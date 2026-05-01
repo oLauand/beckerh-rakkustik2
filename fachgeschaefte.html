@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fachgeschaefte - BECKER Hoerakustik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&family=Fraunces:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="styles.css">
+<style>
+.locations-hero { min-height: 34vh; }
+.locations-hero .page-hero-bg {
+  background:
+    radial-gradient(circle at 16% 18%, rgba(166, 28, 115, 0.16), transparent 24%),
+    radial-gradient(circle at 82% 20%, rgba(201, 75, 155, 0.14), transparent 22%),
+    linear-gradient(135deg, #ffffff 0%, #fdf4f9 48%, #f7edf4 100%);
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+.locations-hero::before {
+  background: linear-gradient(135deg, rgba(255,255,255,0.92) 0%, rgba(253,241,248,0.8) 52%, rgba(247,236,245,0.74) 100%);
+}
+.finder-layout,
+.map-stack,
+.directory-grid,
+.filter-row,
+.action-row,
+.chip-row,
+.result-meta,
+.active-actions,
+.directory-actions,
+.directory-head {
+  display: grid;
+  gap: 18px;
+}
+.finder-layout {
+  grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+  align-items: start;
+}
+.map-stack {
+  grid-template-columns: 1fr;
+}
+.directory-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.filter-row,
+.action-row,
+.chip-row,
+.result-meta,
+.active-actions,
+.directory-actions,
+.directory-head {
+  display: flex;
+  gap: 10px;
+  align-items: stretch;
+  flex-wrap: wrap;
+}
+.directory-actions .inline-btn {
+  flex: 1 1 auto;
+  text-align: center;
+  justify-content: center;
+}
+.directory-head {
+  justify-content: space-between;
+  margin: 28px 0 16px;
+}
+.controls-card,
+.map-card,
+.active-card,
+.result-list,
+.directory-card,
+.status-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 26px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+.controls-card::before,
+.map-card::before,
+.active-card::before,
+.result-list::before,
+.directory-card::before,
+.status-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--magenta), var(--magenta-light));
+}
+.controls-card {
+  padding: 20px;
+  position: sticky;
+  top: 96px;
+  display: grid;
+  gap: 14px;
+}
+.map-card,
+.active-card,
+.result-list,
+.status-card {
+  padding: 20px;
+}
+.directory-card {
+  padding: 22px;
+}
+.hero-copy { max-width: 720px; }
+.hero-copy p,
+.controls-card p,
+.active-card p,
+.directory-card p,
+.directory-card address,
+.status-card,
+.result-item span {
+  color: var(--text-soft);
+}
+.filter-label,
+.count-pill,
+.location-tag,
+.result-distance,
+.quick-chip,
+.quick-chip button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.filter-label,
+.location-tag,
+.result-distance {
+  padding: 7px 12px;
+  background: var(--pink-soft);
+  color: var(--magenta);
+}
+.count-pill {
+  padding: 8px 12px;
+  background: #fff;
+  border: 1px solid rgba(166,28,115,.12);
+  color: var(--text-soft);
+  display: none;
+}
+.search-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 18px;
+  background: #fff;
+  transition: border-color .2s, box-shadow .2s;
+}
+.search-field:focus-within {
+  border-color: var(--magenta);
+  box-shadow: 0 0 0 4px rgba(166,28,115,.08);
+}
+.search-field input,
+.field-select {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+}
+.search-field svg {
+  color: var(--magenta);
+  flex-shrink: 0;
+}
+.field-block {
+  display: grid;
+  gap: 8px;
+  flex: 1 1 180px;
+}
+.field-block label,
+.toggle {
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--text);
+}
+.field-select {
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  background: #fff;
+}
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.toggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--magenta);
+}
+.action-row .inline-btn,
+.active-actions .inline-btn,
+.directory-actions .inline-btn,
+.quick-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 16px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.84rem;
+}
+.inline-btn.primary { background: var(--magenta); color: #fff; }
+.inline-btn.soft,
+.quick-chip { background: var(--pink-soft); color: var(--magenta); border: 1px solid var(--pink-mist); }
+.inline-btn.ghost { background: #fff; color: var(--text); border: 1px solid var(--border); }
+.quick-chip.is-active { background: var(--magenta); color: #fff; border-color: var(--magenta); }
+.status-card { font-weight: 700; }
+.status-card strong { color: var(--magenta); }
+.result-list {
+  height: clamp(260px, 40vh, 330px);
+  max-height: clamp(260px, 40vh, 330px);
+  overflow: auto;
+}
+.result-item {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #fff;
+  text-align: left;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+.result-item + .result-item { margin-top: 10px; }
+.result-item strong { display: block; font-size: 1rem; color: var(--text); }
+.result-item span { display: block; margin-top: 4px; }
+.result-item:hover,
+.result-item:focus-visible,
+.result-item.is-active {
+  border-color: rgba(166,28,115,.22);
+  box-shadow: 0 16px 34px rgba(166,28,115,.12);
+  transform: translateY(-1px);
+}
+#storeMap {
+  min-height: 560px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(166,28,115,.12);
+}
+.leaflet-popup-content-wrapper { border-radius: 18px; }
+.leaflet-popup-content { margin: 14px 16px; font-family: 'Mulish', sans-serif; }
+.leaflet-popup-content strong { display: block; margin-bottom: 6px; color: var(--text); }
+.leaflet-popup-content p { margin: 0 0 10px; color: var(--text-soft); }
+.leaflet-popup-content a { color: var(--magenta); font-weight: 800; }
+.leaflet-marker-icon.custom-marker { background: transparent; border: 0; }
+.custom-marker-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #cf5aa3 0%, #a61c73 100%);
+  border: 3px solid #fff;
+  box-shadow: 0 10px 22px rgba(166,28,115,.22);
+}
+.custom-marker-dot.is-child {
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 0 0 6px rgba(166,28,115,.12), 0 10px 22px rgba(166,28,115,.22);
+}
+.custom-marker-dot.is-active {
+  box-shadow: 0 0 0 8px rgba(166,28,115,.16), 0 12px 26px rgba(166,28,115,.28);
+}
+.active-card h2,
+.directory-card h3 { margin-bottom: 10px; }
+.active-card address,
+.directory-card address {
+  font-style: normal;
+  margin-bottom: 12px;
+}
+.active-meta,
+.directory-meta {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.directory-card.is-highlight {
+  border-color: rgba(166,28,115,.28);
+  box-shadow: 0 18px 38px rgba(166,28,115,.14);
+}
+.empty-state {
+  padding: 26px;
+  border-radius: 22px;
+  border: 1px dashed rgba(166,28,115,.22);
+  background: #fff;
+  color: var(--text-soft);
+  font-weight: 700;
+  text-align: center;
+}
+@media (max-width: 1180px) {
+  .finder-layout,
+  .directory-grid {
+    grid-template-columns: 1fr;
+  }
+  .controls-card { position: static; }
+  #storeMap { min-height: 480px; }
+}
+@media (max-width: 720px) {
+  .controls-card,
+  .map-card,
+  .active-card,
+  .result-list,
+  .directory-card,
+  .status-card { padding: 18px; }
+  #storeMap { min-height: 400px; }
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo"><img src="images/logo.png" alt="Becker Hoerakustik"></a>
+    <ul class="nav-links">
+      <li class="nav-item"><a href="leistungen/hoertest.html">Leistungen</a></li>
+      <li class="nav-item"><a href="ratgeber/index.html">Ratgeber</a></li>
+      <li class="nav-item"><a href="news.html">News</a></li>
+      <li class="nav-item"><a href="veranstaltungen.html">Veranstaltungen</a></li>
+      <li class="nav-item"><a href="unternehmen/firmengeschichte.html">Unternehmen</a></li>
+      <li class="nav-item"><a href="fachgeschaefte.html">Fachgeschaefte</a></li>
+      <li class="nav-item"><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-search-btn" aria-label="Suchen"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></button>
+      <a href="kontakt.html" class="btn btn-primary">Termin buchen</a>
+      <button class="mobile-toggle" aria-label="Menue"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg></button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero locations-hero">
+  <div class="page-hero-bg"></div>
+  <div class="container page-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a><span class="sep">&rsaquo;</span><span class="current">Fachgeschaefte</span>
+    </nav>
+    <div class="hero-copy">
+      <div class="page-eyebrow"><span class="dot"></span>BECKER Standorte</div>
+      <h1>Standorte schnell <span style="color:var(--magenta);font-family:'Fraunces',serif;font-style:italic;font-weight:500;">finden</span></h1>
+      <p class="lead">Ort, Adresse oder eigene Postleitzahl eingeben, filtern und direkt die passende Filiale sehen.</p>
+    </div>
+  </div>
+</header>
+
+<section class="content-section">
+  <div class="container">
+    <div class="finder-layout">
+      <aside class="controls-card reveal">
+        <span class="filter-label">Filter</span>
+        <label class="search-field" for="locationSearch">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
+          <input id="locationSearch" type="search" placeholder="Ort, Adresse oder Postleitzahl" autocomplete="off">
+        </label>
+        <label class="toggle" for="childCenterOnly">
+          <input id="childCenterOnly" type="checkbox">
+          <span>Nur Kinderhoerzentrum</span>
+        </label>
+        <button type="button" class="inline-btn soft" id="clearFiltersBtn" style="align-self:flex-start;">Alles anzeigen</button>
+        <div class="result-list" id="resultList" aria-label="Gefilterte Standorte"></div>
+      </aside>
+
+      <div class="map-stack">
+        <div class="map-card reveal">
+          <div id="storeMap" aria-label="OpenStreetMap mit Standorten"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="directory-head">
+      <h2 class="section-title" style="margin:0;">Standorte</h2>
+      <span class="count-pill" id="resultCount">22 Standorte</span>
+    </div>
+    <div class="directory-grid" id="locationGrid"></div>
+    <div class="empty-state" id="emptyState" hidden>Keine passenden Standorte gefunden.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo"><img src="images/logo.png" alt="Becker Hoerakustik"></a>
+        <p>Verstehen. Unterhalten. Dabeisein.<br>Ich ge<em style="color:#C94B9B;font-style:italic;">Hoere</em> dazu!</p>
+      </div>
+      <div class="footer-col"><h4>Standorte</h4><ul><li><a href="fachgeschaefte.html">Fachgeschaefte</a></li><li><a href="fachgeschaefte/andernach.html">Andernach</a></li><li><a href="fachgeschaefte/mainz.html">Mainz</a></li><li><a href="fachgeschaefte/neuwied.html">Neuwied</a></li></ul></div>
+      <div class="footer-col"><h4>Kontakt</h4><p>BECKER Hoerakustik</p><p><a href="kontakt.html">Kontaktseite</a></p><p><a href="kontakt.html">Termin buchen</a></p></div>
+      <div class="footer-col"><h4>Hinweis</h4><p>Standorte auf OpenStreetMap, inklusive Postleitzahl-Suche zur naechsten Filiale.</p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 BECKER Hoerakustik.</p><div class="footer-bottom-links"><a href="#">Impressum</a><a href="#">Datenschutz</a></div></div>
+  </div>
+</footer>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="nav.js"></script>
+<script>
+const locations = [
+  { id: 'koblenz', city: 'Koblenz', address: 'Schloss-Strasse 25 - Parken: Stegemannstrasse 14, 56068 Koblenz', phone: '0261 35050', fax: '0261 35075', childCenter: true, region: 'Rhein', lat: 50.3569, lng: 7.5944, hauptfiliale: true },
+  { id: 'neuwied', city: 'Neuwied', address: 'Langendorfer Strasse 105, 56564 Neuwied', phone: '02631 31800', fax: '02631 353528', childCenter: true, region: 'Rhein', lat: 50.4311, lng: 7.4705, profile: 'fachgeschaefte/neuwied.html' },
+  { id: 'andernach', city: 'Andernach', address: 'Kramgasse 3-5, 56626 Andernach', phone: '02632 948080', fax: '02632 948082', childCenter: false, region: 'Rhein', lat: 50.4346, lng: 7.4047, profile: 'fachgeschaefte/andernach.html' },
+  { id: 'mainz', city: 'Mainz', address: 'Schillerstrasse 14, 55116 Mainz', phone: '06131 1234500', fax: '', childCenter: false, region: 'Rhein', lat: 49.9929, lng: 8.2473, profile: 'fachgeschaefte/mainz.html' },
+  { id: 'bad-ems', city: 'Bad Ems', address: 'Roemerstrasse 22, 56130 Bad Ems', phone: '02603 70676', fax: '02603 3824', childCenter: false, region: 'Lahn', lat: 50.3359, lng: 7.7193 },
+  { id: 'bendorf', city: 'Bendorf', address: 'Untere Vallendarer Strasse 26-30, 56170 Bendorf', phone: '02622 923926', fax: '02622 923928', childCenter: false, region: 'Rhein', lat: 50.4265, lng: 7.5798 },
+  { id: 'bernkastel-kues', city: 'Bernkastel-Kues', address: 'Cusanusstrasse 14, 54470 Bernkastel-Kues', phone: '06531 6100', fax: '06531 970235', childCenter: false, region: 'Mosel', lat: 49.9145, lng: 7.0735 },
+  { id: 'bingen', city: 'Bingen', address: 'Speisemarkt 6, 55411 Bingen', phone: '06721 4009994', fax: '06721 4009998', childCenter: true, region: 'Nahe', lat: 49.9670, lng: 7.8996 },
+  { id: 'bonn-bad-godesberg', city: 'Bonn-Bad Godesberg', address: 'Alte Bahnhofstrasse 16, 53173 Bad Godesberg', phone: '0228 3502776', fax: '0228 3502779', childCenter: true, region: 'Rhein', lat: 50.6844, lng: 7.1618 },
+  { id: 'emmelshausen', city: 'Emmelshausen', address: 'Am Markt 7a, 56281 Emmelshausen', phone: '06747 9525250', fax: '06747 9505239', childCenter: false, region: 'Hunsrueck', lat: 50.1543, lng: 7.5537 },
+  { id: 'hoehr-grenzhausen', city: 'Hoehr-Grenzhausen', address: 'Bergstrasse 63a, 56203 Hoehr-Grenzhausen', phone: '02624 9524818', fax: '02624 9524819', childCenter: true, region: 'Westerwald', lat: 50.4349, lng: 7.6694 },
+  { id: 'lahnstein', city: 'Lahnstein', address: 'Burgstrasse 18, 56112 Lahnstein', phone: '02621 3686', fax: '02621 188474', childCenter: false, region: 'Rhein', lat: 50.3073, lng: 7.6057 },
+  { id: 'linz', city: 'Linz', address: 'Rheinstrasse 7, 53545 Linz', phone: '02644 980300', fax: '02644 980302', childCenter: false, region: 'Rhein', lat: 50.5677, lng: 7.2845 },
+  { id: 'mayen', city: 'Mayen', address: 'Neustrasse 9, 56727 Mayen', phone: '02651 3060', fax: '02651 77716', childCenter: true, region: 'Eifel', lat: 50.3272, lng: 7.2223 },
+  { id: 'mendig', city: 'Mendig', address: 'Bahnstrasse 42, 56743 Mendig', phone: '02652 9390589', fax: '02652 9365043', childCenter: false, region: 'Eifel', lat: 50.3730, lng: 7.2780 },
+  { id: 'montabaur', city: 'Montabaur', address: 'Kirchstrasse 9-11, 56410 Montabaur', phone: '02602 1342907', fax: '02602 1342908', childCenter: false, region: 'Westerwald', lat: 50.4353, lng: 7.8269 },
+  { id: 'nastaetten', city: 'Nastaetten', address: 'Roemerstrasse 52, 56355 Nastaetten', phone: '06772 960878', fax: '06772 960880', childCenter: true, region: 'Rhein', lat: 50.1998, lng: 7.8571 },
+  { id: 'oberwesel', city: 'Oberwesel', address: 'Rathausstrasse 7, 55430 Oberwesel', phone: '06744 710666', fax: '06744 710611', childCenter: false, region: 'Rhein', lat: 50.1081, lng: 7.7289 },
+  { id: 'polch', city: 'Polch', address: 'Marktplatz 5, 56751 Polch', phone: '02654 964470', fax: '02654 964468', childCenter: false, region: 'Eifel', lat: 50.2996, lng: 7.3156 },
+  { id: 'puderbach', city: 'Puderbach', address: 'Urbacher Strasse 4, 56305 Puderbach', phone: '02684 9770320', fax: '02684 9770321', childCenter: true, region: 'Westerwald', lat: 50.5979, lng: 7.6121 },
+  { id: 'simmern', city: 'Simmern', address: 'Marktstrasse 63, 55469 Simmern', phone: '06761 915555', fax: '06761 965596', childCenter: false, region: 'Hunsrueck', lat: 49.9823, lng: 7.5238 },
+  { id: 'waldesch', city: 'Waldesch', address: 'Huebingerweg 10, 56323 Waldesch', phone: '02628 9897170', fax: '', childCenter: false, region: 'Rhein', lat: 50.2838, lng: 7.7194 },
+  { id: 'zell-mosel', city: 'Zell / Mosel', address: 'Fliehburgstrasse 1a, 56856 Zell / Mosel', phone: '06542 5050', fax: '06542 961280', childCenter: true, region: 'Mosel', lat: 50.0246, lng: 7.1829 }
+];
+
+const searchInput = document.getElementById('locationSearch');
+const childCenterOnly = document.getElementById('childCenterOnly');
+const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+const resultList = document.getElementById('resultList');
+const locationGrid = document.getElementById('locationGrid');
+const emptyState = document.getElementById('emptyState');
+const resultCount = document.getElementById('resultCount');
+
+const state = {
+  activeId: null,
+  derivedCoords: null,
+  derivedLabel: '',
+  derivedMode: '',
+  lookupState: 'idle',
+  lookupMessage: ''
+};
+
+let lookupRequestId = 0;
+let markerMap = new Map();
+
+function normalize(value) {
+  return String(value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+function telHref(phone) {
+  return 'tel:' + phone.replace(/[^0-9+]/g, '');
+}
+
+function osmSearchUrl(address) {
+  return 'https://www.openstreetmap.org/search?query=' + encodeURIComponent(address);
+}
+
+function isPostalCodeQuery(value) {
+  return /^\d{5}$/.test(value.trim());
+}
+
+function searchableText(location) {
+  return normalize([
+    location.city,
+    location.address,
+    location.phone,
+    location.fax,
+    location.region,
+    location.childCenter ? 'kinderhoerzentrum' : ''
+  ].join(' '));
+}
+
+function distanceKm(lat1, lon1, lat2, lon2) {
+  const toRad = (value) => value * Math.PI / 180;
+  const earthRadiusKm = 6371;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  return earthRadiusKm * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+const map = L.map('storeMap', { scrollWheelZoom: false });
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 18,
+  attribution: '&copy; OpenStreetMap-Mitwirkende'
+}).addTo(map);
+map.setView([50.265, 7.48], 9);
+const markersLayer = L.layerGroup().addTo(map);
+
+function markerHtml(location, isActive) {
+  return '<div class="custom-marker-dot' + (location.childCenter ? ' is-child' : '') + (isActive ? ' is-active' : '') + '"></div>';
+}
+
+function popupHtml(location) {
+  const fax = location.fax ? '<p>Fax: ' + location.fax + '</p>' : '';
+  const child = location.childCenter ? '<p>Kinderhoerzentrum</p>' : '';
+  return [
+    '<strong>' + location.city + '</strong>',
+    '<p>' + location.address + '</p>',
+    '<p>Telefon: ' + location.phone + '</p>',
+    fax,
+    child
+  ].join('');
+}
+
+function baseFilteredLocations() {
+  const query = searchInput.value.trim();
+  let items = locations.slice();
+
+  if (childCenterOnly.checked) {
+    items = items.filter((location) => location.childCenter);
+  }
+
+  if (query && !isPostalCodeQuery(query)) {
+    const normalized = normalize(query);
+    items = items.filter((location) => searchableText(location).indexOf(normalized) !== -1);
+  }
+
+  return items;
+}
+
+function getVisibleLocations() {
+  let items = baseFilteredLocations();
+
+  if (state.derivedCoords && (state.derivedMode === 'postcode' || state.derivedMode === 'geolocation')) {
+    items = items
+      .map((location) => ({
+        ...location,
+        distance: distanceKm(state.derivedCoords.lat, state.derivedCoords.lng, location.lat, location.lng)
+      }))
+      .sort((left, right) => left.distance - right.distance)
+      .slice(0, 3);
+  }
+
+  return items;
+}
+
+function ensureActiveLocation(items) {
+  if (!items.length) {
+    state.activeId = null;
+    return null;
+  }
+  if (!state.activeId || !items.some((location) => location.id === state.activeId)) {
+    state.activeId = items[0].id;
+  }
+  return items.find((location) => location.id === state.activeId) || items[0];
+}
+
+function renderStatus(items) {
+  const countLabel = items.length + ' Standort' + (items.length === 1 ? '' : 'e');
+  resultCount.textContent = countLabel;
+}
+
+function renderResultList(items, activeLocation) {
+  if (!items.length) {
+    resultList.innerHTML = '<div class="empty-state">Keine passenden Standorte gefunden.</div>';
+    return;
+  }
+
+  resultList.innerHTML = items.map((location) => {
+    const isActive = activeLocation && location.id === activeLocation.id;
+    const distance = typeof location.distance === 'number' ? '<span class="result-distance">' + location.distance.toFixed(1).replace('.', ',') + ' km</span>' : '';
+    return [
+      '<button type="button" class="result-item' + (isActive ? ' is-active' : '') + '" data-location-id="' + location.id + '">',
+      '  <div class="result-meta"><strong>' + location.city + '</strong>' + distance + '</div>',
+      '  <span>' + location.address + '</span>',
+      '</button>'
+    ].join('');
+  }).join('');
+}
+
+
+
+function renderDirectory(items, activeLocation) {
+  if (!items.length) {
+    locationGrid.innerHTML = '';
+    emptyState.hidden = false;
+    return;
+  }
+
+  emptyState.hidden = true;
+  locationGrid.innerHTML = items.map((location) => {
+    const fax = location.fax ? '<div>Fax: ' + location.fax + '</div>' : '';
+    const childTag = location.childCenter ? '<span class="location-tag">Kinderhoerzentrum</span>' : '';
+    const distance = typeof location.distance === 'number' ? '<span class="location-tag">' + location.distance.toFixed(1).replace('.', ',') + ' km</span>' : '';
+    const profileLink = location.profile ? '<a class="inline-btn soft" href="' + location.profile + '">Details zur Filiale &rsaquo;</a>' : '';
+    const hauptfilialeTag = location.hauptfiliale ? '<span class="location-tag" style="background:var(--magenta);color:#fff;margin-bottom:10px;display:inline-flex;">Hauptfiliale</span>' : '';
+    const isHighlight = !!(activeLocation && activeLocation.id === location.id) || !!location.hauptfiliale;
+
+    return [
+      '<article class="directory-card' + (isHighlight ? ' is-highlight' : '') + '">',
+      hauptfilialeTag,
+      '  <h3>' + location.city + '</h3>',
+      '  <address>' + location.address + '</address>',
+      '  <div class="directory-meta">',
+      '    <div>Telefon: <a href="' + telHref(location.phone) + '" style="color:inherit;">' + location.phone + '</a></div>',
+      fax,
+
+      '  </div>',
+      '  <div class="chip-row">' + childTag + distance + '</div>',
+      '  <div class="directory-actions">',
+      '    <button type="button" class="inline-btn ghost" data-focus-location="' + location.id + '">Auf Karte zeigen</button>',
+      profileLink,
+      '  </div>',
+      '</article>'
+    ].join('');
+  }).join('');
+}
+
+function renderMarkers(items, activeLocation) {
+  markersLayer.clearLayers();
+  markerMap = new Map();
+
+  items.forEach((location) => {
+    const icon = L.divIcon({
+      className: 'custom-marker',
+      html: markerHtml(location, activeLocation && location.id === activeLocation.id),
+      iconSize: [24, 24],
+      iconAnchor: [12, 12],
+      popupAnchor: [0, -8]
+    });
+
+    const marker = L.marker([location.lat, location.lng], { icon }).addTo(markersLayer);
+    marker.bindPopup(popupHtml(location));
+    marker.on('click', () => {
+      state.activeId = location.id;
+      render();
+    });
+    markerMap.set(location.id, marker);
+  });
+
+  if (!items.length) {
+    map.setView([50.265, 7.48], 9);
+    return;
+  }
+
+  if (items.length === 1) {
+    map.setView([items[0].lat, items[0].lng], 12);
+  } else {
+    const bounds = L.latLngBounds(items.map((location) => [location.lat, location.lng]));
+    map.fitBounds(bounds.pad(0.22));
+  }
+
+}
+
+function focusLocation(locationId) {
+  state.activeId = locationId;
+  render();
+  const marker = markerMap.get(locationId);
+  if (marker) {
+    marker.openPopup();
+    map.panTo(marker.getLatLng());
+  }
+  document.getElementById('storeMap').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function clearDerivedState() {
+  state.derivedCoords = null;
+  state.derivedLabel = '';
+  state.derivedMode = '';
+  state.lookupState = 'idle';
+  state.lookupMessage = '';
+}
+
+async function lookupPostalCode(postalCode) {
+  const requestId = ++lookupRequestId;
+  state.lookupState = 'loading';
+  state.lookupMessage = '';
+  render();
+
+  try {
+    const response = await fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&countrycodes=de&limit=1&q=' + encodeURIComponent(postalCode + ' Deutschland'));
+    if (!response.ok) {
+      throw new Error('PLZ konnte nicht geladen werden.');
+    }
+    const results = await response.json();
+    if (requestId !== lookupRequestId) {
+      return;
+    }
+    if (!results.length) {
+      clearDerivedState();
+      state.lookupState = 'error';
+      state.lookupMessage = 'Keine Position zu dieser Postleitzahl gefunden.';
+      render();
+      return;
+    }
+
+    state.derivedCoords = { lat: Number(results[0].lat), lng: Number(results[0].lon) };
+    state.derivedLabel = postalCode;
+    state.derivedMode = 'postcode';
+    state.lookupState = 'idle';
+    state.lookupMessage = '';
+    render();
+  } catch (error) {
+    if (requestId !== lookupRequestId) {
+      return;
+    }
+    clearDerivedState();
+    state.lookupState = 'error';
+    state.lookupMessage = 'PLZ-Suche gerade nicht verfuegbar.';
+    render();
+  }
+}
+
+function handleSearchInput() {
+  const query = searchInput.value.trim();
+  if (isPostalCodeQuery(query)) {
+    lookupPostalCode(query);
+    return;
+  }
+  lookupRequestId += 1;
+  if (state.derivedMode === 'postcode') {
+    clearDerivedState();
+  } else {
+    state.lookupState = 'idle';
+    state.lookupMessage = '';
+  }
+  render();
+}
+
+function render() {
+  const items = getVisibleLocations();
+  const activeLocation = ensureActiveLocation(items);
+  renderStatus(items);
+  renderResultList(items, activeLocation);
+  renderDirectory(items, activeLocation);
+  renderMarkers(items, activeLocation);
+}
+
+searchInput.addEventListener('input', handleSearchInput);
+childCenterOnly.addEventListener('change', () => { render(); });
+clearFiltersBtn.addEventListener('click', () => {
+  searchInput.value = '';
+  childCenterOnly.checked = false;
+  clearDerivedState();
+  render();
+});
+resultList.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-location-id]');
+  if (!button) {
+    return;
+  }
+  focusLocation(button.dataset.locationId);
+});
+locationGrid.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-focus-location]');
+  if (!button) {
+    return;
+  }
+  focusLocation(button.dataset.focusLocation);
+});
+
+render();
+</script>
+</body>
+</html>

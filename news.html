@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News – BECKER Hörakustik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&family=Fraunces:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* News magazine layout */
+.news-toolbar {
+  display:flex; gap:14px; flex-wrap:wrap; align-items:center;
+  margin: 30px 0 24px; padding: 18px 22px;
+  background: linear-gradient(180deg, #fff, var(--pink-soft));
+  border:1px solid rgba(166,28,115,0.10);
+  border-radius:18px;
+}
+.news-filter {
+  border:1px solid var(--border); background:#fff; color:var(--text-soft);
+  padding:8px 16px; border-radius:100px; font-size:13px; font-weight:700;
+  cursor:pointer; transition:all 0.2s ease; font-family:inherit;
+}
+.news-filter:hover { border-color:var(--magenta); color:var(--magenta); }
+.news-filter.active {
+  background: linear-gradient(135deg, var(--magenta), var(--magenta-light));
+  color:white; border-color:transparent;
+  box-shadow: 0 6px 16px rgba(166,28,115,0.25);
+}
+.news-count { margin-left:auto; font-size:13px; color:var(--text-mute); font-weight:600; }
+
+.news-featured {
+  display:grid; grid-template-columns: 1.1fr 1fr; gap:0;
+  background:#fff; border:1px solid var(--border); border-radius:24px;
+  overflow:hidden; box-shadow:0 18px 40px rgba(166,28,115,0.10);
+  margin-bottom: 38px; transition:transform 0.5s cubic-bezier(.2,.7,.3,1), box-shadow 0.5s;
+}
+.news-featured:hover { transform:translateY(-6px); box-shadow:0 30px 60px rgba(166,28,115,0.16); }
+.news-featured-img { position:relative; overflow:hidden; min-height:380px; }
+.news-featured-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.8s cubic-bezier(.2,.7,.3,1); }
+.news-featured:hover .news-featured-img img { transform:scale(1.05); }
+.news-featured-img::after {
+  content:''; position:absolute; inset:0;
+  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.35));
+}
+.news-featured-tag {
+  position:absolute; top:22px; left:22px; z-index:2;
+  background:var(--magenta); color:white; padding:6px 14px; border-radius:100px;
+  font-size:11px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase;
+  box-shadow: 0 8px 20px rgba(166,28,115,0.4);
+}
+.news-featured-body { padding:48px; display:flex; flex-direction:column; justify-content:center; }
+.news-featured-body .news-date { font-size:14px; }
+.news-featured-body h2 {
+  font-size:clamp(26px,2.6vw,38px); font-weight:800; margin:14px 0 18px;
+  letter-spacing:-0.02em; line-height:1.15;
+}
+.news-featured-body p { color:var(--text-soft); font-size:17px; line-height:1.65; margin-bottom:22px; }
+.news-read-more {
+  display:inline-flex; align-items:center; gap:8px;
+  color:var(--magenta); font-weight:800; font-size:14px;
+  letter-spacing:0.04em; text-transform:uppercase;
+}
+.news-read-more::after { content:'→'; transition:transform 0.3s; }
+.news-card:hover .news-read-more::after,
+.news-featured:hover .news-read-more::after { transform:translateX(6px); }
+
+.news-grid {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:28px; margin-top:8px;
+}
+.news-card {
+  background:#fff; border:1px solid var(--border);
+  border-radius:20px; overflow:hidden;
+  box-shadow:0 4px 16px rgba(166,28,115,0.06);
+  transition:transform 0.4s cubic-bezier(.2,.7,.3,1), box-shadow 0.4s, border-color 0.4s;
+  display:flex; flex-direction:column;
+  cursor:pointer;
+}
+.news-card:hover {
+  transform:translateY(-8px);
+  box-shadow:0 24px 50px rgba(166,28,115,0.16);
+  border-color:transparent;
+}
+.news-card-media {
+  position:relative; aspect-ratio: 16/10; overflow:hidden;
+  background: var(--pink-soft);
+}
+.news-card-media img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform 0.7s cubic-bezier(.2,.7,.3,1);
+}
+.news-card:hover .news-card-media img { transform:scale(1.07); }
+.news-tag {
+  position:absolute; top:14px; left:14px; z-index:2;
+  background:rgba(255,255,255,0.95); backdrop-filter:blur(8px);
+  color:var(--magenta); padding:5px 12px; border-radius:100px;
+  font-size:11px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.news-tag.t-event { color:#A61C73; }
+.news-tag.t-jubilaeum { background:linear-gradient(135deg,var(--magenta),var(--magenta-light)); color:white; }
+.news-tag.t-engagement { color:#0E7C66; background:rgba(232,250,244,0.95); }
+.news-card-body { padding:24px 26px 26px; flex:1; display:flex; flex-direction:column; }
+.news-card-body h3 {
+  margin: 8px 0 10px; font-size:19px; font-weight:800;
+  line-height:1.3; letter-spacing:-0.01em;
+}
+.news-card-body p { color:var(--text-soft); line-height:1.6; font-size:14.5px; flex:1; }
+.news-date {
+  color:var(--magenta); font-weight:800; font-size:12px;
+  letter-spacing:0.1em; text-transform:uppercase;
+  display:inline-flex; align-items:center; gap:6px;
+}
+.news-date::before {
+  content:''; width:5px; height:5px; border-radius:50%;
+  background:var(--magenta); display:inline-block;
+}
+.news-card-foot {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:18px; padding-top:16px; border-top:1px solid var(--border);
+  font-size:12px; color:var(--text-mute); font-weight:600;
+}
+.news-card-foot .read-time { display:inline-flex; align-items:center; gap:5px; }
+
+@media (max-width: 900px) {
+  .news-featured { grid-template-columns: 1fr; }
+  .news-featured-img { min-height:280px; }
+  .news-featured-body { padding:32px 28px; }
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav"><div class="container nav-inner"><a href="index.html" class="logo"><img src="images/logo.png" alt="Becker Hörakustik"></a><ul class="nav-links"><li class="nav-item"><a href="leistungen/hoertest.html">Leistungen <svg class="nav-chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"></path></svg></a><ul class="dropdown-menu"><li><a href="leistungen/audio-therapie.html">Audio-Therapie</a></li><li><a href="leistungen/hoergeraetehersteller-partner.html">Hörgerätehersteller &amp; Partner</a></li><li><a href="leistungen/hoertest.html">Hörtest</a></li><li><a href="leistungen/hoertraining.html">Hörtraining</a></li><li><a href="leistungen/paedakustik.html">Pädakustik</a></li><li><a href="leistungen/kinderhoerzentrum.html">Kinderhörzentrum</a></li><li><a href="leistungen/remote-fitting.html">Remote Fitting</a></li><li><a href="leistungen/serviceleistung.html">Serviceleistungen</a></li><li><a href="leistungen/tinnitusberatung.html">Tinnitusberatung</a></li><li><a href="leistungen/gehoerschutz.html">Gehörschutz</a></li><li><a href="leistungen/treffpunkt-ohr.html">Treffpunkt Ohr e.V.</a></li></ul></li><li class="nav-item"><a href="ratgeber/index.html">Ratgeber</a></li><li class="nav-item"><a href="news.html">News</a></li><li class="nav-item"><a href="veranstaltungen.html">Veranstaltungen</a></li><li class="nav-item"><a href="unternehmen/firmengeschichte.html">Unternehmen <svg class="nav-chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></a><ul class="dropdown-menu"><li><a href="unternehmen/karriere.html">Karriere &#8211; jetzt bewerben</a></li><li><a href="unternehmen/firmenchronik.html">Firmenchronik</a></li><li><a href="unternehmen/firmengeschichte.html">Firmengeschichte</a></li><li><a href="unternehmen/unsere-werte.html">Unsere Werte</a></li><li><a href="unternehmen/linksammlung.html">Linksammlung</a></li><li><a href="unternehmen/rein-romantik.html">Rein Romantik</a></li><li><a href="unternehmen/hauszeitschrift.html">Unsere Hauszeitschrift</a></li></ul></li><li class="nav-item"><a href="fachgeschaefte.html">Fachgeschäfte</a></li><li class="nav-item"><a href="kontakt.html">Kontakt</a></li></ul><div class="nav-actions"><button class="nav-search-btn" aria-label="Suchen"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></button><a href="kontakt.html" class="btn btn-primary">Termin buchen</a><button class="mobile-toggle" aria-label="Menu"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg></button></div></div></nav>
+<header class="page-hero"><div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1800&q=80&auto=format&fit=crop');"></div><div class="container page-hero-content"><nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span class="current">News</span></nav><div class="page-eyebrow"><span class="dot"></span>Aktuelles</div><h1>News aus der Welt des <span style="color:var(--magenta);font-family:'Fraunces',serif;font-style:italic;font-weight:500;">Hörens</span></h1><p class="lead">Neuigkeiten aus dem Unternehmen, aus unseren Fachgeschäften und aus dem Jubiläumsjahr von BECKER Hörakustik.</p></div></header>
+<section class="content-section"><div class="container">
+
+<div class="news-toolbar" role="tablist">
+  <button class="news-filter active" data-cat="all">Alle Beiträge</button>
+  <button class="news-filter" data-cat="event">Veranstaltungen</button>
+  <button class="news-filter" data-cat="jubilaeum">100 Jahre Jubiläum</button>
+  <button class="news-filter" data-cat="engagement">Engagement</button>
+  <span class="news-count" id="newsCount">12 Beiträge</span>
+</div>
+
+<article class="news-featured" data-cat="event">
+  <div class="news-featured-img">
+    <span class="news-featured-tag">Top-Story</span>
+    <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=1600&q=85&auto=format&fit=crop" alt="ganz Ohr – Lesung Elke Heidenreich" />
+  </div>
+  <div class="news-featured-body">
+    <span class="news-date">27. März 2026 · 4 Min. Lesezeit</span>
+    <h2>Ein Abend voller Literatur und Hörgenuss: BECKER Hörakustik bei „ganz Ohr"</h2>
+    <p>BECKER Hörakustik hat im Rahmen der Koblenzer Literaturtage „ganz Ohr" eingeladen und zahlreiche Botschafter des guten Hörens zur Lesung von Elke Heidenreich begrüßt – ein Abend voller Sprache, Klang und Begegnung.</p>
+    <a href="#" class="news-read-more">Beitrag lesen</a>
+  </div>
+</article>
+
+<div class="news-grid" id="newsGrid">
+
+<article class="news-card" data-cat="event">
+  <div class="news-card-media"><span class="news-tag t-event">Seminar</span><img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=900&q=80&auto=format&fit=crop" alt="Patientenseminar Tinnitus" loading="lazy"></div>
+  <div class="news-card-body">
+    <span class="news-date">18. März 2026</span>
+    <h3>Achtsamkeit als Schlüssel im Umgang mit Tinnitus</h3>
+    <p>Rund 20 Teilnehmer folgten der Einladung zum kostenfreien Patientenseminar im HÖR-Haus Koblenz. Im Mittelpunkt stand der alltagstaugliche Umgang mit Tinnitus.</p>
+    <div class="news-card-foot"><span class="read-time">⏱ 3 Min.</span><span class="news-read-more">Lesen</span></div>
+  </div>
+</article>
+
+<article class="news-card" data-cat="engagement">
+  <div class="news-card-media"><span class="news-tag t-engagement">Engagement</span><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=80&auto=format&fit=crop" alt="Welttag des Hörens" loading="lazy"></div>
+  <div class="news-card-body">
+    <span class="news-date">3. März 2026</span>
+    <h3>Ihr Bürgermeister hört das Gras wachsen!</h3>
+    <p>Zum Welttag des Hörens setzten zahlreiche Stadt- und Verbandsbürgermeister gemeinsam mit BECKER ein sichtbares Zeichen für gutes Hören.</p>
+    <div class="news-card-foot"><span class="read-time">⏱ 2 Min.</span><span class="news-read-more">Lesen</span></div>
+  </div>
+</article>
+
+<article class="news-card" data-cat="event">
+  <div class="news-card-media"><span class="news-tag t-event">Literatur</span><img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=900&q=80&auto=format&fit=crop" alt="Literaturtage Koblenz" loading="lazy"></div>
+  <div class="news-card-body">
+    <span class="news-date">18. Februar 2026</span>
+    <h3>Koblenz ist wieder „ganz Ohr"</h3>
+    <p>Auch 2026 unterstützt BECKER Hörakustik die Koblenzer Literaturtage und bringt Hörkultur, Begegnung und regionales Engagement zusammen.</p>
+    <div class="news-card-foot"><span class="read-time">⏱ 3 Min.</span><span class="news-read-more">Lesen</span></div>
+  </div>
+</article>
+
+<article class="news-card" data-cat="engagement">
+  <div class="news-card-media"><span class="news-tag t-engagement">Tradition</span><img src="https://images.unsplash.com/photo-1521334884684-d80222895322?w=900&q=80&auto=format&fit=crop" alt="Fastnacht mit Verantwortung" loading="lazy"></div>
+  <div class="news-card-body">
+    <span class="news-date">22. Januar 2026</span>
+    <h3>Gehörschutz für die Koblenzer Gecken</h3>
+    <p>BECKER Hörakustik und die Kapuzemänner zeigen: Fastnacht und Verantwortung gehören zusammen. Gehörschutz wurde zum sichtbaren Statement.</p>
+    <div class="news-card-foot"><span class="read-time">⏱ 2 Min.</span><span class="news-read-more">Lesen</span></div>
+  </div>
+</article>
+
+<article class="news-card" data-cat="jubilaeum">
+  <div class="news-card-media"><span class="news-tag t-jubilaeum">100 Jahre</span><img src="https://images.unsplash.com/photo-1530021232320-687d8e3dba54?w=900&q=80&auto=format&fit=crop" alt="100 Jahre Jubiläum" loading="lazy"></div>
+  <div class="news-card-body">
+    <span class="news-date">20. Januar 2026</span>
+    <h3>100 Jahre BECKER – Handwerkskammer würdigt Familienbetrieb</h3>
+    <p>Anlässlich des 100-jährigen Betriebsjubiläums erhielt BECKER Hörakustik eine Ehrenurkunde der Handwerkskammer Koblenz.</p>
+    <div class="news-card-foot"><span class="read-time">⏱ 4 Min.</span><span class="news-read-more">Lesen</span></div>
+  </div>
+</article>
+
+<article class="news-card" data-cat="engagement">
+  <div class="news-card-media"><span class="news-tag t-engagement">Heimat</span><img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=900&q=80&auto=format&fit=crop" alt="Grußkarte 2026" loading="lazy"></div>
+  <div class="news-card-body">
+    <span class="news-date">6. Januar 2026</span>
+    <h3>Heimatliebe als Kundenbindungsmaßnahme</h3>
+    <p>Mit der Grußkarte 2026 knüpft BECKER an eine lange Tradition an und setzt auch im Jubiläumsjahr auf regionale Identität und persönliche Nähe.</p>
+    <div class="news-card-foot"><span class="read-time">⏱ 2 Min.</span><span class="news-read-more">Lesen</span></div>
+  </div>
+</article>
+
+<article class="news-card" data-cat="jubilaeum">
+  <div class="news-card-media"><span class="news-tag t-jubilaeum">100 Jahre</span><img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=900&q=80&auto=format&fit=crop" alt="Jubiläumsgala 100 Jahre" loading="lazy"></div>
+  <div class="news-card-body">
+    <span class="news-date">5. Dezember 2025</span>
+    <h3>Ein Abend voller Klang und Geschichte – Jubiläumsgala</h3>
+    <p>Gemeinsam mit Brillen Becker feierte BECKER Hörakustik in der Rhein-Mosel-Halle ein Jahrhundert Unternehmensgeschichte.</p>
+    <div class="news-card-foot"><span class="read-time">⏱ 5 Min.</span><span class="news-read-more">Lesen</span></div>
+  </div>
+</article>
+
+<article class="news-card" data-cat="engagement">
+  <div class="news-card-media"><span class="news-tag t-engagement">Spende</span><img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=900&q=80&auto=format&fit=crop" alt="Trichtertelefon Spielplatz" loading="lazy"></div>
+  <div class="news-card-body">
+    <span class="news-date">12. August 2025</span>
+    <h3>Gutes Hören beginnt früh – Spende für den Spielplatz</h3>
+    <p>Im Jubiläumsjahr spendete BECKER Hörakustik ein Trichtertelefon an die Gemeinde Lykershausen und unterstützte damit frühe Hörerfahrungen spielerisch.</p>
+    <div class="news-card-foot"><span class="read-time">⏱ 3 Min.</span><span class="news-read-more">Lesen</span></div>
+  </div>
+</article>
+
+<article class="news-card" data-cat="event">
+  <div class="news-card-media"><span class="news-tag t-event">Fortbildung</span><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&q=80&auto=format&fit=crop" alt="HNO QM-Zirkel Bonn" loading="lazy"></div>
+  <div class="news-card-body">
+    <span class="news-date">9. Juli 2025</span>
+    <h3>Fortbildung des HNO QM-Zirkels in Bonn</h3>
+    <p>Eine Fachveranstaltung rund um moderne CI-Versorgung vertiefte den fachlichen Austausch über Schwerhörigkeit und Hörverbesserung.</p>
+    <div class="news-card-foot"><span class="read-time">⏱ 4 Min.</span><span class="news-read-more">Lesen</span></div>
+  </div>
+</article>
+
+<article class="news-card" data-cat="jubilaeum">
+  <div class="news-card-media"><span class="news-tag t-jubilaeum">Jubiläum</span><img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=900&q=80&auto=format&fit=crop" alt="Sommerfest Jubiläum" loading="lazy"></div>
+  <div class="news-card-body">
+    <span class="news-date">1. Juli 2025</span>
+    <h3>„Ein Jahrhundert voller Klang und Visionen" – Sommerfest</h3>
+    <p>Mit einem stilvollen Sommerfest in Koblenz feierten Brillen Becker und BECKER Hörakustik gemeinsam 100 Jahre Unternehmensgeschichte.</p>
+    <div class="news-card-foot"><span class="read-time">⏱ 4 Min.</span><span class="news-read-more">Lesen</span></div>
+  </div>
+</article>
+
+<article class="news-card" data-cat="event">
+  <div class="news-card-media"><span class="news-tag t-event">Hör-Tag</span><img src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=900&q=80&auto=format&fit=crop" alt="Hör-Erlebnistage" loading="lazy"></div>
+  <div class="news-card-body">
+    <span class="news-date">16. April 2025</span>
+    <h3>Erfolgreiche Hör-Erlebnistage</h3>
+    <p>Großes Interesse, wertvolle Impulse und starke Perspektiven für die Zukunft des Hörens prägten die Jubiläumsveranstaltungen.</p>
+    <div class="news-card-foot"><span class="read-time">⏱ 3 Min.</span><span class="news-read-more">Lesen</span></div>
+  </div>
+</article>
+
+</div>
+
+<script>
+(function(){
+  var filters = document.querySelectorAll('.news-filter');
+  var cards = document.querySelectorAll('.news-grid .news-card, .news-featured');
+  var count = document.getElementById('newsCount');
+  filters.forEach(function(f){
+    f.addEventListener('click', function(){
+      filters.forEach(function(x){ x.classList.remove('active'); });
+      f.classList.add('active');
+      var cat = f.getAttribute('data-cat');
+      var visible = 0;
+      cards.forEach(function(c){
+        var match = cat === 'all' || c.getAttribute('data-cat') === cat;
+        c.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      count.textContent = visible + ' Beitr' + (visible === 1 ? 'ag' : 'äge');
+    });
+  });
+})();
+</script>
+
+</div></section>
+<footer><div class="container"><div class="footer-top"><div class="footer-brand"><a href="index.html" class="footer-logo"><img src="images/logo.png" alt="Becker Hörakustik"></a><p>Verstehen. Unterhalten. Dabeisein.<br>Ich ge<em style="color:#C94B9B;font-style:italic;">Höre</em> dazu!</p></div><div class="footer-col"><h4>Leistungen</h4><ul><li><a href="leistungen/hoertest.html">Hörtest</a></li><li><a href="leistungen/audio-therapie.html">Audiotherapie</a></li><li><a href="leistungen/gehoerschutz.html">Gehörschutz</a></li></ul></div><div class="footer-col"><h4>Unternehmen</h4><ul><li><a href="unternehmen/firmengeschichte.html">Über uns</a></li><li><a href="veranstaltungen.html">Veranstaltungen</a></li></ul></div><div class="footer-col"><h4>Kontakt</h4><p><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="color:var(--magenta-light);flex-shrink:0"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg> 0800 / 123 456 78</p><p><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="color:var(--magenta-light);flex-shrink:0"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> info@becker-hoerakustik.de</p><p><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="color:var(--magenta-light);flex-shrink:0"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg> Mo–Fr 9:00–18:00 Uhr</p></div></div><div class="footer-bottom"><p>© 2026 BECKER Hörakustik. Alle Rechte vorbehalten.</p><div class="footer-bottom-links"><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a></div></div></div></footer>
+<script src="nav.js"></script>
+</body>
+</html>

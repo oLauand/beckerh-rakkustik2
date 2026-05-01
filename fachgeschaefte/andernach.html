@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fachgeschaeft Andernach - BECKER Hoerakustik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&family=Fraunces:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+.location-hero { min-height: 58vh; }
+.location-hero .page-hero-bg {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(166, 28, 115, 0.18), transparent 28%),
+    radial-gradient(circle at 82% 24%, rgba(201, 75, 155, 0.14), transparent 24%),
+    linear-gradient(140deg, #fff 0%, #fdf4f9 52%, #f7edf4 100%);
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+.location-hero::before { background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(253,241,248,0.78) 100%); }
+.location-shell,.info-grid,.detail-grid,.team-grid,.support-grid { display:grid; gap:24px; }
+.location-shell { grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr); align-items:end; }
+.info-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.detail-grid,.team-grid,.support-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.panel { background:#fff; border:1px solid var(--border); border-radius:26px; box-shadow:var(--shadow-sm); position:relative; overflow:hidden; padding:28px; }
+.panel::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--magenta),var(--magenta-light)); }
+.panel p { color:var(--text-soft); }
+.badge,.team-role { display:inline-flex; align-items:center; gap:8px; padding:7px 14px; border-radius:999px; background:var(--pink-soft); color:var(--magenta); font-size:.75rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin-bottom:14px; }
+.fact-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.fact { border-radius:18px; border:1px solid rgba(166,28,115,.12); background:linear-gradient(180deg,#fff 0%,#fdf8fb 100%); padding:16px; }
+.fact strong { display:block; font-size:1.3rem; line-height:1.1; color:var(--magenta); }
+.fact span { display:block; margin-top:8px; color:var(--text-mute); font-size:.74rem; text-transform:uppercase; letter-spacing:.08em; font-weight:800; }
+.branch-art,.team-portrait { position:relative; overflow:hidden; border-radius:20px; }
+.branch-art { aspect-ratio:16/10; margin-bottom:18px; padding:20px; color:#fff; display:flex; flex-direction:column; justify-content:flex-end; background:radial-gradient(circle at 26% 22%, rgba(255,255,255,.18), transparent 24%),linear-gradient(140deg,#cf5aa3 0%,#8d1a61 100%); }
+.branch-art::before,.team-portrait::before { content:''; position:absolute; width:88px; height:88px; border-radius:50%; background:rgba(255,255,255,.2); top:16%; right:12%; }
+.branch-art::after { content:''; position:absolute; width:220px; height:132px; border-radius:110px 110px 0 0; background:rgba(255,255,255,.14); left:50%; bottom:-20px; transform:translateX(-50%); }
+.branch-art small,.team-portrait span { position:relative; z-index:1; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; font-weight:800; opacity:.9; }
+.branch-art strong { position:relative; z-index:1; font-size:1.9rem; line-height:1.05; }
+.team-card { background:linear-gradient(180deg,#fff 0%,#fdf8fb 100%); }
+.team-portrait { aspect-ratio:4/3; margin-bottom:16px; display:flex; align-items:flex-end; padding:18px; color:#fff; background:linear-gradient(140deg,#c74d9e 0%,#7b1a56 100%); }
+.team-portrait::after { content:''; position:absolute; width:170px; height:126px; border-radius:84px 84px 0 0; background:rgba(255,255,255,.68); left:50%; bottom:-10px; transform:translateX(-50%); }
+.team-portrait.tone-soft { background:linear-gradient(140deg,#d98abb 0%,#93306a 100%); }
+.service-list,.hint-list { list-style:none; display:grid; gap:10px; }
+.service-list li,.hint-list li { display:flex; gap:10px; color:var(--text-soft); }
+.service-list li::before,.hint-list li::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--magenta); margin-top:9px; flex-shrink:0; }
+.hours-list { list-style:none; display:grid; gap:10px; }
+.hours-list li { display:flex; justify-content:space-between; gap:12px; padding-bottom:10px; border-bottom:1px solid var(--border); color:var(--text-soft); font-weight:600; }
+.hours-list li:last-child { border-bottom:none; padding-bottom:0; }
+.action-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:20px; }
+.inline-btn { display:inline-flex; align-items:center; justify-content:center; padding:12px 18px; border-radius:999px; font-weight:800; font-size:.84rem; }
+.inline-btn.primary { background:var(--magenta); color:#fff; }
+.inline-btn.soft { background:var(--pink-soft); color:var(--magenta); border:1px solid var(--pink-mist); }
+@media (max-width: 1080px) { .location-shell,.info-grid,.detail-grid,.team-grid,.support-grid,.fact-grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<nav class="nav" id="nav"><div class="container nav-inner"><a href="../index.html" class="logo"><img src="../images/logo.png" alt="Becker Hoerakustik"></a><ul class="nav-links"><li class="nav-item"><a href="../leistungen/hoertest.html">Leistungen</a></li><li class="nav-item"><a href="../ratgeber/index.html">Ratgeber</a></li><li class="nav-item"><a href="../news.html">News</a></li><li class="nav-item"><a href="../veranstaltungen.html">Veranstaltungen</a></li><li class="nav-item"><a href="../unternehmen/firmengeschichte.html">Unternehmen</a></li><li class="nav-item"><a href="../fachgeschaefte.html">Fachgeschaefte</a></li><li class="nav-item"><a href="../kontakt.html">Kontakt</a></li></ul><div class="nav-actions"><button class="nav-search-btn" aria-label="Suchen"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></button><a href="../kontakt.html" class="btn btn-primary">Termin buchen</a><button class="mobile-toggle" aria-label="Menue"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg></button></div></div></nav>
+
+<header class="page-hero location-hero">
+  <div class="page-hero-bg"></div>
+  <div class="container page-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a><span class="sep">&rsaquo;</span><a href="../fachgeschaefte.html">Fachgeschaefte</a><span class="sep">&rsaquo;</span><span class="current">Andernach</span></nav>
+    <div class="location-shell">
+      <div>
+        <div class="page-eyebrow"><span class="dot"></span>BECKER Hoerakustik Andernach</div>
+        <h1>Persoenliche Hoerakustik mitten in <span style="color:var(--magenta);font-family:'Fraunces',serif;font-style:italic;font-weight:500;">Andernach</span></h1>
+        <p class="lead">Wer in Andernach kurze Wege und eine ruhige, klare Beratung sucht, findet hier einen Standort mit guter Erreichbarkeit und viel Alltagstauglichkeit vor dem ersten Termin.</p>
+      </div>
+      <aside class="panel reveal">
+        <div class="branch-art" role="img" aria-label="Illustrierte Vorschau fuer den Standort Andernach"><small>Standort Andernach</small><strong>Altstadt und kurze Wege</strong></div>
+        <span class="badge">Schnell im Blick</span>
+        <div class="fact-grid"><div class="fact"><strong>08:00-17:00</strong><span>Mo bis Fr</span></div><div class="fact"><strong>02632 948080</strong><span>Telefon</span></div><div class="fact"><strong>Altstadtlage</strong><span>zentral erreichbar</span></div></div>
+        <div class="action-row"><a class="inline-btn primary" href="../kontakt.html">Termin anfragen</a><a class="inline-btn soft" href="https://www.google.com/maps/search/?api=1&query=Kramgasse%203-5%2C%2056626%20Andernach" target="_blank" rel="noopener noreferrer">Route planen</a></div>
+      </aside>
+    </div>
+  </div>
+</header>
+
+<section class="content-section">
+  <div class="container info-grid">
+    <article class="panel reveal"><span class="badge">Adresse &amp; Kontakt</span><h3>Kramgasse 3-5, 56626 Andernach</h3><p>Telefon: 02632 948080<br>Fax: 02632 948082</p><p>Fuer Terminwunsch, Rueckfragen und Nachsorge ist das Team direkt ueber die Kontaktseite erreichbar.</p></article>
+    <article class="panel reveal"><span class="badge">Oeffnungszeiten</span><ul class="hours-list"><li><span>Montag bis Freitag</span><span>08:00 - 17:00 Uhr</span></li><li><span>Beratungstermine</span><span>gern vorab anfragen</span></li></ul></article>
+    <article class="panel reveal"><span class="badge">Parken &amp; Anfahrt</span><p>Parkmoeglichkeiten finden Sie gegenueber dem historischen Rathaus. Kurzparken ist vormittags bis 10 Uhr im Fussgaengerbereich vor dem Ladenbereich moeglich. Fuer laengere Besuche eignet sich die Rathaus-Tiefgarage.</p></article>
+  </div>
+</section>
+
+<section class="content-section bg-light">
+  <div class="container detail-grid">
+    <article class="panel reveal"><span class="badge">Leistungen vor Ort</span><ul class="service-list"><li>Hoergeraete-Beratung und Anpassung</li><li>Nachsorge und Feineinstellung im Alltag</li><li>Tinnitus-Beratung und Hoertraining</li><li>CI-Service und langfristige Begleitung</li><li>Unterstuetzung bei Fragen zu Hoerverlust und Schwerhoerigkeit</li></ul></article>
+    <article class="panel reveal"><span class="badge">Gut zu wissen</span><p>Der Standort eignet sich besonders, wenn Sie Beratung ohne Umwege suchen. Durch die zentrale Lage laesst sich der Besuch gut in den Alltag integrieren, auch fuer Nachkontrollen oder kurze Service-Termine.</p><div class="action-row"><a class="inline-btn soft" href="../fachgeschaefte.html">Zur Standortuebersicht</a></div></article>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="container">
+    <span class="section-eyebrow">Team vor Ort</span>
+    <h2 class="section-title">Persoenliche Ansprechpartner in <span style="color:var(--magenta);">Andernach</span></h2>
+    <div class="team-grid">
+      <article class="panel team-card reveal"><div class="team-portrait"><span>BECKER Team</span></div><span class="team-role">Standortleitung</span><h3>Martina Becker</h3><p>Behutsame Beratung, klare Erklaerungen und ein Blick fuer die Fragen, die vor einer ersten Versorgung wirklich wichtig sind.</p></article>
+      <article class="panel team-card reveal"><div class="team-portrait tone-soft"><span>BECKER Team</span></div><span class="team-role">Hoersystem-Anpassung</span><h3>Tim Schneider</h3><p>Begleitet Kunden von der ersten Analyse bis zur Feineinstellung und achtet besonders auf alltagstaugliche Hoerloesungen.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="content-section bg-light">
+  <div class="container support-grid">
+    <article class="panel reveal"><span class="badge">Vor dem Termin</span><ul class="hint-list"><li>Bringen Sie vorhandene Hoergeraete oder Unterlagen gern mit.</li><li>Notieren Sie typische Hoersituationen aus Ihrem Alltag.</li><li>Planen Sie bei Bedarf etwas Zeit fuer Parken und Fussweg in der Altstadt ein.</li></ul></article>
+    <article class="panel reveal"><span class="badge">Weitere Standorte</span><p>Wenn Andernach fuer Sie nicht ideal liegt, finden Sie auf den Profilseiten von Mainz und Neuwied weitere Informationen zu Team, Kontakt und Schwerpunkt.</p><div class="action-row"><a class="inline-btn soft" href="mainz.html">Mainz ansehen</a><a class="inline-btn soft" href="neuwied.html">Neuwied ansehen</a><a class="inline-btn soft" href="../fachgeschaefte.html">Alle Fachgeschaefte</a></div></article>
+  </div>
+</section>
+
+<footer><div class="container"><div class="footer-top"><div class="footer-brand"><a href="../index.html" class="footer-logo"><img src="../images/logo.png" alt="Becker Hoerakustik"></a><p>Verstehen. Unterhalten. Dabeisein.<br>Ich ge<em style="color:#C94B9B;font-style:italic;">Hoere</em> dazu!</p></div><div class="footer-col"><h4>Standorte</h4><ul><li><a href="../fachgeschaefte.html">Alle Fachgeschaefte</a></li><li><a href="andernach.html">Andernach</a></li><li><a href="mainz.html">Mainz</a></li><li><a href="neuwied.html">Neuwied</a></li></ul></div><div class="footer-col"><h4>Kontakt</h4><p>Kramgasse 3-5, 56626 Andernach</p><p>02632 948080</p><p>Mo-Fr 08:00-17:00 Uhr</p></div><div class="footer-col"><h4>Naechster Schritt</h4><p>Termin anfragen, Route planen oder zur Standortuebersicht wechseln.</p></div></div><div class="footer-bottom"><p>&copy; 2026 BECKER Hoerakustik.</p><div class="footer-bottom-links"><a href="#">Impressum</a><a href="#">Datenschutz</a></div></div></div></footer>
+<script src="../nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fachgeschaeft Koblenz - BECKER Hoerakustik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&family=Fraunces:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+.location-hero::before {
+  background: linear-gradient(135deg, rgba(255,255,255,0.94) 0%, rgba(253,241,248,0.86) 58%, rgba(247,236,245,0.82) 100%);
+}
+
+.location-shell,
+.detail-grid,
+.team-grid,
+.info-grid-local,
+.quote-strip {
+  display: grid;
+  gap: 24px;
+}
+
+.location-shell {
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  align-items: end;
+}
+
+.hero-card,
+.detail-card,
+.team-card,
+.info-card,
+.map-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-card,
+.detail-card,
+.info-card,
+.map-card {
+  padding: 28px;
+}
+
+.hero-card h3,
+.detail-card h3,
+.team-card h3,
+.info-card h3,
+.map-card h3 {
+  margin-bottom: 12px;
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--pink-soft);
+  color: var(--magenta);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.stat-grid,
+.detail-grid,
+.team-grid,
+.info-grid-local {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stat-item {
+  background: rgba(255,255,255,0.78);
+  border: 1px solid rgba(166,28,115,0.12);
+  border-radius: 18px;
+  padding: 16px;
+}
+
+.stat-item strong {
+  display: block;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--magenta);
+}
+
+.stat-item span {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-mute);
+  font-weight: 800;
+}
+
+.detail-card,
+.team-card,
+.info-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-card::before,
+.team-card::before,
+.info-card::before,
+.map-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--magenta), var(--magenta-light));
+}
+
+.detail-card p,
+.hero-card p,
+.team-card p,
+.info-card p,
+.map-card p {
+  color: var(--text-soft);
+}
+
+.team-card {
+  padding: 24px;
+}
+
+.team-role {
+  display: inline-flex;
+  margin-bottom: 12px;
+  border-radius: 999px;
+  padding: 6px 12px;
+  background: var(--pink-soft);
+  color: var(--magenta);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.info-list,
+.service-list {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.info-list li,
+.service-list li {
+  display: flex;
+  gap: 10px;
+  color: var(--text-soft);
+}
+
+.info-list li::before,
+.service-list li::before {
+  content: '•';
+  color: var(--magenta);
+  font-weight: 800;
+}
+
+.quote-strip {
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: stretch;
+}
+
+.quote-card {
+  background: linear-gradient(135deg, var(--magenta), var(--magenta-light));
+  color: white;
+  border-radius: 28px;
+  padding: 30px;
+}
+
+.quote-card blockquote {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(1.5rem, 2.7vw, 2.1rem);
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.inline-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 800;
+}
+
+.inline-button.primary {
+  background: var(--magenta);
+  color: white;
+}
+
+.inline-button.soft {
+  background: var(--pink-soft);
+  color: var(--magenta);
+  border: 1px solid var(--pink-mist);
+}
+
+@media (max-width: 980px) {
+  .location-shell,
+  .stat-grid,
+  .detail-grid,
+  .team-grid,
+  .info-grid-local,
+  .quote-strip {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="logo"><img src="../images/logo.png" alt="Becker Hoerakustik"></a>
+    <ul class="nav-links">
+      <li class="nav-item">
+        <a href="../leistungen/hoertest.html">Leistungen <svg class="nav-chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"></path></svg></a>
+        <ul class="dropdown-menu">
+          <li><a href="../leistungen/audio-therapie.html">Audio-Therapie</a></li>
+          <li><a href="../leistungen/hoergeraetehersteller-partner.html">Hoergeraetehersteller &amp; Partner</a></li>
+          <li><a href="../leistungen/hoertest.html">Hoertest</a></li>
+          <li><a href="../leistungen/hoertraining.html">Hoertraining</a></li>
+          <li><a href="../leistungen/paedakustik.html">Paedakustik</a></li>
+          <li><a href="../leistungen/kinderhoerzentrum.html">Kinderhoerzentrum</a></li>
+          <li><a href="../leistungen/remote-fitting.html">Remote Fitting</a></li>
+          <li><a href="../leistungen/serviceleistung.html">Serviceleistung</a></li>
+          <li><a href="../leistungen/tinnitusberatung.html">Tinnitusberatung</a></li>
+          <li><a href="../leistungen/gehoerschutz.html">Gehoerschutz</a></li>
+          <li><a href="../leistungen/treffpunkt-ohr.html">Treffpunkt Ohr e.V.</a></li>
+        </ul>
+      </li>
+      <li class="nav-item"><a href="../ratgeber/index.html">Ratgeber</a></li>
+      <li class="nav-item"><a href="../news.html">News</a></li>
+      <li class="nav-item"><a href="../veranstaltungen.html">Veranstaltungen</a></li>
+      <li class="nav-item"><a href="../unternehmen/firmengeschichte.html">Unternehmen</a></li>
+      <li class="nav-item"><a href="../fachgeschaefte.html">Fachgeschaefte</a></li>
+      <li class="nav-item"><a href="../kontakt.html">Kontakt</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-search-btn" aria-label="Suchen"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></button>
+      <a href="../kontakt.html" class="btn btn-primary">Termin buchen</a>
+      <button class="mobile-toggle" aria-label="Menue"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg></button>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero location-hero">
+  <div class="page-hero-bg" style="background-image:url('https://images.unsplash.com/photo-1516549655669-df45057c8c03?w=1600&q=75&auto=format&fit=crop');"></div>
+  <div class="container page-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a><span class="sep">&rsaquo;</span><a href="../fachgeschaefte.html">Fachgeschaefte</a><span class="sep">&rsaquo;</span><span class="current">Koblenz</span>
+    </nav>
+    <div class="location-shell">
+      <div>
+        <div class="page-eyebrow"><span class="dot"></span>Hauptstandort Koblenz</div>
+        <h1>BECKER Hoerakustik <span style="color:var(--magenta);font-family:'Fraunces',serif;font-style:italic;font-weight:500;">Koblenz</span></h1>
+        <p class="lead">Das Haupthaus in Koblenz verbindet klassische Hoerakustik, Kinderhoerzentrum und den zentralen Einstieg in die BECKER Standortwelt.</p>
+        <div class="cta-row">
+          <a class="inline-button primary" href="../kontakt.html">Termin vereinbaren</a>
+          <a class="inline-button soft" href="../fachgeschaefte.html">Zur Standortuebersicht</a>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <span class="kicker">Schnellueberblick</span>
+        <div class="stat-grid">
+          <div class="stat-item"><strong>0261</strong><span>Telefon 35050</span></div>
+          <div class="stat-item"><strong>Mo-Fr</strong><span>08:00-17:30</span></div>
+          <div class="stat-item"><strong>3</strong><span>Profile im Ausbau</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</header>
+
+<section class="content-section">
+  <div class="container detail-grid">
+    <article class="detail-card reveal">
+      <span class="kicker">Adresse</span>
+      <h3>Mitten in Koblenz</h3>
+      <p>Schloss-Strasse 25<br>56068 Koblenz</p>
+      <p>Parken: Stegemannstrasse 14</p>
+      <p>Telefon: 0261 35050<br>Fax: 0261 35075<br>E-Mail: info@becker-hoerakustik.de</p>
+    </article>
+    <article class="detail-card reveal">
+      <span class="kicker">Leistungen</span>
+      <h3>Versorgung aus einem Haus</h3>
+      <ul class="service-list">
+        <li>Kinderhoerzentrum mit kindgerechter Beratung</li>
+        <li>Anpassung moderner Hoersysteme fuehrender Hersteller</li>
+        <li>Cochlea-Implantat-Service und Nachsorge</li>
+        <li>Audiotherapie, Hoertraining und Tinnitusberatung</li>
+      </ul>
+    </article>
+    <article class="detail-card reveal">
+      <span class="kicker">Besuch</span>
+      <h3>So laeuft ein Termin ab</h3>
+      <ul class="info-list">
+        <li>Ausfuehrliches Erstgespraech mit persoenlichem Bedarf</li>
+        <li>Hoertest, technische Auswahl und direkte Anpassung</li>
+        <li>Nachjustierung, Training und laengerfristige Begleitung</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section class="content-section bg-light">
+  <div class="container">
+    <span class="section-eyebrow">Team vor Ort</span>
+    <h2 class="section-title">Menschen, die Koblenz <span style="color:var(--magenta);">praegen</span></h2>
+    <div class="team-grid">
+      <article class="team-card reveal">
+        <span class="team-role">Standortleitung</span>
+        <h3>Anne Becker</h3>
+        <p>Fuehrt das Haupthaus mit Fokus auf Versorgungsqualitaet, Teamkoordination und einer Beratung, die Technik immer mit Alltagstauglichkeit verbindet.</p>
+      </article>
+      <article class="team-card reveal">
+        <span class="team-role">Kinderhoerzentrum</span>
+        <h3>Jana Mueller</h3>
+        <p>Begleitet Familien, Kinder und Jugendliche vom ersten Hoertest bis zur langfristigen Nachversorgung in enger Abstimmung mit den Eltern.</p>
+      </article>
+      <article class="team-card reveal">
+        <span class="team-role">Audiotherapie</span>
+        <h3>David Schmitt</h3>
+        <p>Verbindet technische Anpassung mit Hoertraining, damit neue Hoersysteme nicht nur besser klingen, sondern auch sicher im Alltag ankommen.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="container quote-strip">
+    <div class="quote-card reveal">
+      <blockquote>"Koblenz ist unser Haupthaus. Von hier aus wird sichtbar, wie Standortprofil, Fachgeschaefte-Uebersicht und Hauptmarke zusammenarbeiten sollen."</blockquote>
+      <p>Die Seite ist bewusst als Hauptprofil ausgebaut und kann als Vorlage fuer weitere Standorte dienen.</p>
+    </div>
+    <div class="map-card reveal">
+      <span class="kicker">Vor Ihrem Besuch</span>
+      <h3>Hilfreich fuer den Termin</h3>
+      <p>Bringen Sie vorhandene Hoersysteme, letzte Arztbefunde und alltaegliche Hoersituationen mit, die Ihnen aktuell schwerfallen. So kann das Team direkt zielgerichtet beraten.</p>
+      <div class="cta-row">
+        <a class="inline-button soft" href="https://www.google.com/maps/search/?api=1&query=Schloss-Strasse%2025%2C%2056068%20Koblenz" target="_blank" rel="noopener noreferrer">Route planen</a>
+        <a class="inline-button primary" href="../kontakt.html">Termin buchen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="../index.html" class="footer-logo"><img src="../images/logo.png" alt="Becker Hoerakustik"></a>
+        <p>Verstehen. Unterhalten. Dabeisein.<br>Ich ge<em style="color:#C94B9B;font-style:italic;">Hoere</em> dazu!</p>
+      </div>
+      <div class="footer-col"><h4>Standorte</h4><ul>
+        <li><a href="../fachgeschaefte.html">Alle Fachgeschaefte</a></li>
+        <li><a href="koblenz.html">Koblenz</a></li>
+        <li><a href="andernach.html">Andernach</a></li>
+        <li><a href="mainz.html">Mainz</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Leistungen</h4><ul>
+        <li><a href="../leistungen/kinderhoerzentrum.html">Kinderhoerzentrum</a></li>
+        <li><a href="../leistungen/hoertest.html">Hoertest</a></li>
+        <li><a href="../leistungen/tinnitusberatung.html">Tinnitusberatung</a></li>
+        <li><a href="../leistungen/audio-therapie.html">Audio-Therapie</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Kontakt</h4><p>Schloss-Strasse 25, 56068 Koblenz</p><p>0261 35050</p><p>Mo-Fr 08:00-17:30</p></div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2026 BECKER Hoerakustik.</p><div class="footer-bottom-links"><a href="#">Impressum</a><a href="#">Datenschutz</a></div></div>
+  </div>
+</footer>
+<script src="../nav.js"></script>
+</body>
+</html>

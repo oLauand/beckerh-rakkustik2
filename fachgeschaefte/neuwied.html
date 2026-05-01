@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fachgeschaeft Neuwied - BECKER Hoerakustik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&family=Fraunces:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+.location-hero { min-height: 58vh; }
+.location-hero .page-hero-bg {
+  background:
+    radial-gradient(circle at 18% 18%, rgba(166, 28, 115, 0.18), transparent 28%),
+    radial-gradient(circle at 80% 20%, rgba(210, 110, 176, 0.16), transparent 24%),
+    linear-gradient(140deg, #fff 0%, #fdf4f9 52%, #f7edf4 100%);
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+.location-hero::before { background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(253,241,248,0.78) 100%); }
+.location-shell,.info-grid,.detail-grid,.team-grid,.support-grid { display:grid; gap:24px; }
+.location-shell { grid-template-columns:minmax(0,1.08fr) minmax(320px,.92fr); align-items:end; }
+.info-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.detail-grid,.team-grid,.support-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.panel { background:#fff; border:1px solid var(--border); border-radius:26px; box-shadow:var(--shadow-sm); position:relative; overflow:hidden; padding:28px; }
+.panel::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--magenta),var(--magenta-light)); }
+.panel p { color:var(--text-soft); }
+.badge,.team-role { display:inline-flex; align-items:center; gap:8px; padding:7px 14px; border-radius:999px; background:var(--pink-soft); color:var(--magenta); font-size:.75rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin-bottom:14px; }
+.fact-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.fact { min-height:112px; border-radius:18px; border:1px solid rgba(166,28,115,.12); background:linear-gradient(180deg,#fff 0%,#fdf8fb 100%); padding:16px; }
+.fact strong { display:block; font-size:1.08rem; line-height:1.2; color:var(--magenta); word-break:break-word; }
+.fact span { display:block; margin-top:8px; color:var(--text-mute); font-size:.72rem; text-transform:uppercase; letter-spacing:.08em; font-weight:800; }
+.branch-art,.team-portrait { position:relative; overflow:hidden; border-radius:20px; }
+.branch-art { aspect-ratio:16/10; margin-bottom:18px; padding:20px; color:#fff; display:flex; flex-direction:column; justify-content:flex-end; background:radial-gradient(circle at 24% 22%, rgba(255,255,255,.18), transparent 24%),linear-gradient(140deg,#d26eb0 0%,#7b1e57 100%); }
+.branch-art::before,.team-portrait::before { content:''; position:absolute; width:88px; height:88px; border-radius:50%; background:rgba(255,255,255,.2); top:16%; right:12%; }
+.branch-art::after { content:''; position:absolute; width:220px; height:132px; border-radius:110px 110px 0 0; background:rgba(255,255,255,.14); left:50%; bottom:-20px; transform:translateX(-50%); }
+.branch-art small,.team-portrait span { position:relative; z-index:1; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; font-weight:800; opacity:.9; }
+.branch-art strong { position:relative; z-index:1; font-size:1.9rem; line-height:1.05; }
+.team-card { background:linear-gradient(180deg,#fff 0%,#fdf8fb 100%); }
+.team-portrait { aspect-ratio:4/3; margin-bottom:16px; display:flex; align-items:flex-end; padding:18px; color:#fff; background:linear-gradient(140deg,#d26eb0 0%,#7b1e57 100%); }
+.team-portrait::after { content:''; position:absolute; width:170px; height:126px; border-radius:84px 84px 0 0; background:rgba(255,255,255,.68); left:50%; bottom:-10px; transform:translateX(-50%); }
+.team-portrait.tone-soft { background:linear-gradient(140deg,#c95aa0 0%,#5f1945 100%); }
+.service-list,.hint-list { list-style:none; display:grid; gap:10px; }
+.service-list li,.hint-list li { display:flex; gap:10px; color:var(--text-soft); }
+.service-list li::before,.hint-list li::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--magenta); margin-top:9px; flex-shrink:0; }
+.action-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:20px; }
+.inline-btn { display:inline-flex; align-items:center; justify-content:center; padding:12px 18px; border-radius:999px; font-weight:800; font-size:.84rem; }
+.inline-btn.primary { background:var(--magenta); color:#fff; }
+.inline-btn.soft { background:var(--pink-soft); color:var(--magenta); border:1px solid var(--pink-mist); }
+@media (max-width: 1080px) { .location-shell,.info-grid,.detail-grid,.team-grid,.support-grid,.fact-grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<nav class="nav" id="nav"><div class="container nav-inner"><a href="../index.html" class="logo"><img src="../images/logo.png" alt="Becker Hoerakustik"></a><ul class="nav-links"><li class="nav-item"><a href="../leistungen/hoertest.html">Leistungen</a></li><li class="nav-item"><a href="../ratgeber/index.html">Ratgeber</a></li><li class="nav-item"><a href="../news.html">News</a></li><li class="nav-item"><a href="../veranstaltungen.html">Veranstaltungen</a></li><li class="nav-item"><a href="../unternehmen/firmengeschichte.html">Unternehmen</a></li><li class="nav-item"><a href="../fachgeschaefte.html">Fachgeschaefte</a></li><li class="nav-item"><a href="../kontakt.html">Kontakt</a></li></ul><div class="nav-actions"><button class="nav-search-btn" aria-label="Suchen"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></button><a href="../kontakt.html" class="btn btn-primary">Termin buchen</a><button class="mobile-toggle" aria-label="Menue"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg></button></div></div></nav>
+
+<header class="page-hero location-hero">
+  <div class="page-hero-bg"></div>
+  <div class="container page-hero-content">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a><span class="sep">&rsaquo;</span><a href="../fachgeschaefte.html">Fachgeschaefte</a><span class="sep">&rsaquo;</span><span class="current">Neuwied</span></nav>
+    <div class="location-shell">
+      <div>
+        <div class="page-eyebrow"><span class="dot"></span>BECKER Hoerakustik Neuwied</div>
+        <h1>Kinderhoerzentrum und Hoerakustik in <span style="color:var(--magenta);font-family:'Fraunces',serif;font-style:italic;font-weight:500;">Neuwied</span></h1>
+        <p class="lead">In Neuwied steht die langfristige Begleitung im Vordergrund: fuer Familien, Kinder und alle, die bei Versorgung und Nachsorge einen besonders klaren, ruhigen Ablauf suchen.</p>
+      </div>
+      <aside class="panel reveal">
+        <div class="branch-art" role="img" aria-label="Illustrierte Vorschau fuer den Standort Neuwied"><small>Kinderhoerzentrum Neuwied</small><strong>Familiennah und gut planbar</strong></div>
+        <span class="badge">Schnell im Blick</span>
+        <div class="fact-grid"><div class="fact"><strong>Langendorfer Str. 105</strong><span>Neuwied</span></div><div class="fact"><strong>02631 31800</strong><span>Telefon</span></div><div class="fact"><strong>Kinderhoerzentrum</strong><span>Schwerpunkt</span></div></div>
+        <div class="action-row"><a class="inline-btn primary" href="../kontakt.html">Termin anfragen</a><a class="inline-btn soft" href="https://www.google.com/maps/search/?api=1&query=Langendorfer%20Strasse%20105%2C%2056564%20Neuwied" target="_blank" rel="noopener noreferrer">Route planen</a></div>
+      </aside>
+    </div>
+  </div>
+</header>
+
+<section class="content-section">
+  <div class="container info-grid">
+    <article class="panel reveal"><span class="badge">Adresse &amp; Kontakt</span><h3>Langendorfer Strasse 105, 56564 Neuwied</h3><p>Telefon: 02631 31800<br>Fax: 02631 353528</p><p>Der Standort eignet sich fuer wiederkehrende Termine, Nachsorge und alle Fragen, die waehrend einer laengerfristigen Betreuung auftauchen.</p></article>
+    <article class="panel reveal"><span class="badge">Kinderhoerzentrum</span><p>Neuwied begleitet Familien strukturiert durch Beratung, Anpassung und Nachkontrollen. Das macht den Standort besonders hilfreich, wenn mehrere Termine ueber einen laengeren Zeitraum geplant werden muessen.</p></article>
+    <article class="panel reveal"><span class="badge">Besuch ohne Umwege</span><p>Die Seite konzentriert sich auf das Wesentliche: Kontakt, Route, Ansprechpartner und eine verstaendliche Einordnung, wofuer der Standort gut passt.</p></article>
+  </div>
+</section>
+
+<section class="content-section bg-light">
+  <div class="container detail-grid">
+    <article class="panel reveal"><span class="badge">Leistungen vor Ort</span><ul class="service-list"><li>Begleitung von Familien und Kindern mit Hoerverlust</li><li>Beratung fuer Erwachsene und langfristige Nachsorge</li><li>Anpassung und Feineinstellung von Hoersystemen</li><li>Alltagsnahe Erklaerungen fuer Eltern und Bezugspersonen</li><li>Ruhige Begleitung bei regelmaessigen Kontrollterminen</li></ul></article>
+    <article class="panel reveal"><span class="badge">Hilfreich fuer Familien</span><ul class="hint-list"><li>Bringen Sie vorhandene Unterlagen, Hoergeraete oder Fragen gesammelt mit.</li><li>Planen Sie bei Kindern lieber etwas mehr Zeit fuer Ankommen und Eingewoehnung ein.</li><li>Notieren Sie Beobachtungen aus Kita, Schule oder Alltag, damit das Team konkrete Situationen einordnen kann.</li></ul></article>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="container">
+    <span class="section-eyebrow">Team vor Ort</span>
+    <h2 class="section-title">Begleitung mit Ruhe und Struktur in <span style="color:var(--magenta);">Neuwied</span></h2>
+    <div class="team-grid">
+      <article class="panel team-card reveal"><div class="team-portrait"><span>BECKER Team</span></div><span class="team-role">Kinderhoerzentrum</span><h3>Laura Weiss</h3><p>Begleitet Familien strukturiert durch Anpassung, Eingewoehnung und Nachkontrollen und erklaert auch laengere Schritte verstaendlich.</p></article>
+      <article class="panel team-card reveal"><div class="team-portrait tone-soft"><span>BECKER Team</span></div><span class="team-role">Akustik &amp; Service</span><h3>Marcel Jung</h3><p>Verbindet technische Anpassung mit klaren Erklaerungen und sorgt dafuer, dass auch spaetere Service-Termine nachvollziehbar bleiben.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="content-section bg-light">
+  <div class="container support-grid">
+    <article class="panel reveal"><span class="badge">Fuer den ersten Besuch</span><p>Wenn Sie mit Kind oder als Familie kommen, hilft eine kurze Vorbereitung enorm: bisherige Unterlagen, Fragen aus Alltag oder Schule und eventuelle Beobachtungen zum Hoeren bringen schnell Struktur ins Gespraech.</p></article>
+    <article class="panel reveal"><span class="badge">Weitere Standorte</span><p>Andernach und Mainz zeigen denselben klaren Aufbau mit anderen Schwerpunkten. So koennen Sie je nach Weg, Stadt oder Betreuungssituation leichter entscheiden.</p><div class="action-row"><a class="inline-btn soft" href="andernach.html">Andernach ansehen</a><a class="inline-btn soft" href="mainz.html">Mainz ansehen</a><a class="inline-btn soft" href="../fachgeschaefte.html">Alle Fachgeschaefte</a></div></article>
+  </div>
+</section>
+
+<footer><div class="container"><div class="footer-top"><div class="footer-brand"><a href="../index.html" class="footer-logo"><img src="../images/logo.png" alt="Becker Hoerakustik"></a><p>Verstehen. Unterhalten. Dabeisein.<br>Ich ge<em style="color:#C94B9B;font-style:italic;">Hoere</em> dazu!</p></div><div class="footer-col"><h4>Standorte</h4><ul><li><a href="../fachgeschaefte.html">Alle Fachgeschaefte</a></li><li><a href="andernach.html">Andernach</a></li><li><a href="mainz.html">Mainz</a></li><li><a href="neuwied.html">Neuwied</a></li></ul></div><div class="footer-col"><h4>Kontakt</h4><p>Langendorfer Strasse 105, 56564 Neuwied</p><p>02631 31800</p><p>Kinderhoerzentrum</p></div><div class="footer-col"><h4>Naechster Schritt</h4><p>Termin anfragen, Route planen oder zur Standortuebersicht wechseln.</p></div></div><div class="footer-bottom"><p>&copy; 2026 BECKER Hoerakustik.</p><div class="footer-bottom-links"><a href="#">Impressum</a><a href="#">Datenschutz</a></div></div></div></footer>
+<script src="../nav.js"></script>
+</body>
+</html>
