@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <style>
   :root {
@@ -312,6 +313,16 @@
     animation: scaleX 1s 0.6s cubic-bezier(.2,.7,.3,1) both;
     transform-origin: left;
   }
+  .hero h1 .accent-line {
+    display: block;
+    margin-top: 18px;
+    font-size: clamp(24px, 2.8vw, 38px);
+    line-height: 1.15;
+  }
+  .hero h1 .accent-line::after {
+    left: -2px; right: -2px; bottom: 2px;
+    height: 10px;
+  }
   @keyframes scaleX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
   .hero p.lead {
     font-size: 19px;
@@ -338,6 +349,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    min-width: 184px;
     transition: transform 0.25s ease;
   }
   .trust-item:hover { transform: translateY(-3px); }
@@ -495,7 +507,7 @@
   .leistungen { background: var(--bg); position: relative; }
   .leistungen-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 22px;
   }
   .service-card {
@@ -892,6 +904,187 @@
     gap: 8px;
   }
   .calendar-time .icon { font-size: 16px; }
+
+  /* ============ REPUTATION ============ */
+  .reputation-section {
+    position: relative;
+    background:
+      radial-gradient(circle at 10% 16%, rgba(166,28,115,0.08), transparent 28%),
+      linear-gradient(180deg, #fff 0%, #fff8fc 100%);
+  }
+  .reputation-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+    gap: 28px;
+    align-items: start;
+  }
+  .reputation-video-card,
+  .review-panel {
+    background: white;
+    border: 1px solid rgba(166,28,115,0.10);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+  .reputation-video-card {
+    overflow: hidden;
+  }
+  .video-frame {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(135deg, #170f16 0%, #2a1122 100%);
+  }
+  .video-frame video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    background: #120d12;
+  }
+  .video-caption {
+    padding: 28px 30px 30px;
+  }
+  .review-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    border-radius: 999px;
+    background: var(--pink-soft);
+    color: var(--magenta);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .video-caption h3 {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+  .video-caption p {
+    font-size: 16px;
+    color: var(--text-soft);
+    line-height: 1.65;
+    max-width: 58ch;
+  }
+  .review-stack {
+    display: grid;
+    gap: 18px;
+  }
+  .review-panel {
+    padding: 24px;
+  }
+  .review-source {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .review-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    background: var(--pink-soft);
+    color: var(--magenta);
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .review-source strong {
+    display: block;
+    font-size: 18px;
+    line-height: 1.2;
+  }
+  .review-source small {
+    display: block;
+    margin-top: 4px;
+    color: var(--text-mute);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.45;
+  }
+  .review-score {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .review-score span {
+    font-size: 18px;
+    color: var(--text-mute);
+    font-weight: 700;
+    letter-spacing: 0;
+    margin-bottom: 6px;
+  }
+  .review-stars {
+    display: flex;
+    gap: 8px;
+    margin: 16px 0 12px;
+    color: #f4b400;
+    font-size: 16px;
+  }
+  .review-copy {
+    color: var(--text-soft);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .review-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .review-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: #fff7fb;
+    border: 1px solid rgba(166,28,115,0.10);
+    color: var(--text-soft);
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .review-chip i {
+    color: var(--magenta);
+  }
+  .review-panel.review-network {
+    background: linear-gradient(135deg, rgba(166,28,115,0.06), rgba(255,255,255,0.98));
+  }
+  .social-proof-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .social-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 999px;
+    background: white;
+    color: var(--text);
+    border: 1px solid rgba(166,28,115,0.12);
+    box-shadow: 0 10px 28px rgba(166,28,115,0.08);
+    font-size: 14px;
+    font-weight: 700;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+  }
+  .social-pill:hover {
+    transform: translateY(-2px);
+    border-color: rgba(166,28,115,0.24);
+    box-shadow: 0 14px 30px rgba(166,28,115,0.12);
+    color: var(--magenta);
+  }
+  .social-pill i {
+    font-size: 16px;
+    line-height: 1;
+  }
 
   /* ============ APP SECTION ============ */
   .app-section {
@@ -1324,6 +1517,9 @@
     background: var(--magenta);
     transform: translateY(-3px);
   }
+  .footer-social a i {
+    line-height: 1;
+  }
   .footer-bottom-links { display: flex; gap: 24px; }
   .footer-bottom-links a {
     color: rgba(255,255,255,0.5);
@@ -1508,7 +1704,7 @@
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 1024px) {
-    .hero-grid, .experten-grid, .app-grid, .cta-grid {
+    .hero-grid, .experten-grid, .app-grid, .cta-grid, .reputation-grid {
       grid-template-columns: 1fr;
       gap: 50px;
     }
@@ -1523,14 +1719,19 @@
       padding: calc(10px + env(safe-area-inset-top, 0px)) 0 10px;
     }
     .nav-inner {
-      flex-wrap: wrap;
+      position: relative;
+      flex-wrap: nowrap;
       gap: 14px;
     }
     .nav-links {
       display: none;
-      width: 100%;
-      order: 3;
-      margin-top: 16px;
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      right: 0;
+      width: auto;
+      order: initial;
+      margin-top: 0;
     }
     .nav-links.mobile-open {
       display: flex;
@@ -1599,6 +1800,12 @@
     .phone-frame { width: 260px; height: 520px; transform: rotate(0); }
     .hero-cta { flex-direction: column; align-items: stretch; }
     .hero-cta .btn { justify-content: center; }
+    .hero-trust { gap: 16px; }
+    .trust-item { width: 100%; }
+    .review-panel, .reputation-video-card { border-radius: 24px; }
+    .review-score { font-size: 40px; }
+    .video-caption { padding: 24px; }
+    .social-proof-links { flex-direction: column; }
     .nav {
       padding: calc(12px + env(safe-area-inset-top, 0px)) 0 12px;
     }
@@ -1863,43 +2070,46 @@
         100 Jahre Hörakustik · seit 1925
       </span>
       <h1>
-        Hören ist <span class="accent">Leben</span>.<br>
-        Wir machen<br>es möglich.
+        Verstehen.<br>
+        Unterhalten.<br>
+        Dabeisein.
+        <span class="accent accent-line">Ich geHöre dazu.</span>
       </h1>
       <p class="lead">
-        Modernste Hörsystem-Technologie, individuelle Beratung und 100 Jahre
-        Familientradition – an über 40 Standorten in der Rhein-Main-Region.
+        22x in Ihrer Nähe: 21 Mal im nördlichen Rheinland-Pfalz und einmal in
+        Bonn-Bad Godesberg. Persönliche Beratung, moderne Hörsysteme und ein
+        Familienunternehmen, das seit 1925 für Teilhabe steht.
       </p>
       <div class="hero-cta">
         <a href="kontakt.html" class="btn btn-primary">
           <svg class="icon"><use href="#i-calendar-check"/></svg>
-          Kostenfreien Hörtest buchen
+          Kostenfreien Hörtest mit Beratung buchen
         </a>
-        <a href="#leistungen" class="btn btn-secondary">
-          <svg class="icon"><use href="#i-play"/></svg>
-          Unsere Leistungen
+        <a href="#reputation" class="btn btn-secondary">
+          <svg class="icon"><use href="#i-star"/></svg>
+          Bewertungen &amp; Empfehlungen
         </a>
       </div>
       <div class="hero-trust">
         <a href="fachgeschaefte.html" class="trust-item">
           <span class="trust-icon"><svg class="icon"><use href="#i-storefront"/></svg></span>
           <div class="trust-item-text">
-            <span class="num">40+</span>
-            <span class="label">Fachgeschäfte</span>
+            <span class="num">22x</span>
+            <span class="label">in Ihrer Nähe</span>
           </div>
         </a>
-        <a href="unternehmen/firmengeschichte.html" class="trust-item">
+        <a href="https://www.google.com/search?q=BECKER+H%C3%B6rakustik+oHG+Koblenz" target="_blank" rel="noopener noreferrer" class="trust-item">
           <span class="trust-icon"><svg class="icon"><use href="#i-users"/></svg></span>
           <div class="trust-item-text">
-            <span class="num">100.000+</span>
-            <span class="label">zufriedene Kunden</span>
+            <span class="num">4,9 / 5</span>
+            <span class="label">346 Google-Rezensionen</span>
           </div>
         </a>
-        <a href="#botschafter" class="trust-item">
+        <a href="https://www.kununu.com/de/becker-hoerakustik7" target="_blank" rel="noopener noreferrer" class="trust-item">
           <span class="trust-icon"><svg class="icon"><use href="#i-star"/></svg></span>
           <div class="trust-item-text">
-            <span class="num">4,9 / 5</span>
-            <span class="label">Kundenbewertung</span>
+            <span class="num">95 %</span>
+            <span class="label">Kununu-Weiterempfehlung</span>
           </div>
         </a>
       </div>
@@ -1919,8 +2129,8 @@
           <span class="section-eyebrow" style="color:rgba(255,255,255,0.85);">Termin buchen</span>
           <h2>Bereit für besseres <span class="brand-em">Hören</span>?</h2>
           <p>
-            Vereinbaren Sie jetzt Ihren kostenfreien Hörtest in einem unserer
-            über 40 Fachgeschäfte – online in nur 60 Sekunden.
+            Vereinbaren Sie jetzt Ihren kostenfreien Hörtest mit Beratung.
+            Online in nur 60 Sekunden, an 22 Standorten in Ihrer Nähe.
           </p>
           <div class="cta-buttons">
             <a href="kontakt.html" class="btn btn-white">
@@ -1963,64 +2173,175 @@
   </div>
 </section>
 
+<!-- ============ REPUTATION ============ -->
+<section id="reputation" class="reputation-section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Empfehlungen &amp; Bewertungen</span>
+      <h2 class="section-title">Stark empfohlen. <span class="brand-em">Sichtbar bewertet.</span></h2>
+      <p class="section-lead">
+        Die Empfehlung der Handwerkskammer Koblenz, starke Google-Rezensionen und sehr gute
+        Kununu-Werte zeigen, wofür BECKER steht: fachliche Qualität, menschliche Beratung und
+        ein Team, das gerne bleibt.
+      </p>
+    </div>
+    <div class="reputation-grid">
+      <article class="reputation-video-card reveal">
+        <div class="video-frame">
+          <video controls playsinline preload="metadata">
+            <source src="https://www.beckerhoerakustik.de/wp-content/uploads/2025/08/hwk2_1280_opt.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-caption">
+          <span class="review-badge"><i class="bi bi-play-circle-fill"></i> Empfehlung der Handwerkskammer Koblenz</span>
+          <h3>Ein starkes Zeichen aus dem Handwerk</h3>
+          <p>
+            Dieses Video macht sichtbar, was BECKER seit Jahren auszeichnet: verlässliche
+            Beratung, präzises Handwerk und ein spürbares Verständnis dafür, wie wichtig
+            gutes Hören für Teilhabe im Alltag ist.
+          </p>
+        </div>
+      </article>
+      <div class="review-stack">
+        <article class="review-panel reveal">
+          <div class="review-source">
+            <span class="review-icon"><i class="bi bi-google"></i></span>
+            <div>
+              <strong>Google Rezensionen</strong>
+              <small>BECKER Hörakustik oHG in Koblenz</small>
+            </div>
+          </div>
+          <div class="review-score">4,9 <span>/ 5</span></div>
+          <div class="review-stars" aria-hidden="true">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          </div>
+          <p class="review-copy">
+            346 Rezensionen und ein durchgehend starkes Bild in den lokalen Ergebnissen. Das ist
+            ein klares Signal für hohe Zufriedenheit und echte Weiterempfehlung.
+          </p>
+          <div class="review-meta">
+            <span class="review-chip"><i class="bi bi-geo-alt-fill"></i> Koblenz</span>
+            <span class="review-chip"><i class="bi bi-chat-square-quote-fill"></i> 346 Rezensionen</span>
+            <span class="review-chip"><i class="bi bi-star-fill"></i> 4,9 Sterne</span>
+          </div>
+          <a href="https://www.google.com/search?q=BECKER+H%C3%B6rakustik+oHG+Koblenz" target="_blank" rel="noopener noreferrer" class="social-pill">
+            <i class="bi bi-arrow-up-right"></i> Google-Bewertungen ansehen
+          </a>
+        </article>
+        <article class="review-panel reveal">
+          <div class="review-source">
+            <span class="review-icon"><i class="bi bi-award-fill"></i></span>
+            <div>
+              <strong>Kununu als Arbeitgeber</strong>
+              <small>Arbeitgeberbewertungen von Mitarbeitenden</small>
+            </div>
+          </div>
+          <div class="review-score">4,2 <span>/ 5</span></div>
+          <div class="review-stars" aria-hidden="true">
+            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
+          </div>
+          <p class="review-copy">
+            48 Bewertungen und 95 % Weiterempfehlung zeigen, dass die Qualität von BECKER nicht
+            nur Kundinnen und Kunden, sondern auch das eigene Team überzeugt.
+          </p>
+          <div class="review-meta">
+            <span class="review-chip"><i class="bi bi-people-fill"></i> 48 Bewertungen</span>
+            <span class="review-chip"><i class="bi bi-heart-fill"></i> 95 % Empfehlung</span>
+            <span class="review-chip"><i class="bi bi-briefcase-fill"></i> Arbeitgeberprofil</span>
+          </div>
+          <a href="https://www.kununu.com/de/becker-hoerakustik7" target="_blank" rel="noopener noreferrer" class="social-pill">
+            <i class="bi bi-arrow-up-right"></i> Kununu-Profil ansehen
+          </a>
+        </article>
+        <article class="review-panel review-network reveal">
+          <div class="review-source">
+            <span class="review-icon"><i class="bi bi-share-fill"></i></span>
+            <div>
+              <strong>Social Media &amp; direkte Einblicke</strong>
+              <small>Aktuell, verbunden und sauber verlinkt</small>
+            </div>
+          </div>
+          <p class="review-copy">
+            Hier sehen Sie Neuigkeiten, Einblicke ins Team, Aktionen und das, was BECKER im Alltag
+            ausmacht. Alle Links führen direkt zu den offiziellen Profilen.
+          </p>
+          <div class="social-proof-links">
+            <a href="https://www.instagram.com/beckerhoerakustik/" target="_blank" rel="noopener noreferrer" class="social-pill"><i class="bi bi-instagram"></i> Instagram</a>
+            <a href="https://www.facebook.com/beckerhoerakustik" target="_blank" rel="noopener noreferrer" class="social-pill"><i class="bi bi-facebook"></i> Facebook</a>
+            <a href="https://www.youtube.com/@beckerhorakustik7681" target="_blank" rel="noopener noreferrer" class="social-pill"><i class="bi bi-youtube"></i> YouTube</a>
+            <a href="https://www.linkedin.com/company/becker-hoerakustik/" target="_blank" rel="noopener noreferrer" class="social-pill"><i class="bi bi-linkedin"></i> LinkedIn</a>
+            <a href="https://www.google.com/search?q=BECKER+H%C3%B6rakustik+oHG+Koblenz" target="_blank" rel="noopener noreferrer" class="social-pill"><i class="bi bi-google"></i> Google</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ LEISTUNGEN ============ -->
 <section id="leistungen" class="leistungen">
   <div class="container">
     <div class="section-head reveal">
-      <span class="section-eyebrow">Unsere Topleistungen</span>
+      <span class="section-eyebrow">Unsere Topleistungen!</span>
       <h2 class="section-title">Alles für Ihr <span class="brand-em">bestes Hören</span> – aus einer Hand.</h2>
       <p class="section-lead">
-        Von der ersten Beratung bis zur perfekten Anpassung Ihres Hörsystems –
-        unser Expertenteam begleitet Sie auf jedem Schritt Ihrer Hörreise.
+        Von der ersten Beratung über spezialisierte Therapieangebote bis zur digitalen Betreuung:
+        Diese Leistungen stehen auf der Startseite, weil sie für viele Menschen der wichtigste Einstieg sind.
       </p>
     </div>
     <div class="leistungen-grid">
       <a href="leistungen/hoertest.html" class="service-card reveal">
         <div class="service-icon"><svg class="icon"><use href="#i-ear"/></svg></div>
-        <h3>Kostenfreier Hörtest</h3>
-        <p>Professionelle Hörmessung mit ausführlicher Beratung – schnell, einfach und ohne Termindruck.</p>
+        <h3>Kostenfreier Hörtest mit Beratung</h3>
+        <p>Professionelle Hörmessung mit persönlicher Beratung, klaren Ergebnissen und einem verständlichen nächsten Schritt.</p>
         <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
       </a>
       <a href="leistungen/audio-therapie.html" class="service-card reveal">
         <div class="service-icon"><svg class="icon"><use href="#i-headphones"/></svg></div>
         <h3>Audiotherapie</h3>
-        <p>Gezieltes Hörtraining zur nachhaltigen Verbesserung Ihres Sprachverstehens und Hörerlebnisses.</p>
+        <p>Gezielte Begleitung für besseres Sprachverstehen, mehr Sicherheit im Alltag und nachhaltige Hörentlastung.</p>
         <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
       </a>
-      <a href="leistungen/serviceleistung.html" class="service-card reveal">
+      <a href="leistungen/hoergeraetehersteller-partner.html" class="service-card reveal">
         <div class="service-icon"><svg class="icon"><use href="#i-signal"/></svg></div>
         <h3>CI-Kompetenz</h3>
-        <p>Spezialisierte Versorgung und Betreuung von Cochlea-Implantat-Trägern – zertifizierter Service.</p>
+        <p>Spezialisierte Versorgung und Betreuung von Cochlea-Implantat-Trägerinnen und -Trägern mit erfahrenem Team.</p>
+        <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+      </a>
+      <a href="leistungen/hoertraining.html" class="service-card reveal">
+        <div class="service-icon"><svg class="icon"><use href="#i-grad"/></svg></div>
+        <h3>Professionelles Hörtraining</h3>
+        <p>Strukturiertes Training für eine bessere Eingewöhnung und mehr Sicherheit in Gesprächen, Familie und Beruf.</p>
         <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
       </a>
       <a href="leistungen/kinderhoerzentrum.html" class="service-card reveal">
         <div class="service-icon"><svg class="icon"><use href="#i-baby"/></svg></div>
         <h3>Kinderhörzentren</h3>
-        <p>Liebevolle, kindgerechte Betreuung in unseren spezialisierten Hörzentren für die Kleinsten.</p>
+        <p>Liebevolle, kindgerechte Versorgung in spezialisierten Zentren für Kinder, Eltern und den Alltag dazwischen.</p>
         <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
       </a>
       <a href="leistungen/tinnitusberatung.html" class="service-card reveal">
         <div class="service-icon"><svg class="icon"><use href="#i-wave"/></svg></div>
         <h3>Tinnitus-Beratung</h3>
-        <p>Individuelle Lösungen und moderne Therapieansätze für Menschen mit Ohrgeräuschen.</p>
+        <p>Individuelle Beratung und moderne Ansätze für Menschen, die Ohrgeräusche besser verstehen und entlasten wollen.</p>
         <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
       </a>
       <a href="leistungen/remote-fitting.html" class="service-card reveal">
         <div class="service-icon"><svg class="icon"><use href="#i-laptop"/></svg></div>
         <h3>Remote-Fitting</h3>
-        <p>Hörsystemanpassung bequem von Zuhause aus – modernste Technik, persönlicher Service.</p>
+        <p>Hörsystem-Anpassung bequem von zuhause aus, mit persönlichem Kontakt und technischer Feinjustierung aus der Ferne.</p>
         <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
       </a>
-      <a href="leistungen/hoertraining.html" class="service-card reveal">
-        <div class="service-icon"><svg class="icon"><use href="#i-grad"/></svg></div>
-        <h3>Hörtraining</h3>
-        <p>Professionelle Trainingsprogramme für eine optimale Eingewöhnung an Ihr neues Hörsystem.</p>
-        <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
-      </a>
-      <a href="leistungen/paedakustik.html" class="service-card reveal">
+      <a href="kontakt.html" class="service-card reveal">
         <div class="service-icon"><svg class="icon"><use href="#i-chip"/></svg></div>
-        <h3>Pädakustik &amp; Gehörschutz</h3>
-        <p>Spezialisierte Versorgung für Kinder sowie maßgefertigter Gehörschutz für Beruf und Freizeit.</p>
+        <h3>Firmeneigene IdO-Systeme</h3>
+        <p>Individuelle Im-Ohr-Lösungen für diskretes Tragen, präzisen Sitz und eine Versorgung, die zu Ihrem Alltag passt.</p>
+        <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+      </a>
+      <a href="kontakt.html" class="service-card reveal">
+        <div class="service-icon"><svg class="icon"><use href="#i-calendar-check"/></svg></div>
+        <h3>Online Termin buchen</h3>
+        <p>Einfach Termin anfragen, Hörtest planen oder Rückruf wünschen. Schnell, klar und direkt zur passenden Filiale.</p>
         <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
       </a>
     </div>
@@ -2045,21 +2366,21 @@
         Vertrauenssache ist.
       </p>
       <p>
-        Auf zahlreichen Veranstaltungen, in unseren über 40 Fachgeschäften und
-        natürlich digital – wir sind da, wo Sie uns brauchen.
+        An 22 Standorten, auf Veranstaltungen und natürlich digital sind wir genau dort,
+        wo Sie uns brauchen.
       </p>
       <div class="experten-stats">
         <div class="stat">
-          <span class="num">50+</span>
-          <span class="label">Jahre Erfahrung im Hörakustiker-Handwerk</span>
+          <span class="num">100</span>
+          <span class="label">Jahre Familienunternehmen seit 1925</span>
         </div>
         <div class="stat">
           <span class="num">200+</span>
           <span class="label">qualifizierte Hörakustik-Experten</span>
         </div>
         <div class="stat">
-          <span class="num">40+</span>
-          <span class="label">Fachgeschäfte in ganz Deutschland</span>
+          <span class="num">22x</span>
+          <span class="label">in Ihrer Nähe in Rheinland-Pfalz und Bonn-Bad Godesberg</span>
         </div>
       </div>
     </div>
@@ -2070,11 +2391,11 @@
 <section id="botschafter" class="botschafter">
   <div class="container">
     <div class="section-head center reveal">
-      <span class="section-eyebrow">Botschafter:innen des guten Hörens</span>
+      <span class="section-eyebrow">Kundenstimmen aus dem Alltag</span>
       <h2 class="section-title">Echte <span class="brand-em">Geschichten</span>. Echte Menschen.</h2>
       <p class="section-lead">
-        Lernen Sie unsere Botschafter:innen kennen und erfahren Sie, wie modernes Hören
-        ihr Leben verändert hat.
+        Neben Google- und Kununu-Bewertungen zeigen diese Porträts, wie modernes Hören
+        im echten Leben wieder Nähe, Sicherheit und Teilhabe möglich macht.
       </p>
     </div>
     <div class="testimonials">
@@ -2155,8 +2476,8 @@
               </div>
               <div class="phone-highlight">
                 <div>
-                  <strong>Naechster Termin</strong>
-                  <small>Do., 9:30 Uhr in Koblenz</small>
+                    <strong>Naechster Termin</strong>
+                    <small>Hörtest mit Beratung in Koblenz</small>
                 </div>
                 <span class="phone-pill">Check-in</span>
               </div>
@@ -2165,15 +2486,15 @@
               <div class="phone-card-row">
                 <div class="pcr-icon"><svg class="icon"><use href="#i-calendar-check"/></svg></div>
                 <div class="pcr-text">
-                  <strong>Termin am Do., 9:30</strong>
-                  <small>Hoertest im Haupthaus Koblenz</small>
+                    <strong>Termin am Do., 9:30</strong>
+                    <small>Hörtest mit Beratung im Haupthaus Koblenz</small>
                 </div>
                 <svg class="icon pcr-arrow"><use href="#i-caret-right"/></svg>
               </div>
               <div class="phone-card-row">
                 <div class="pcr-icon"><svg class="icon"><use href="#i-ear"/></svg></div>
                 <div class="pcr-text">
-                  <strong>Mein Hörprofil</strong>
+                    <strong>Mein Hörprofil</strong>
                   <small>Letzte Anpassung: 12.04.</small>
                 </div>
                 <svg class="icon pcr-arrow"><use href="#i-caret-right"/></svg>
@@ -2197,8 +2518,8 @@
             </div>
             <div class="phone-nav" aria-hidden="true">
               <div class="phone-nav-item"><svg class="icon"><use href="#i-calendar-check"/></svg>Termine</div>
-              <div class="phone-nav-item"><svg class="icon"><use href="#i-ear"/></svg>Hoeren</div>
-              <div class="phone-nav-item"><svg class="icon"><use href="#i-chat"/></svg>Chat</div>
+              <div class="phone-nav-item"><svg class="icon"><use href="#i-ear"/></svg>Profil</div>
+              <div class="phone-nav-item"><svg class="icon"><use href="#i-chat"/></svg>Fragen</div>
               <div class="phone-nav-item"><svg class="icon"><use href="#i-file"/></svg>Docs</div>
             </div>
           </div>
@@ -2208,22 +2529,23 @@
         <span class="section-eyebrow">Unsere BECKER App</span>
         <h2 class="section-title">Ihr Hörakustiker – immer in der <span class="brand-em">Hosentasche</span>.</h2>
         <p class="section-lead">
-          Mit der BECKER App haben Sie alles im Blick: Termine, Hörprofile, Dokumente
-          und direkten Draht zu Ihrem persönlichen Hörakustiker.
+          Mit der BECKER App haben Sie Termine, Hörprofil, Dokumente und den direkten Draht
+          zu Ihrem persönlichen Hörakustiker an einem Ort.
         </p>
         <ul class="app-features">
-          <li><span class="li-icon"><svg class="icon"><use href="#i-calendar-check"/></svg></span> Termine jederzeit buchen &amp; verwalten</li>
+          <li><span class="li-icon"><svg class="icon"><use href="#i-calendar-check"/></svg></span> Online Termin buchen</li>
           <li><span class="li-icon"><svg class="icon"><use href="#i-ear"/></svg></span> Hörprofil &amp; Hörsysteme einsehen</li>
           <li><span class="li-icon"><svg class="icon"><use href="#i-file"/></svg></span> Dokumente immer griffbereit</li>
           <li><span class="li-icon"><svg class="icon"><use href="#i-chat"/></svg></span> Schnell &amp; bequem Fragen stellen</li>
           <li><span class="li-icon"><svg class="icon"><use href="#i-bell"/></svg></span> Neuigkeiten &amp; Angebote erhalten</li>
+          <li><span class="li-icon"><svg class="icon"><use href="#i-ear"/></svg></span> Kostenfreien Hörtest mit Beratung anfragen</li>
         </ul>
         <div style="display:flex; gap:14px; flex-wrap:wrap;">
-          <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <svg class="icon"><use href="#i-apple"/></svg> App Store
+          <a href="kontakt.html" class="btn btn-primary">
+            <svg class="icon"><use href="#i-mail"/></svg> Jetzt Infos anfordern
           </a>
-          <a href="https://play.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-            <svg class="icon"><use href="#i-play-store"/></svg> Google Play
+          <a href="kontakt.html" class="btn btn-secondary">
+            <svg class="icon"><use href="#i-calendar-check"/></svg> Hörtest mit Beratung buchen
           </a>
         </div>
       </div>
@@ -2356,10 +2678,11 @@
         </a>
         <p>Verstehen. Unterhalten. Dabeisein.<br>Ich ge<span class="brand-em">Höre</span> dazu!</p>
         <div class="footer-social">
-          <a href="#" aria-label="Facebook"><svg class="icon"><use href="#i-facebook"/></svg></a>
-          <a href="#" aria-label="Instagram"><svg class="icon"><use href="#i-instagram"/></svg></a>
-          <a href="#" aria-label="YouTube"><svg class="icon"><use href="#i-youtube"/></svg></a>
-          <a href="#" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a>
+          <a href="https://www.facebook.com/beckerhoerakustik" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="https://www.instagram.com/beckerhoerakustik/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="https://www.youtube.com/@beckerhorakustik7681" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          <a href="https://www.linkedin.com/company/becker-hoerakustik/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="https://www.google.com/search?q=BECKER+H%C3%B6rakustik+oHG+Koblenz" target="_blank" rel="noopener noreferrer" aria-label="Google"><i class="bi bi-google"></i></a>
         </div>
       </div>
       <div class="footer-col">
@@ -2369,7 +2692,8 @@
           <li><a href="unternehmen/karriere.html">Karriere</a></li>
           <li><a href="fachgeschaefte.html">Fachgeschäfte</a></li>
           <li><a href="veranstaltungen.html">Veranstaltungen</a></li>
-          <li><a href="#botschafter">Botschafter:innen</a></li>
+          <li><a href="#reputation">Bewertungen &amp; Empfehlungen</a></li>
+          <li><a href="#botschafter">Kundenstimmen</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -2377,17 +2701,17 @@
         <ul>
           <li><a href="leistungen/hoertest.html">Kostenfreier Hörtest</a></li>
           <li><a href="leistungen/audio-therapie.html">Audiotherapie</a></li>
-          <li><a href="leistungen/paedakustik.html">CI-Kompetenz</a></li>
+          <li><a href="leistungen/hoergeraetehersteller-partner.html">CI-Kompetenz</a></li>
           <li><a href="leistungen/tinnitusberatung.html">Tinnitus-Beratung</a></li>
           <li><a href="leistungen/remote-fitting.html">Remote-Fitting</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Kontakt</h4>
-        <p><svg class="icon"><use href="#i-phone"/></svg> 0800 / 123 456 78</p>
+        <p><svg class="icon"><use href="#i-phone"/></svg> 0261 / 3 50 50</p>
         <p><svg class="icon"><use href="#i-mail"/></svg> info@becker-hoerakustik.de</p>
-        <p><svg class="icon"><use href="#i-clock"/></svg> Mo–Fr 9:00–18:00 Uhr</p>
-        <p><svg class="icon"><use href="#i-map"/></svg> Über 40 Fachgeschäfte</p>
+        <p><svg class="icon"><use href="#i-clock"/></svg> Mo–Fr 8:00–17:30 Uhr</p>
+        <p><svg class="icon"><use href="#i-map"/></svg> 22x in Ihrer Nähe</p>
       </div>
     </div>
     <div class="footer-bottom">
