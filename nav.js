@@ -32,6 +32,84 @@
     return getRootPrefix() + path;
   }
 
+  function applyTextReplacements(value) {
+    var result = value;
+    [
+      [/BECKER Hoerakustik/g, 'BECKER Hörakustik'],
+      [/Becker Hoerakustik/g, 'Becker Hörakustik'],
+      [/Fachgeschaefte/g, 'Fachgeschäfte'],
+      [/Fachgeschaeft/g, 'Fachgeschäft'],
+      [/Hauptgeschaeft/g, 'Hauptgeschäft'],
+      [/Geschaeft/g, 'Geschäft'],
+      [/geschaeft/g, 'geschäft'],
+      [/Naechster/g, 'Nächster'],
+      [/naechster/g, 'nächster'],
+      [/Oeffnungszeiten/g, 'Öffnungszeiten'],
+      [/oeffnungszeiten/g, 'öffnungszeiten'],
+      [/Schliessen/g, 'Schließen'],
+      [/schliessen/g, 'schließen'],
+      [/Menue/g, 'Menü'],
+      [/Schillerstrasse/g, 'Schillerstraße'],
+      [/Marktstrasse/g, 'Marktstraße'],
+      [/Langendorfer Strasse/g, 'Langendorfer Straße'],
+      [/Bahnhofstrasse/g, 'Bahnhofstraße'],
+      [/Kirchstrasse/g, 'Kirchstraße'],
+      [/Burgstrasse/g, 'Burgstraße'],
+      [/Fliehburgstrasse/g, 'Fliehburgstraße'],
+      [/strasse/g, 'straße'],
+      [/Strasse/g, 'Straße'],
+      [/Praezision/g, 'Präzision'],
+      [/Erklaerungen/g, 'Erklärungen'],
+      [/erklaert/g, 'erklärt'],
+      [/verstaendlich/g, 'verständlich'],
+      [/Fuehrt/g, 'Führt'],
+      [/fuehrt/g, 'führt'],
+      [/Rueck/g, 'Rück'],
+      [/rueck/g, 'rück'],
+      [/laeng/g, 'läng'],
+      [/\bPaed/g, 'Päd'],
+      [/\bpaed/g, 'päd'],
+      [/\bHoer/g, 'Hör'],
+      [/\bhoer/g, 'hör']
+    ].forEach(function (replacement) {
+      result = result.replace(replacement[0], replacement[1]);
+    });
+    return result;
+  }
+
+  function normalizeSiteCopy(root) {
+    var attrNames = ['title', 'alt', 'placeholder', 'aria-label'];
+    var walker = document.createTreeWalker(root || document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (node) {
+        if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+        if (!node.parentNode) return NodeFilter.FILTER_REJECT;
+        if (/^(SCRIPT|STYLE|NOSCRIPT|TEXTAREA|CODE|PRE|SVG|PATH)$/i.test(node.parentNode.nodeName)) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var current;
+
+    while ((current = walker.nextNode())) {
+      current.nodeValue = applyTextReplacements(current.nodeValue);
+    }
+
+    queryAll('*', root || document.body).forEach(function (element) {
+      attrNames.forEach(function (attrName) {
+        if (!element.hasAttribute(attrName)) return;
+        element.setAttribute(attrName, applyTextReplacements(element.getAttribute(attrName)));
+      });
+    });
+  }
+
+  function standardizeHeaderCtas() {
+    queryAll('.nav-actions .btn.btn-primary').forEach(function (link) {
+      link.textContent = 'Termin vereinbaren';
+      link.classList.add('nav-cta');
+    });
+  }
+
   function ensureDropdown(selector, label, items) {
     queryAll(selector).forEach(function (link) {
       var item = link.parentNode;
@@ -49,6 +127,25 @@
   }
 
   function ensureSharedDropdowns() {
+    ensureDropdown('.nav-links .nav-item > a[href$="hoertest.html"]', 'Leistungen', [
+      '<li><a href="' + makeHref('leistungen/audio-therapie.html') + '">Audio-Therapie</a></li>',
+      '<li><a href="' + makeHref('leistungen/hoergeraetehersteller-partner.html') + '">Hörgerätehersteller &amp; Partner</a></li>',
+      '<li><a href="' + makeHref('leistungen/hoertest.html') + '">Hörtest</a></li>',
+      '<li><a href="' + makeHref('leistungen/hoertraining.html') + '">Hörtraining</a></li>',
+      '<li><a href="' + makeHref('leistungen/paedakustik.html') + '">Pädakustik</a></li>',
+      '<li><a href="' + makeHref('leistungen/kinderhoerzentrum.html') + '">Kinderhörzentrum</a></li>',
+      '<li><a href="' + makeHref('leistungen/remote-fitting.html') + '">Remote Fitting</a></li>',
+      '<li><a href="' + makeHref('leistungen/serviceleistung.html') + '">Serviceleistungen</a></li>',
+      '<li><a href="' + makeHref('leistungen/tinnitusberatung.html') + '">Tinnitusberatung</a></li>',
+      '<li><a href="' + makeHref('leistungen/gehoerschutz.html') + '">Gehörschutz</a></li>',
+      '<li><a href="' + makeHref('leistungen/treffpunkt-ohr.html') + '">Treffpunkt Ohr e.V.</a></li>'
+    ]);
+
+    ensureDropdown('.nav-links .nav-item > a[href$="ratgeber/index.html"]', 'Ratgeber', [
+      '<li><a href="' + makeHref('ratgeber/index.html') + '">Informationen zum guten Hören</a></li>',
+      '<li><a href="' + makeHref('ratgeber/index.html#faq') + '">Ihre Fragen, unsere Antworten</a></li>'
+    ]);
+
     ensureDropdown('.nav-links .nav-item > a[href$="firmengeschichte.html"]', 'Unternehmen', [
       '<li><a href="' + makeHref('unternehmen/karriere.html') + '">Karriere - jetzt bewerben</a></li>',
       '<li><a href="' + makeHref('unternehmen/firmenchronik.html') + '">Firmenchronik</a></li>',
@@ -74,12 +171,12 @@
       '  <div class="search-bar-row">',
       '    <div class="search-input-wrap">',
       '      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>',
-      '      <input type="text" id="searchInput" placeholder="Suchen auf BECKER Hoerakustik ..." autocomplete="off" />',
+      '      <input type="text" id="searchInput" placeholder="Suchen auf BECKER Hörakustik ..." autocomplete="off" />',
       '    </div>',
-      '    <button class="search-close-btn" id="searchClose" aria-label="Suche schliessen">x</button>',
+      '    <button class="search-close-btn" id="searchClose" aria-label="Suche schließen">×</button>',
       '  </div>',
       '  <div class="search-results" id="searchResults" aria-live="polite"></div>',
-      '  <p class="search-hint">ESC druecken oder x klicken zum Schliessen</p>',
+      '  <p class="search-hint">ESC drücken oder × klicken zum Schließen</p>',
       '</div>'
     ].join('');
     document.body.appendChild(overlay);
@@ -96,7 +193,7 @@
     banner.setAttribute('aria-label', 'Cookie-Einstellungen');
     banner.innerHTML = [
       '<div class="cookie-text">',
-      '  <strong>Wir verwenden Cookies</strong> - fuer eine bessere Website-Erfahrung und zur Analyse unseres Angebots. Mehr dazu auf der <a href="' + makeHref('kontakt.html') + '">Kontaktseite</a>.',
+      '  <strong>Wir verwenden Cookies</strong> - für eine bessere Website-Erfahrung und zur Analyse unseres Angebots. Mehr dazu auf der <a href="' + makeHref('kontakt.html') + '">Kontaktseite</a>.',
       '</div>',
       '<div class="cookie-actions">',
       '  <button class="btn btn-secondary" style="font-size:14px;padding:10px 20px;" data-cookie-choice="essential">Nur notwendige</button>',
@@ -148,6 +245,8 @@
 
   /* Nav scroll shadow */
   var nav = document.getElementById('nav');
+  standardizeHeaderCtas();
+  normalizeSiteCopy(document.body);
   if (nav) {
     window.addEventListener('scroll', function () {
       nav.classList.toggle('scrolled', window.scrollY > 20);
@@ -227,25 +326,31 @@
   /* Mobile menu toggle */
   var mobileToggle = document.querySelector('.mobile-toggle');
   var navLinks = document.querySelector('.nav-links');
+  function closeMobileMenu() {
+    if (!mobileToggle || !navLinks) return;
+    mobileToggle.setAttribute('aria-expanded', 'false');
+    navLinks.classList.remove('mobile-open');
+    document.body.classList.remove('nav-open');
+  }
   if (mobileToggle && navLinks) {
     mobileToggle.setAttribute('aria-expanded', 'false');
     mobileToggle.addEventListener('click', function () {
       var isOpen = mobileToggle.getAttribute('aria-expanded') === 'true';
       mobileToggle.setAttribute('aria-expanded', String(!isOpen));
-      if (isOpen) {
-        navLinks.removeAttribute('style');
-      } else {
-        navLinks.style.cssText = 'display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:white;padding:20px 32px 24px;box-shadow:0 20px 40px rgba(0,0,0,0.14);z-index:99;gap:8px;border-bottom:1px solid rgba(166,28,115,0.08);';
-      }
+      navLinks.classList.toggle('mobile-open', !isOpen);
+      document.body.classList.toggle('nav-open', !isOpen);
     });
 
     queryAll('.nav-links a').forEach(function (link) {
       link.addEventListener('click', function () {
         if (window.matchMedia('(max-width: 1024px)').matches) {
-          mobileToggle.setAttribute('aria-expanded', 'false');
-          navLinks.removeAttribute('style');
+          closeMobileMenu();
         }
       });
+    });
+
+    window.addEventListener('resize', function () {
+      if (window.matchMedia('(min-width: 1025px)').matches) closeMobileMenu();
     });
   }
 
@@ -268,18 +373,18 @@
   function buildSearchIndex() {
     var items = [
       { title: 'Startseite', url: makeHref('index.html'), text: 'Hero Leistungen Termin Hoertest Hoerexperten Botschafter Veranstaltungen Fachgeschaefte' },
-      { title: 'Fachgeschaefte', url: makeHref('fachgeschaefte.html'), text: 'Standorte Karte Suche Stadt in der Naehe Oeffnungszeiten Route Fachgeschaefte' },
-      { title: 'Fachgeschaeft Andernach', url: makeHref('fachgeschaefte/andernach.html'), text: 'Andernach Team Oeffnungszeiten Parken Karte Termin Beratung' },
-      { title: 'Fachgeschaeft Mainz', url: makeHref('fachgeschaefte/mainz.html'), text: 'Mainz Team Oeffnungszeiten Innenstadt Termin Hoerberatung' },
-      { title: 'Fachgeschaeft Neuwied', url: makeHref('fachgeschaefte/neuwied.html'), text: 'Neuwied Team Kinderhoerzentrum Oeffnungszeiten Termin Beratung' },
+      { title: 'Fachgeschäfte', url: makeHref('fachgeschaefte.html'), text: 'Standorte Karte Suche Stadt in der Nähe Öffnungszeiten Route Fachgeschäfte' },
+      { title: 'Fachgeschäft Andernach', url: makeHref('fachgeschaefte/andernach.html'), text: 'Andernach Team Öffnungszeiten Parken Karte Termin Beratung' },
+      { title: 'Fachgeschäft Mainz', url: makeHref('fachgeschaefte/mainz.html'), text: 'Mainz Team Öffnungszeiten Innenstadt Termin Hörberatung' },
+      { title: 'Fachgeschäft Neuwied', url: makeHref('fachgeschaefte/neuwied.html'), text: 'Neuwied Team Kinderhörzentrum Öffnungszeiten Termin Beratung' },
       { title: 'Kontakt', url: makeHref('kontakt.html'), text: 'Kontakt Termin Anfrage Karte Telefon E-Mail Hausbesuch' },
-      { title: 'Veranstaltungen', url: makeHref('veranstaltungen.html'), text: 'Events Vortraege Informationen Termine' },
+      { title: 'Veranstaltungen', url: makeHref('veranstaltungen.html'), text: 'Events Vorträge Informationen Termine' },
       { title: 'News', url: makeHref('news.html'), text: 'Neuigkeiten Magazin Ratgeber' },
-      { title: 'Hoertest', url: makeHref('leistungen/hoertest.html'), text: 'Kostenfreier Hoertest Termin Beratung' },
+      { title: 'Hörtest', url: makeHref('leistungen/hoertest.html'), text: 'Kostenfreier Hörtest Termin Beratung' },
       { title: 'Kinderhoerzentrum', url: makeHref('leistungen/kinderhoerzentrum.html'), text: 'Kindgerecht kompetent liebevoll Kinder Pädakustik' },
       { title: 'Remote Fitting', url: makeHref('leistungen/remote-fitting.html'), text: 'Anpassung Zuhause digital Service' },
       { title: 'Tinnitusberatung', url: makeHref('leistungen/tinnitusberatung.html'), text: 'Tinnitus Beratung Therapie Hilfe' },
-      { title: 'Ratgeber und FAQ', url: makeHref('ratgeber/index.html#faq'), text: 'Antworten FAQ gutes Hoeren Fragen Ratgeber' }
+      { title: 'Ratgeber und FAQ', url: makeHref('ratgeber/index.html#faq'), text: 'Antworten FAQ gutes Hören Fragen Ratgeber' }
     ];
 
     queryAll('section[id], [id].content-section, header[id], .hero, .page-hero').forEach(function (section) {
@@ -332,7 +437,7 @@
     matches = matches.slice(0, 8);
 
     if (!matches.length) {
-      searchResults.innerHTML = '<div class="search-empty">Keine Treffer gefunden. Versuchen Sie Begriffe wie Hoertest, Kontakt, Fachgeschaefte oder Kinderhoerzentrum.</div>';
+      searchResults.innerHTML = '<div class="search-empty">Keine Treffer gefunden. Versuchen Sie Begriffe wie Hörtest, Kontakt, Fachgeschäfte oder Kinderhörzentrum.</div>';
       return;
     }
 
