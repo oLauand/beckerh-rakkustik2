@@ -477,8 +477,63 @@
     .hero-media { opacity: 0.33; background-position: 64% center; }
   }
   @media (max-width: 600px) {
-    .hero h1 { font-size: clamp(36px, 9vw, 52px); }
-    .hero-media { opacity: 0.29; background-position: 70% center; }
+    .hero {
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 72px 0 16px;
+      align-items: center;
+    }
+    .hero-media {
+      opacity: 0.42;
+      background-position: center 22%;
+      background-size: cover;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      padding: 6px 13px;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 8vw, 42px);
+      margin-bottom: 12px;
+      line-height: 1.05;
+    }
+    .hero h1 .accent-line {
+      font-size: clamp(16px, 4.6vw, 24px);
+      margin-top: 8px;
+    }
+    .hero p.lead {
+      font-size: 13.5px;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .hero-cta {
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .hero-cta .btn {
+      font-size: 13px;
+      padding: 10px 16px;
+      text-align: center;
+      justify-content: center;
+    }
+    .hero-trust {
+      gap: 10px 18px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      min-width: unset;
+      gap: 8px;
+    }
+    .trust-item .trust-icon {
+      width: 36px;
+      height: 36px;
+      font-size: 16px;
+      border-radius: 10px;
+    }
+    .trust-item .num { font-size: 16px; }
+    .trust-item .label { font-size: 11px; }
   }
 
   /* ============ ANIMATIONS ============ */
