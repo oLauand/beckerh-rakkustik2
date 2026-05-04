@@ -1,20 +1,2333 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Becker Hörakustik – Verstehen. Unterhalten. Dabeisein.</title>
-  <meta name="description" content="Weiterleitung zur Startseite von BECKER Hörakustik." />
-  <meta http-equiv="refresh" content="0; url=index-standalone.html" />
-  <link rel="canonical" href="index-standalone.html" />
-  <script>
-    window.location.replace('index-standalone.html');
-  </script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Becker Hörakustik – Verstehen. Unterhalten. Dabeisein.</title>
+
+<!-- Fonts: Mulish (gerundet, freundlich) + Fraunces für Akzente -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&family=Fraunces:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --magenta: #A61C73;
+    --magenta-dark: #7E1457;
+    --magenta-light: #C94B9B;
+    --accent: #C2187A;
+    --pink-soft: #FDF1F8;
+    --pink-mist: #F9E6F1;
+    --pink-blush: #FBEAF3;
+    --bg: #FAFAFA;
+    --white: #FFFFFF;
+    --text: #1A1A1A;
+    --text-soft: #4A4A4A;
+    --text-mute: #888;
+    --border: #ECECEC;
+    --shadow-sm: 0 2px 12px rgba(166,28,115,0.07);
+    --shadow-md: 0 14px 40px rgba(166,28,115,0.10);
+    --shadow-lg: 0 24px 60px rgba(166,28,115,0.14);
+    --radius-sm: 12px;
+    --radius-md: 20px;
+    --radius-lg: 32px;
+    --radius-xl: 48px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family: 'Mulish', system-ui, -apple-system, sans-serif;
+    color: var(--text);
+    background: var(--white);
+    font-size: 17px;
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Mulish', system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .brand-em {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--magenta);
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ============ ICONS (Inline SVG via CSS background) ============ */
+  /* All icons use currentColor so they inherit text color */
+  .icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    fill: currentColor;
+    flex-shrink: 0;
+  }
+
+  /* ============ NAVIGATION ============ */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 16px 0;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+  }
+  .nav.scrolled {
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    padding: 12px 0;
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .logo img {
+    height: 42px;
+    width: auto;
+    display: block;
+  }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-soft);
+    transition: color 0.2s;
+    position: relative;
+    padding: 4px 0;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--magenta);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--magenta); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 26px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: 'Mulish', sans-serif;
+  }
+  .btn .icon { font-size: 18px; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--magenta) 0%, var(--magenta-light) 100%);
+    color: white;
+    box-shadow: 0 8px 24px rgba(166,28,115,0.25);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(166,28,115,0.4);
+  }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-secondary {
+    background: white;
+    color: var(--magenta);
+    border: 1.5px solid var(--magenta);
+  }
+  .btn-secondary:hover {
+    background: var(--pink-soft);
+    transform: translateY(-2px);
+  }
+
+  .mobile-toggle {
+    display: none;
+    color: var(--magenta);
+    font-size: 28px;
+  }
+
+  /* ============ HERO – editorial split layout ============ */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    padding: 130px 0 90px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background:
+      radial-gradient(ellipse at 0% 0%, #FFF5FB 0%, transparent 55%),
+      radial-gradient(ellipse at 100% 100%, #FDEBF5 0%, transparent 50%),
+      linear-gradient(180deg, #FFFFFF 0%, #FDF7FB 100%);
+    isolation: isolate;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      radial-gradient(circle at 82% 18%, rgba(166,28,115,0.22) 0%, rgba(166,28,115,0.00) 36%),
+      radial-gradient(circle at 12% 78%, rgba(214,98,173,0.18) 0%, rgba(214,98,173,0.00) 34%),
+      linear-gradient(90deg, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.48) 42%, rgba(255,255,255,0.66) 100%),
+      linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,247,252,0.16) 100%);
+    pointer-events: none;
+  }
+  .hero-media {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('images/fachgeschäft_koblenz.jpg');
+    background-size: cover;
+    background-position: center center;
+    opacity: 0.39;
+    transform: scale(1.02) translateZ(0);
+    will-change: transform;
+    pointer-events: none;
+  }
+  .hero-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 1;
+    will-change: transform;
+  }
+  .hero-glow.g1 {
+    top: -120px; left: -100px;
+    width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(201,75,155,0.45), transparent 65%);
+    animation: heroFloat 14s ease-in-out infinite;
+  }
+  .hero-glow.g2 {
+    bottom: -180px; right: -120px;
+    width: 540px; height: 540px;
+    background: radial-gradient(circle, rgba(166,28,115,0.35), transparent 65%);
+    animation: heroFloat 18s ease-in-out infinite reverse;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+  .hero-content {
+    max-width: 760px;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 18px;
+    background: white;
+    color: var(--magenta);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    box-shadow: 0 6px 20px rgba(166,28,115,0.08);
+    border: 1px solid rgba(166,28,115,0.12);
+    animation: fadeUp 0.8s cubic-bezier(.2,.7,.3,1) both;
+  }
+  .hero-eyebrow .dot {
+    width: 7px; height: 7px;
+    background: var(--magenta);
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(166,28,115,0.55);
+    animation: pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(166,28,115,0.55); }
+    70% { box-shadow: 0 0 0 14px rgba(166,28,115,0); }
+    100% { box-shadow: 0 0 0 0 rgba(166,28,115,0); }
+  }
+  .hero h1 {
+    font-size: clamp(44px, 6vw, 84px);
+    font-weight: 800;
+    margin-bottom: 28px;
+    animation: fadeUp 0.9s 0.08s cubic-bezier(.2,.7,.3,1) both;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+  }
+  .hero h1 .accent {
+    color: var(--magenta);
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    position: relative;
+    display: inline-block;
+  }
+  .hero h1 .accent::after {
+    content: '';
+    position: absolute;
+    left: -4px; right: -4px; bottom: 6px;
+    height: 14px;
+    background: linear-gradient(90deg, rgba(201,75,155,0.35), rgba(166,28,115,0.18));
+    border-radius: 6px;
+    z-index: -1;
+    animation: scaleX 1s 0.6s cubic-bezier(.2,.7,.3,1) both;
+    transform-origin: left;
+  }
+  @keyframes scaleX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .hero p.lead {
+    font-size: 19px;
+    color: var(--text-soft);
+    margin-bottom: 36px;
+    max-width: 540px;
+    animation: fadeUp 0.9s 0.18s cubic-bezier(.2,.7,.3,1) both;
+    line-height: 1.65;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 52px;
+    animation: fadeUp 0.9s 0.26s cubic-bezier(.2,.7,.3,1) both;
+  }
+  .hero-trust {
+    display: flex;
+    gap: 36px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.9s 0.34s cubic-bezier(.2,.7,.3,1) both;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.25s ease;
+  }
+  .trust-item:hover { transform: translateY(-3px); }
+  .trust-item .trust-icon {
+    width: 46px;
+    height: 46px;
+    background: white;
+    border-radius: 13px;
+    color: var(--magenta);
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    box-shadow: 0 6px 18px rgba(166,28,115,0.10);
+    border: 1px solid rgba(166,28,115,0.10);
+  }
+  .trust-item-text { line-height: 1.3; }
+  .trust-item .num {
+    display: block;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .trust-item .label {
+    font-size: 13px;
+    color: var(--text-mute);
+    font-weight: 600;
+  }
+
+  @keyframes heroSlideIn {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes heroBob {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes heroFloat {
+    0%,100% { transform: translate3d(0,0,0) scale(1); }
+    50% { transform: translate3d(40px,-30px,0) scale(1.08); }
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-scroll-cue {
+    position: absolute;
+    bottom: 24px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: var(--magenta);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+    opacity: 0.7;
+    animation: fadeIn 1s 1.2s ease both;
+  }
+  .hero-scroll-cue::before {
+    content: '';
+    display: block;
+    width: 1px; height: 32px;
+    background: linear-gradient(180deg, transparent, var(--magenta));
+    margin: 0 auto 8px;
+    animation: scrollLine 2s ease-in-out infinite;
+    transform-origin: top;
+  }
+  @keyframes scrollLine {
+    0%,100% { transform: scaleY(0.4); opacity: 0.4; }
+    50% { transform: scaleY(1); opacity: 1; }
+  }
+
+  @media (max-width: 1100px) {
+    .hero-grid { gap: 0; }
+    .hero::before {
+      background:
+        radial-gradient(circle at 78% 16%, rgba(166,28,115,0.18) 0%, rgba(166,28,115,0.00) 34%),
+        linear-gradient(180deg, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.56) 58%, rgba(255,255,255,0.68) 100%),
+        linear-gradient(180deg, rgba(255,250,253,0.05) 0%, rgba(255,247,252,0.16) 100%);
+    }
+  }
+  @media (max-width: 900px) {
+    .hero { min-height: auto; padding: 110px 0 60px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 0; }
+    .hero-trust { gap: 24px; }
+    .hero-scroll-cue { display: none; }
+    .hero-media { opacity: 0.33; background-position: 64% center; }
+  }
+  @media (max-width: 600px) {
+    .hero h1 { font-size: clamp(36px, 9vw, 52px); }
+    .hero-media { opacity: 0.29; background-position: 70% center; }
+  }
+
+  /* ============ ANIMATIONS ============ */
+  @keyframes fadeInUp {
+    from { opacity:0; transform: translateY(30px); }
+    to { opacity:1; transform: translateY(0); }
+  }
+  @keyframes fadeInRight {
+    from { opacity:0; transform: translateX(40px); }
+    to { opacity:1; transform: translateX(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ============ SECTION DEFAULTS ============ */
+  section { padding: 110px 0; }
+  .section-eyebrow {
+    display: inline-block;
+    color: var(--magenta);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    margin-bottom: 18px;
+    max-width: 720px;
+    line-height: 1.1;
+  }
+  .section-lead {
+    color: var(--text-soft);
+    font-size: 18px;
+    max-width: 620px;
+    margin-bottom: 60px;
+    line-height: 1.6;
+  }
+  .section-head { text-align: left; margin-bottom: 60px; }
+  .section-head.center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .section-head.center .section-title,
+  .section-head.center .section-lead {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ============ LEISTUNGEN ============ */
+  .leistungen { background: var(--bg); position: relative; }
+  .leistungen-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+  .service-card {
+    background: white;
+    padding: 36px 28px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 4px;
+    background: linear-gradient(90deg, var(--magenta), var(--magenta-light));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: transparent;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 60px; height: 60px;
+    border-radius: 16px;
+    background: var(--pink-soft);
+    color: var(--magenta);
+    display: grid;
+    place-items: center;
+    font-size: 30px;
+    margin-bottom: 22px;
+    transition: all 0.4s;
+  }
+  .service-card:hover .service-icon {
+    background: linear-gradient(135deg, var(--magenta), var(--magenta-light));
+    color: white;
+    transform: rotate(-5deg) scale(1.05);
+  }
+  .service-card h3 {
+    font-size: 19px;
+    margin-bottom: 12px;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+  .service-card p {
+    color: var(--text-soft);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .service-card .arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--magenta);
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 18px;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.3s;
+  }
+  .service-card:hover .arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* ============ EXPERTEN ============ */
+  .experten { background: white; padding: 120px 0; }
+  .experten-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 70px;
+    align-items: center;
+  }
+  .experten-img {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, var(--pink-soft), var(--pink-mist));
+    padding: 0;
+    position: relative;
+    cursor: zoom-in;
+    border: none;
+    aspect-ratio: 4/5;
+    display: block;
+    width: 100%;
+    width: 100%;
+    text-align: left;
+  }
+  .media-zoom-badge {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 40px; height: 40px;
+    background: white;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    box-shadow: var(--shadow-sm);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 2;
+  }
+  .media-zoom-badge svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--magenta);
+  }
+  .media-trigger:hover .media-zoom-badge,
+  .media-trigger:focus-visible .media-zoom-badge { opacity: 1; transform: scale(1.04); }
+  .experten-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 24%;
+    display: block;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .experten-img:hover img { transform: scale(1.04); }
+  .experten-content h2 {
+    font-size: clamp(30px, 3.6vw, 48px);
+    font-weight: 800;
+    margin-bottom: 24px;
+    line-height: 1.1;
+  }
+  .experten-content p {
+    color: var(--text-soft);
+    font-size: 18px;
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+  .experten-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+    padding-top: 36px;
+    border-top: 1px solid var(--border);
+  }
+  .stat .num {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--magenta);
+    line-height: 1;
+    display: block;
+    letter-spacing: -0.02em;
+  }
+  .stat .label {
+    font-size: 13px;
+    color: var(--text-soft);
+    margin-top: 8px;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  /* ============ BOTSCHAFTERINNEN ============ */
+  .botschafter { background: linear-gradient(180deg, var(--bg) 0%, white 100%); }
+  .testimonials {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+  .testimonial {
+    background: white;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+  }
+  .testimonial:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+  }
+  .testimonial-img {
+    overflow: hidden;
+    background: var(--pink-soft);
+    position: relative;
+    border: none;
+    width: 100%;
+    padding: 0;
+    cursor: zoom-in;
+    display: block;
+  }
+  .testimonial-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform 0.6s;
+  }
+  .testimonial-img::after {
+    content: '';
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23A61C73'><path d='M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z'/></svg>") center/20px no-repeat;
+    box-shadow: 0 6px 18px rgba(166,28,115,0.25);
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity .25s ease, transform .25s ease;
+    pointer-events: none;
+  }
+  .testimonial:hover .testimonial-img::after { opacity: 1; transform: translateY(0); }
+  .testimonial:hover .testimonial-img img {
+    transform: scale(1.05);
+  }
+  .testimonial-body { padding: 30px; }
+  .testimonial-body .quote-icon {
+    color: var(--magenta);
+    font-size: 36px;
+    margin-bottom: 12px;
+    opacity: 0.5;
+    line-height: 1;
+  }
+  .testimonial-body p {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 20px;
+  }
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .testimonial-author strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .testimonial-author small {
+    font-size: 13px;
+    color: var(--text-mute);
+    font-weight: 500;
+  }
+  .testimonial-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    color: var(--magenta);
+    font-weight: 800;
+    font-size: 14px;
+  }
+  .testimonial-link .icon { font-size: 16px; }
+
+  /* ============ CTA ============ */
+  .cta-section { padding: 100px 0; background: var(--white); }
+  .cta-card {
+    background:
+      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.18), transparent 50%),
+      linear-gradient(135deg, var(--magenta) 0%, var(--magenta-light) 100%);
+    border-radius: var(--radius-xl);
+    padding: 80px 70px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-card::before, .cta-card::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .cta-card::before {
+    bottom: -100px; right: -100px;
+    width: 400px; height: 400px;
+    border: 1.5px solid rgba(255,255,255,0.15);
+  }
+  .cta-card::after {
+    bottom: -200px; right: -200px;
+    width: 600px; height: 600px;
+    border: 1.5px solid rgba(255,255,255,0.10);
+  }
+  .cta-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 50px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-grid h2 {
+    font-size: clamp(32px, 4vw, 50px);
+    font-weight: 800;
+    margin-bottom: 18px;
+    color: white;
+    line-height: 1.1;
+  }
+  .cta-grid h2 .brand-em {
+    color: white;
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+  }
+  .cta-grid p {
+    font-size: 18px;
+    opacity: 0.92;
+    margin-bottom: 32px;
+    max-width: 460px;
+    line-height: 1.6;
+  }
+  .cta-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-white { background: white; color: var(--magenta); }
+  .btn-white:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+  }
+  .btn-outline-white {
+    background: transparent;
+    color: white;
+    border: 1.5px solid rgba(255,255,255,0.5);
+  }
+  .btn-outline-white:hover { background: rgba(255,255,255,0.12); }
+
+  .cta-calendar {
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    border-radius: var(--radius-md);
+    padding: 30px;
+    backdrop-filter: blur(10px);
+  }
+  .cta-calendar h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cta-calendar h4 .icon { font-size: 20px; }
+  .calendar-days {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .day-slot {
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 14px 8px;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .day-slot:hover, .day-slot.active {
+    background: white;
+    color: var(--magenta);
+    transform: translateY(-3px);
+  }
+  .day-slot.active { transform: none; }
+  .day-slot .day-name {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+    opacity: 0.7;
+    display: block;
+    letter-spacing: 0.05em;
+  }
+  .day-slot .day-num {
+    font-size: 22px;
+    font-weight: 800;
+    margin-top: 4px;
+    letter-spacing: -0.02em;
+  }
+  .day-slot.active .day-name, .day-slot:hover .day-name { opacity: 1; }
+  .calendar-time {
+    margin-top: 18px;
+    font-size: 13px;
+    opacity: 0.92;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .calendar-time .icon { font-size: 16px; }
+
+  /* ============ APP SECTION ============ */
+  .app-section {
+    background: linear-gradient(180deg, rgba(249,230,241,0.45) 0%, var(--bg) 100%);
+    margin-top: -34px;
+    position: relative;
+    z-index: 2;
+  }
+  .app-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .app-mockup {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  .phone-frame {
+    width: 320px;
+    height: 640px;
+    background: linear-gradient(160deg, #202126 0%, #0d0d10 100%);
+    border-radius: 50px;
+    padding: 12px;
+    box-shadow: 0 26px 70px rgba(18,16,24,0.28), inset 0 0 0 1px rgba(255,255,255,0.08);
+    position: relative;
+    transform: rotate(-3deg);
+    transition: transform 0.6s;
+  }
+  .phone-frame:hover { transform: rotate(0deg) translateY(-10px); }
+  .phone-screen {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #f5e8f1 0%, #ffffff 36%, #fff7fb 100%);
+    border-radius: 38px;
+    overflow: hidden;
+    position: relative;
+    padding: 22px 18px 18px;
+    color: var(--text);
+  }
+  .phone-notch {
+    position: absolute;
+    top: 12px; left: 50%;
+    transform: translateX(-50%);
+    width: 100px; height: 24px;
+    background: #111;
+    border-radius: 100px;
+    z-index: 2;
+  }
+  .phone-statusbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(26,26,26,0.76);
+    margin: 10px 2px 18px;
+  }
+  .phone-header-card {
+    background: linear-gradient(135deg, var(--magenta) 0%, var(--magenta-light) 100%);
+    color: #fff;
+    border-radius: 26px;
+    padding: 18px 18px 20px;
+    box-shadow: 0 14px 36px rgba(166,28,115,0.22);
+  }
+  .phone-greeting {
+    font-size: 12px;
+    opacity: 0.88;
+    font-weight: 700;
+  }
+  .phone-greeting h3 {
+    font-size: 22px;
+    font-weight: 800;
+    color: white;
+    margin-top: 4px;
+  }
+  .phone-highlight {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .phone-highlight strong {
+    display: block;
+    font-size: 14px;
+  }
+  .phone-highlight small {
+    display: block;
+    opacity: 0.78;
+  }
+  .phone-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 76px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.22);
+    font-size: 12px;
+    font-weight: 800;
+  }
+  .phone-card {
+    background: white;
+    color: var(--text);
+    border-radius: 24px;
+    padding: 18px;
+    margin-top: 18px;
+    box-shadow: 0 14px 36px rgba(0,0,0,0.10);
+  }
+  .phone-card-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+  }
+  .phone-card-row + .phone-card-row { border-top: 1px solid var(--border); }
+  .pcr-icon {
+    width: 36px; height: 36px;
+    background: var(--pink-soft);
+    color: var(--magenta);
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .pcr-text { flex: 1; }
+  .pcr-text strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .pcr-text small {
+    font-size: 11px;
+    color: var(--text-mute);
+    font-weight: 500;
+  }
+  .pcr-arrow {
+    color: var(--text-mute);
+    font-size: 14px;
+  }
+  .phone-nav {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .phone-nav-item {
+    border-radius: 16px;
+    background: #fff;
+    border: 1px solid var(--border);
+    padding: 10px 8px;
+    text-align: center;
+    color: var(--text-soft);
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .phone-nav-item .icon {
+    display: block;
+    margin: 0 auto 6px;
+    color: var(--magenta);
+    font-size: 18px;
+  }
+
+  .app-features {
+    list-style: none;
+    margin-bottom: 36px;
+  }
+  .app-features li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .app-features li:last-child { border-bottom: none; }
+  .app-features li .li-icon {
+    color: var(--magenta);
+    font-size: 22px;
+    background: var(--pink-soft);
+    padding: 8px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    width: 38px; height: 38px;
+    display: grid;
+    place-items: center;
+  }
+
+  /* ============ PARTNER ============ */
+  .partner {
+    padding: 90px 0;
+    background: white;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .partner-head { text-align: center; margin-bottom: 50px; }
+  .partner-head h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-mute);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .partner-marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+  }
+  .partner-track {
+    display: flex;
+    gap: 70px;
+    align-items: center;
+    animation: scroll 50s linear infinite;
+    width: max-content;
+  }
+  .partner-track:hover { animation-play-state: paused; }
+  .partner-track img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.55;
+    transition: all 0.3s;
+    flex-shrink: 0;
+  }
+  .partner-track img:hover {
+    filter: grayscale(0);
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ============ EVENTS ============ */
+  .events { background: linear-gradient(180deg, white 0%, var(--bg) 100%); }
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+  }
+  .event-card {
+    background: white;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: all 0.4s;
+    cursor: pointer;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .event-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+  }
+  .event-img {
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+  }
+  .event-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 28%;
+    transition: transform 0.6s;
+  }
+  .event-card:hover .event-img img {
+    transform: scale(1.08);
+  }
+  .event-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(166,28,115,0.0) 30%, rgba(166,28,115,0.45) 100%);
+  }
+  .event-date {
+    position: absolute;
+    top: 18px; left: 18px;
+    background: white;
+    color: var(--magenta);
+    padding: 10px 14px;
+    border-radius: 12px;
+    text-align: center;
+    z-index: 2;
+    box-shadow: var(--shadow-sm);
+  }
+  .event-date .day {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+    display: block;
+    letter-spacing: -0.02em;
+  }
+  .event-date .month {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+  .event-body { padding: 28px; }
+  .event-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--pink-soft);
+    color: var(--magenta);
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+  }
+  .event-body h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    font-weight: 800;
+    line-height: 1.25;
+  }
+  .event-body p {
+    font-size: 14px;
+    color: var(--text-soft);
+    margin-bottom: 18px;
+    line-height: 1.55;
+  }
+  .event-meta {
+    display: flex;
+    gap: 18px;
+    font-size: 13px;
+    color: var(--text-mute);
+    font-weight: 500;
+  }
+  .event-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .event-meta .icon { font-size: 16px; }
+
+  /* ============ FOOTER ============ */
+  footer { background: #1A1A1A; color: white; padding: 80px 0 30px; }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr 1fr;
+    gap: 50px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .footer-brand p {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin: 24px 0;
+  }
+  .footer-brand p .brand-em { color: var(--magenta-light); }
+  .footer-logo {
+    background: white;
+    padding: 12px 18px;
+    border-radius: 12px;
+    display: inline-block;
+  }
+  .footer-logo img { height: 36px; display: block; }
+  .footer-col h4 {
+    font-size: 14px;
+    font-weight: 800;
+    margin-bottom: 22px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: white;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 12px; }
+  .footer-col ul a {
+    color: rgba(255,255,255,0.65);
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .footer-col ul a:hover { color: white; }
+  .footer-col p {
+    color: rgba(255,255,255,0.65);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+  }
+  .footer-col p .icon {
+    color: var(--magenta-light);
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .footer-bottom {
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-bottom p {
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+  }
+  .footer-social { display: flex; gap: 10px; }
+  .footer-social a {
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: white;
+    transition: all 0.3s;
+    font-size: 18px;
+  }
+  .footer-social a:hover {
+    background: var(--magenta);
+    transform: translateY(-3px);
+  }
+  .footer-bottom-links { display: flex; gap: 24px; }
+  .footer-bottom-links a {
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .footer-bottom-links a:hover { color: white; }
+
+  /* ============ DROPDOWN NAVIGATION ============ */
+  .nav-item { position: relative; list-style: none; }
+  .nav-item > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text-soft);
+    transition: color 0.2s;
+    padding: 4px 0;
+    position: relative;
+    white-space: nowrap;
+  }
+  .nav-item > a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 2px;
+    background: var(--magenta);
+    transition: width 0.3s;
+  }
+  .nav-item > a:hover { color: var(--magenta); }
+  .nav-item > a:hover::after { width: 100%; }
+  .nav-chevron {
+    width: 14px; height: 14px;
+    transition: transform 0.25s;
+    flex-shrink: 0;
+    fill: currentColor;
+    margin-top: 1px;
+  }
+  /* Dropdown – JS controls .is-open class; no CSS hover needed */
+  .nav-item.is-open > a > .nav-chevron { transform: rotate(180deg); }
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 6px); left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    background: white;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12), 0 2px 8px rgba(166,28,115,0.06);
+    border: 1px solid var(--border);
+    min-width: 260px;
+    padding: 10px 8px 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 200;
+    list-style: none;
+  }
+  .dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -6px; left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px; height: 10px;
+    background: white;
+    border-left: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+  }
+  /* Bridge: invisible strip between nav link and dropdown keeps nav-item hovered */
+  .nav-item:has(.dropdown-menu) > a::after { display: none !important; }
+  .nav-item:has(.dropdown-menu)::after {
+    content: ''; position: absolute; top: 100%; left: -8px; right: -8px; height: 12px;
+    pointer-events: auto;
+  }
+  .nav-item.is-open > .dropdown-menu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* ===== SEARCH OVERLAY ===== */
+  .search-overlay {
+    position: fixed; inset: 0; z-index: 500;
+    background: rgba(10,0,8,0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex; align-items: flex-start;
+    padding-top: 120px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .search-overlay.active { opacity: 1; pointer-events: auto; }
+  .search-overlay-inner { width: 100%; max-width: 700px; margin: 0 auto; padding: 0 32px; }
+  .search-bar-row { display: flex; align-items: center; gap: 14px; }
+  .search-input-wrap {
+    display: flex; align-items: center;
+    background: white; border-radius: 100px;
+    padding: 16px 24px; gap: 16px; flex: 1;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+  }
+  .search-input-wrap svg { color: var(--magenta); flex-shrink: 0; }
+  .search-input-wrap input {
+    flex: 1; border: none; outline: none;
+    font-size: 20px; font-family: 'Mulish', sans-serif; color: var(--text);
+  }
+  .search-close-btn {
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+    color: white; width: 50px; height: 50px; border-radius: 50%;
+    display: grid; place-items: center; cursor: pointer;
+    font-size: 22px; flex-shrink: 0; transition: background 0.2s;
+  }
+  .search-close-btn:hover { background: rgba(255,255,255,0.25); }
+  .search-hint {
+    margin-top: 18px; color: rgba(255,255,255,0.45);
+    font-size: 13px; font-weight: 600; text-align: center; letter-spacing: 0.04em;
+  }
+  .search-results { margin-top: 22px; display: grid; gap: 12px; }
+  .search-result-card {
+    display: grid; gap: 6px; padding: 18px 20px; border-radius: 18px;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+    transition: transform 0.22s ease, background 0.22s ease, border-color 0.22s ease;
+  }
+  .search-result-card:hover { transform: translateY(-2px); background: rgba(255,255,255,0.14); border-color: rgba(201,75,155,0.45); }
+  .search-result-card strong { color: white; font-size: 17px; }
+  .search-result-kicker { font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--magenta-light); }
+  .search-result-copy { color: rgba(255,255,255,0.76); font-size: 14px; line-height: 1.5; }
+  .search-result-url { color: rgba(255,255,255,0.48); font-size: 12px; font-weight: 700; }
+  .search-empty { padding: 18px 20px; border-radius: 18px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.78); line-height: 1.55; }
+
+  /* ===== COOKIE BANNER ===== */
+  .cookie-banner {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 400;
+    background: #1A1A1A; color: white;
+    padding: 20px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 24px; flex-wrap: wrap;
+    border-top: 3px solid var(--magenta);
+    box-shadow: 0 -8px 30px rgba(0,0,0,0.25);
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+  .cookie-banner.hidden { transform: translateY(110%); }
+  .cookie-text { flex: 1; min-width: 200px; font-size: 14px; line-height: 1.55; color: rgba(255,255,255,0.8); }
+  .cookie-text strong { color: white; }
+  .cookie-text a { color: var(--magenta-light); text-decoration: underline; }
+  .cookie-actions { display: flex; gap: 12px; flex-shrink: 0; }
+  .dropdown-menu li { list-style: none; }
+  .dropdown-menu li a {
+    display: block;
+    padding: 9px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-soft);
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+    position: static;
+  }
+  .dropdown-menu li a:hover {
+    background: var(--pink-soft);
+    color: var(--magenta);
+  }
+  .dropdown-menu li a::after { display: none !important; }
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .nav-search-btn {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--pink-soft);
+    color: var(--magenta);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    border: 1px solid var(--pink-mist);
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .nav-search-btn:hover { background: var(--pink-mist); }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1024px) {
+    .hero-grid, .experten-grid, .app-grid, .cta-grid {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+    .leistungen-grid, .testimonials, .events-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .mobile-toggle { display: block; }
+    .feature-card.fc-1, .feature-card.fc-2, .feature-card.fc-3 {
+      margin-left: 0; margin-right: 0;
+    }
+  }
+  @media (max-width: 720px) {
+    .container { padding: 0 20px; }
+    section { padding: 70px 0; }
+    .leistungen-grid, .testimonials, .events-grid { grid-template-columns: 1fr; }
+    .experten-stats { grid-template-columns: 1fr; gap: 16px; }
+    .cta-card { padding: 50px 30px; }
+    .footer-top { grid-template-columns: 1fr; gap: 36px; }
+    .hero { padding: 110px 0 60px; min-height: auto; }
+    .phone-frame { width: 260px; height: 520px; transform: rotate(0); }
+    .hero-cta { flex-direction: column; align-items: stretch; }
+    .hero-cta .btn { justify-content: center; }
+  }
+</style>
 </head>
 <body>
-  <main>
-    <p>Sie werden zur Startseite von BECKER Hörakustik weitergeleitet.</p>
-    <p><a href="index-standalone.html">Falls die Weiterleitung nicht funktioniert, hier klicken.</a></p>
-  </main>
+
+<!-- ============ INLINE SVG ICON DEFINITIONS ============ -->
+<!-- These are reused throughout the page via <use href="#..."> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Calendar with check -->
+    <symbol id="i-calendar-check" viewBox="0 0 24 24">
+      <path d="M19 4h-2V2h-2v2H9V2H7v2H5C3.9 4 3 4.9 3 6v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-8.5 9.5l5-5-1.41-1.41-3.59 3.59-1.59-1.59L7.5 14.5l3 3z"/>
+    </symbol>
+    <!-- Phone -->
+    <symbol id="i-phone" viewBox="0 0 24 24">
+      <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+    </symbol>
+    <!-- Ear -->
+    <symbol id="i-ear" viewBox="0 0 256 256">
+      <path d="M212,112a84,84,0,0,0-168,0c0,32.65,16.79,53.71,30.27,70.63C84.69,195.78,92,205,92,216a28,28,0,0,0,56,0c0-15.32,8.06-23.39,18.27-33.61C176.45,172.21,188,160.65,188,144a8,8,0,0,0-16,0c0,9.99-8.05,18.05-18.27,28.27C144.06,182.5,132,194.55,132,216a12,12,0,0,1-24,0c0-17.05-9.86-29.43-19.4-41.4C76.27,159.45,60,138.85,60,112a68,68,0,0,1,136,0,8,8,0,0,0,16,0Zm-84-44a44.05,44.05,0,0,0-44,44,8,8,0,0,0,16,0,28,28,0,0,1,56,0c0,9.34-3.85,13.94-9.86,20.55C140,138.92,132,147.8,132,160a8,8,0,0,0,16,0c0-6.07,4.42-10.93,10-17.07C164.61,135.78,172,127.66,172,112A44.05,44.05,0,0,0,128,68Z"/>
+    </symbol>
+    <!-- Shield Check -->
+    <symbol id="i-shield-check" viewBox="0 0 24 24">
+      <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+    </symbol>
+    <!-- Storefront -->
+    <symbol id="i-storefront" viewBox="0 0 24 24">
+      <path d="M21.9 8.89l-1.05-4.37c-.22-.9-1-1.52-1.91-1.52H5.05c-.9 0-1.69.63-1.9 1.52L2.1 8.89c-.24 1.02-.02 2.06.62 2.88.08.11.19.19.28.29V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6.94c.09-.09.2-.18.28-.28.64-.82.87-1.87.62-2.89zm-2.99-3.9l1.05 4.37c.1.42.01.84-.25 1.17-.14.18-.44.47-.94.47-.61 0-1.14-.49-1.21-1.14L16.98 5l1.93-.01zM13 5h1.96l.54 4.52c.05.39-.07.78-.33 1.07-.22.26-.54.41-.95.41-.67 0-1.22-.59-1.22-1.31V5zM8.49 9.52L9.04 5H11v4.69c0 .72-.55 1.31-1.29 1.31-.34 0-.65-.15-.89-.41-.25-.29-.37-.68-.33-1.07zm-4.45-.16L5.05 5h1.97l-.58 4.86c-.08.65-.6 1.14-1.21 1.14-.49 0-.8-.29-.93-.47-.27-.32-.36-.75-.26-1.17zM5 19v-6.03c.08.01.15.03.23.03.87 0 1.66-.36 2.24-.95.6.6 1.4.95 2.31.95.87 0 1.65-.36 2.23-.93.59.57 1.39.93 2.29.93.84 0 1.64-.35 2.24-.95.58.59 1.37.95 2.24.95.08 0 .15-.02.23-.03V19H5z"/>
+    </symbol>
+    <!-- Users -->
+    <symbol id="i-users" viewBox="0 0 24 24">
+      <path d="M12 12.75c1.63 0 3.07.39 4.24.9 1.08.48 1.76 1.56 1.76 2.73L18 18H6l.01-1.61c0-1.18.68-2.26 1.76-2.73 1.17-.52 2.6-.91 4.23-.91zM4 13c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm1.13 1.1c-.37-.06-.74-.1-1.13-.1-.99 0-1.93.21-2.78.58C.48 14.9 0 15.62 0 16.43V18l4.5-.02v-1.61c0-.83.23-1.61.63-2.27zM20 13c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm4 3.43c0-.81-.48-1.53-1.22-1.85-.85-.37-1.79-.58-2.78-.58-.39 0-.76.04-1.13.1.4.66.63 1.44.63 2.27v1.61L24 18v-1.57zM12 6c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z"/>
+    </symbol>
+    <!-- Star -->
+    <symbol id="i-star" viewBox="0 0 24 24">
+      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+    </symbol>
+    <!-- Headphones -->
+    <symbol id="i-headphones" viewBox="0 0 24 24">
+      <path d="M12 1c-4.97 0-9 4.03-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7c0-4.97-4.03-9-9-9z"/>
+    </symbol>
+    <!-- Cell signal -->
+    <symbol id="i-signal" viewBox="0 0 24 24">
+      <path d="M2 22h20V2L2 22z"/>
+    </symbol>
+    <!-- Baby (face icon) -->
+    <symbol id="i-baby" viewBox="0 0 24 24">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-3.5 6c.83 0 1.5.67 1.5 1.5S9.33 11 8.5 11 7 10.33 7 9.5 7.67 8 8.5 8zm7 0c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zM12 17.5c-2.33 0-4.31-1.46-5.11-3.5h10.22c-.8 2.04-2.78 3.5-5.11 3.5z"/>
+    </symbol>
+    <!-- Waveform -->
+    <symbol id="i-wave" viewBox="0 0 24 24">
+      <path d="M2 12h2v2H2v-2zm4-4h2v10H6V8zm4-4h2v18h-2V4zm4 4h2v10h-2V8zm4 2h2v2h-2v-2zm4-2h2v6h-2V8z"/>
+    </symbol>
+    <!-- Laptop -->
+    <symbol id="i-laptop" viewBox="0 0 24 24">
+      <path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/>
+    </symbol>
+    <!-- Graduation -->
+    <symbol id="i-grad" viewBox="0 0 24 24">
+      <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+    </symbol>
+    <!-- Circuitry / chip -->
+    <symbol id="i-chip" viewBox="0 0 24 24">
+      <path d="M15 9H9v6h6V9zm-2 4h-2v-2h2v2zm8-2V9h-2V7c0-1.1-.9-2-2-2h-2V3h-2v2h-2V3H9v2H7c-1.1 0-2 .9-2 2v2H3v2h2v2H3v2h2v2c0 1.1.9 2 2 2h2v2h2v-2h2v2h2v-2h2c1.1 0 2-.9 2-2v-2h2v-2h-2v-2h2zm-4 6H7V7h10v10z"/>
+    </symbol>
+    <!-- Arrow right -->
+    <symbol id="i-arrow-right" viewBox="0 0 24 24">
+      <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+    </symbol>
+    <!-- Arrow up right -->
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24">
+      <path d="M5 17.59L15.59 7H9V5h10v10h-2V8.41L6.41 19 5 17.59z"/>
+    </symbol>
+    <!-- Play circle -->
+    <symbol id="i-play" viewBox="0 0 24 24">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+    </symbol>
+    <!-- Quote (both quotes) -->
+    <symbol id="i-quotes" viewBox="0 0 24 24">
+      <path d="M9.983 3v7.391c0 5.704-3.731 9.57-8.983 10.609l-.995-2.151c2.432-.917 3.995-3.638 3.995-5.849h-4v-10h9.983zm14.017 0v7.391c0 5.704-3.748 9.571-9 10.609l-.996-2.151c2.433-.917 3.996-3.638 3.996-5.849h-3.983v-10h9.983z"/>
+    </symbol>
+    <!-- Map pin -->
+    <symbol id="i-map" viewBox="0 0 24 24">
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+    </symbol>
+    <!-- Clock -->
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+    </symbol>
+    <!-- Calendar (plain) -->
+    <symbol id="i-calendar" viewBox="0 0 24 24">
+      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v16c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H5V8h14v13z"/>
+    </symbol>
+    <!-- Chat bubble -->
+    <symbol id="i-chat" viewBox="0 0 24 24">
+      <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+    </symbol>
+    <!-- File text -->
+    <symbol id="i-file" viewBox="0 0 24 24">
+      <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+    </symbol>
+    <!-- Bell -->
+    <symbol id="i-bell" viewBox="0 0 24 24">
+      <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+    </symbol>
+    <!-- Caret right -->
+    <symbol id="i-caret-right" viewBox="0 0 24 24">
+      <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+    </symbol>
+    <!-- List (mobile menu) -->
+    <symbol id="i-list" viewBox="0 0 24 24">
+      <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+    </symbol>
+    <!-- Apple -->
+    <symbol id="i-apple" viewBox="0 0 24 24">
+      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+    </symbol>
+    <!-- Google Play -->
+    <symbol id="i-play-store" viewBox="0 0 24 24">
+      <path d="M3 20.5V3.5c0-.6.34-1.13.84-1.4l11.95 9.9-11.95 9.9c-.5-.27-.84-.79-.84-1.4zm17.16-9.6c.34.34.34.9 0 1.24l-2.85 1.66-3.13-2.6 3.13-2.6 2.85 1.66c.34.34.34.9 0 1.64zM5.04 1.5l11.04 9.13-2.92 2.43L5.04 1.5zm0 21L13.16 13l2.92 2.43L5.04 22.5z"/>
+    </symbol>
+    <!-- Facebook -->
+    <symbol id="i-facebook" viewBox="0 0 24 24">
+      <path d="M24 12c0-6.627-5.373-12-12-12S0 5.373 0 12c0 5.99 4.388 10.954 10.125 11.854V15.469H7.078V12h3.047V9.356c0-3.007 1.792-4.668 4.533-4.668 1.312 0 2.686.234 2.686.234v2.953H15.83c-1.491 0-1.956.925-1.956 1.874V12h3.328l-.532 3.469h-2.796v8.385C19.612 22.954 24 17.99 24 12z"/>
+    </symbol>
+    <!-- Instagram -->
+    <symbol id="i-instagram" viewBox="0 0 24 24">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+    </symbol>
+    <!-- YouTube -->
+    <symbol id="i-youtube" viewBox="0 0 24 24">
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+    </symbol>
+    <!-- LinkedIn -->
+    <symbol id="i-linkedin" viewBox="0 0 24 24">
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+    </symbol>
+    <!-- Envelope -->
+    <symbol id="i-mail" viewBox="0 0 24 24">
+      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo" aria-label="Becker Hörakustik">
+      <img src="images/logo.png" alt="Becker Hörakustik" />
+    </a>
+    <ul class="nav-links">
+      <!-- Leistungen -->
+      <li class="nav-item">
+        <a href="leistungen/hoertest.html">Leistungen
+          <svg class="nav-chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="leistungen/audio-therapie.html">Audio-Therapie</a></li>
+          <li><a href="leistungen/hoergeraetehersteller-partner.html">Hörgerätehersteller &amp; Partner</a></li>
+          <li><a href="leistungen/hoertest.html">Hörtest</a></li>
+          <li><a href="leistungen/hoertraining.html">Hörtraining</a></li>
+          <li><a href="leistungen/paedakustik.html">Pädakustik</a></li>
+          <li><a href="leistungen/kinderhoerzentrum.html">Kinderhörzentrum</a></li>
+          <li><a href="leistungen/remote-fitting.html">Remote Fitting</a></li>
+          <li><a href="leistungen/serviceleistung.html">Serviceleistung</a></li>
+          <li><a href="leistungen/tinnitusberatung.html">Tinnitusberatung</a></li>
+          <li><a href="leistungen/gehoerschutz.html">Gehörschutz</a></li>
+          <li><a href="leistungen/treffpunkt-ohr.html">Treffpunkt Ohr e.V.</a></li>
+        </ul>
+      </li>
+      <!-- Ratgeber -->
+      <li class="nav-item">
+        <a href="ratgeber/index.html">Ratgeber
+          <svg class="nav-chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="ratgeber/index.html">Informationen zum guten Hören</a></li>
+          <li><a href="ratgeber/index.html#faq">Ihre Fragen, unsere Antworten</a></li>
+        </ul>
+      </li>
+      <!-- News -->
+      <li class="nav-item"><a href="news.html">News</a></li>
+      <!-- Veranstaltungen -->
+      <li class="nav-item"><a href="veranstaltungen.html">Veranstaltungen</a></li>
+      <!-- Unternehmen -->
+      <li class="nav-item">
+        <a href="unternehmen/firmengeschichte.html">Unternehmen
+          <svg class="nav-chevron" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="unternehmen/karriere.html">Karriere – jetzt bewerben</a></li>
+          <li><a href="unternehmen/firmenchronik.html">Firmenchronik</a></li>
+          <li><a href="unternehmen/firmengeschichte.html">Firmengeschichte</a></li>
+          <li><a href="unternehmen/unsere-werte.html">Unsere Werte</a></li>
+          <li><a href="unternehmen/linksammlung.html">Linksammlung</a></li>
+          <li><a href="unternehmen/rein-romantik.html">Rein Romantik</a></li>
+          <li><a href="unternehmen/hauszeitschrift.html">Unsere Hauszeitschrift</a></li>
+        </ul>
+      </li>
+      <!-- Fachgeschäfte -->
+      <li class="nav-item"><a href="fachgeschaefte.html">Fachgeschäfte</a></li>
+      <!-- Kontakt -->
+      <li class="nav-item"><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-search-btn" aria-label="Suchen">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      </button>
+      <a href="kontakt.html" class="btn btn-primary">
+        <svg class="icon"><use href="#i-calendar-check"/></svg>
+        Termin buchen
+      </a>
+      <button class="mobile-toggle" aria-label="Menu">
+        <svg class="icon"><use href="#i-list"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-media" aria-hidden="true"></div>
+  <div class="hero-glow g1" aria-hidden="true"></div>
+  <div class="hero-glow g2" aria-hidden="true"></div>
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <span class="hero-eyebrow">
+        <span class="dot"></span>
+        100 Jahre Hörakustik · seit 1925
+      </span>
+      <h1>
+        Hören ist <span class="accent">Leben</span>.<br>
+        Wir machen<br>es möglich.
+      </h1>
+      <p class="lead">
+        Modernste Hörsystem-Technologie, individuelle Beratung und 100 Jahre
+        Familientradition – an über 40 Standorten in der Rhein-Main-Region.
+      </p>
+      <div class="hero-cta">
+        <a href="kontakt.html" class="btn btn-primary">
+          <svg class="icon"><use href="#i-calendar-check"/></svg>
+          Kostenfreien Hörtest buchen
+        </a>
+        <a href="#leistungen" class="btn btn-secondary">
+          <svg class="icon"><use href="#i-play"/></svg>
+          Unsere Leistungen
+        </a>
+      </div>
+      <div class="hero-trust">
+        <a href="fachgeschaefte.html" class="trust-item">
+          <span class="trust-icon"><svg class="icon"><use href="#i-storefront"/></svg></span>
+          <div class="trust-item-text">
+            <span class="num">40+</span>
+            <span class="label">Fachgeschäfte</span>
+          </div>
+        </a>
+        <a href="unternehmen/firmengeschichte.html" class="trust-item">
+          <span class="trust-icon"><svg class="icon"><use href="#i-users"/></svg></span>
+          <div class="trust-item-text">
+            <span class="num">100.000+</span>
+            <span class="label">zufriedene Kunden</span>
+          </div>
+        </a>
+        <a href="#botschafter" class="trust-item">
+          <span class="trust-icon"><svg class="icon"><use href="#i-star"/></svg></span>
+          <div class="trust-item-text">
+            <span class="num">4,9 / 5</span>
+            <span class="label">Kundenbewertung</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <a href="#cta" class="hero-scroll-cue" aria-label="Nach unten scrollen">Mehr entdecken</a>
+</header>
+
+<!-- ============ CTA (Termin buchen – gleich nach Hero sichtbar) ============ -->
+<section id="cta" class="cta-section" style="padding:80px 0;">
+  <div class="container">
+    <div class="cta-card reveal">
+      <div class="cta-grid">
+        <div>
+          <span class="section-eyebrow" style="color:rgba(255,255,255,0.85);">Termin buchen</span>
+          <h2>Bereit für besseres <span class="brand-em">Hören</span>?</h2>
+          <p>
+            Vereinbaren Sie jetzt Ihren kostenfreien Hörtest in einem unserer
+            über 40 Fachgeschäfte – online in nur 60 Sekunden.
+          </p>
+          <div class="cta-buttons">
+            <a href="kontakt.html" class="btn btn-white">
+              <svg class="icon"><use href="#i-calendar-check"/></svg>
+              Jetzt online Termin buchen
+            </a>
+            <a href="kontakt.html" class="btn btn-outline-white">
+              <svg class="icon"><use href="#i-phone"/></svg>
+              Wir rufen zurück
+            </a>
+          </div>
+        </div>
+        <div class="cta-calendar">
+          <h4><svg class="icon"><use href="#i-calendar"/></svg> Verfügbare Termine diese Woche</h4>
+          <div class="calendar-days">
+            <div class="day-slot">
+              <span class="day-name">Mi</span>
+              <span class="day-num">29</span>
+            </div>
+            <div class="day-slot active">
+              <span class="day-name">Do</span>
+              <span class="day-num">30</span>
+            </div>
+            <div class="day-slot">
+              <span class="day-name">Fr</span>
+              <span class="day-num">01</span>
+            </div>
+            <div class="day-slot">
+              <span class="day-name">Mo</span>
+              <span class="day-num">04</span>
+            </div>
+          </div>
+          <div class="calendar-time">
+            <svg class="icon"><use href="#i-clock"/></svg>
+            <span>Nächster freier Termin: <strong>Do., 9:30 Uhr</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEISTUNGEN ============ -->
+<section id="leistungen" class="leistungen">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Unsere Topleistungen</span>
+      <h2 class="section-title">Alles für Ihr <span class="brand-em">bestes Hören</span> – aus einer Hand.</h2>
+      <p class="section-lead">
+        Von der ersten Beratung bis zur perfekten Anpassung Ihres Hörsystems –
+        unser Expertenteam begleitet Sie auf jedem Schritt Ihrer Hörreise.
+      </p>
+    </div>
+    <div class="leistungen-grid">
+      <a href="leistungen/hoertest.html" class="service-card reveal">
+        <div class="service-icon"><svg class="icon"><use href="#i-ear"/></svg></div>
+        <h3>Kostenfreier Hörtest</h3>
+        <p>Professionelle Hörmessung mit ausführlicher Beratung – schnell, einfach und ohne Termindruck.</p>
+        <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+      </a>
+      <a href="leistungen/audio-therapie.html" class="service-card reveal">
+        <div class="service-icon"><svg class="icon"><use href="#i-headphones"/></svg></div>
+        <h3>Audiotherapie</h3>
+        <p>Gezieltes Hörtraining zur nachhaltigen Verbesserung Ihres Sprachverstehens und Hörerlebnisses.</p>
+        <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+      </a>
+      <a href="leistungen/serviceleistung.html" class="service-card reveal">
+        <div class="service-icon"><svg class="icon"><use href="#i-signal"/></svg></div>
+        <h3>CI-Kompetenz</h3>
+        <p>Spezialisierte Versorgung und Betreuung von Cochlea-Implantat-Trägern – zertifizierter Service.</p>
+        <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+      </a>
+      <a href="leistungen/kinderhoerzentrum.html" class="service-card reveal">
+        <div class="service-icon"><svg class="icon"><use href="#i-baby"/></svg></div>
+        <h3>Kinderhörzentren</h3>
+        <p>Liebevolle, kindgerechte Betreuung in unseren spezialisierten Hörzentren für die Kleinsten.</p>
+        <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+      </a>
+      <a href="leistungen/tinnitusberatung.html" class="service-card reveal">
+        <div class="service-icon"><svg class="icon"><use href="#i-wave"/></svg></div>
+        <h3>Tinnitus-Beratung</h3>
+        <p>Individuelle Lösungen und moderne Therapieansätze für Menschen mit Ohrgeräuschen.</p>
+        <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+      </a>
+      <a href="leistungen/remote-fitting.html" class="service-card reveal">
+        <div class="service-icon"><svg class="icon"><use href="#i-laptop"/></svg></div>
+        <h3>Remote-Fitting</h3>
+        <p>Hörsystemanpassung bequem von Zuhause aus – modernste Technik, persönlicher Service.</p>
+        <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+      </a>
+      <a href="leistungen/hoertraining.html" class="service-card reveal">
+        <div class="service-icon"><svg class="icon"><use href="#i-grad"/></svg></div>
+        <h3>Hörtraining</h3>
+        <p>Professionelle Trainingsprogramme für eine optimale Eingewöhnung an Ihr neues Hörsystem.</p>
+        <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+      </a>
+      <a href="leistungen/paedakustik.html" class="service-card reveal">
+        <div class="service-icon"><svg class="icon"><use href="#i-chip"/></svg></div>
+        <h3>Pädakustik &amp; Gehörschutz</h3>
+        <p>Spezialisierte Versorgung für Kinder sowie maßgefertigter Gehörschutz für Beruf und Freizeit.</p>
+        <span class="arrow">Mehr erfahren <svg class="icon"><use href="#i-arrow-right"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERTEN ============ -->
+<section id="experten" class="experten">
+  <div class="container experten-grid">
+    <button type="button" class="experten-img media-trigger reveal" data-lightbox-src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1600&q=75&auto=format&fit=crop" data-lightbox-alt="BECKER Team in einer persoenlichen Beratungssituation">
+      <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&q=75&auto=format&fit=crop" alt="BECKER Team in einer persoenlichen Beratungssituation" loading="lazy" />
+      <span class="media-zoom-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z"/></svg>
+      </span>
+    </button>
+    <div class="experten-content reveal">
+      <span class="section-eyebrow">Das BECKER-Team</span>
+      <h2>Über 200 <span class="brand-em">Hörexperten</span>, die Sie persönlich kennenlernen.</h2>
+      <p>
+        Hinter jedem perfekt sitzenden Hörsystem steht ein engagiertes Team aus
+        leidenschaftlichen Hörakustikern. Wir nehmen uns Zeit für Sie – weil Hören
+        Vertrauenssache ist.
+      </p>
+      <p>
+        Auf zahlreichen Veranstaltungen, in unseren über 40 Fachgeschäften und
+        natürlich digital – wir sind da, wo Sie uns brauchen.
+      </p>
+      <div class="experten-stats">
+        <div class="stat">
+          <span class="num">50+</span>
+          <span class="label">Jahre Erfahrung im Hörakustiker-Handwerk</span>
+        </div>
+        <div class="stat">
+          <span class="num">200+</span>
+          <span class="label">qualifizierte Hörakustik-Experten</span>
+        </div>
+        <div class="stat">
+          <span class="num">40+</span>
+          <span class="label">Fachgeschäfte in ganz Deutschland</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOTSCHAFTER ============ -->
+<section id="botschafter" class="botschafter">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="section-eyebrow">Botschafter:innen des guten Hörens</span>
+      <h2 class="section-title">Echte <span class="brand-em">Geschichten</span>. Echte Menschen.</h2>
+      <p class="section-lead">
+        Lernen Sie unsere Botschafter:innen kennen und erfahren Sie, wie modernes Hören
+        ihr Leben verändert hat.
+      </p>
+    </div>
+    <div class="testimonials">
+      <div class="testimonial reveal">
+        <button type="button" class="testimonial-img media-trigger" data-lightbox-src="images/testimonial-schenk.jpg" data-lightbox-alt="Gabriele Schenk">
+          <img src="images/testimonial-schenk.jpg" alt="Gabriele Schenk" loading="lazy" />
+          <span class="media-zoom-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z"/></svg></span>
+        </button>
+        <div class="testimonial-body">
+          <svg class="icon quote-icon"><use href="#i-quotes"/></svg>
+          <p>Über mein Hörsystem bin ich mit der ganzen Welt verbunden!</p>
+          <div class="testimonial-author">
+            <div>
+              <strong>Gabriele Schenk</strong>
+              <small>Botschafterin des guten Hörens</small>
+            </div>
+            <svg class="icon" style="color:var(--magenta); font-size:20px;"><use href="#i-arrow-up-right"/></svg>
+          </div>
+          <button type="button" class="testimonial-link" data-portrait="images/testimonial-schenk.jpg">Porträt ansehen <svg class="icon"><use href="#i-arrow-up-right"/></svg></button>
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <button type="button" class="testimonial-img media-trigger" data-lightbox-src="images/testimonial-roder.jpg" data-lightbox-alt="Elke Roder">
+          <img src="images/testimonial-roder.jpg" alt="Elke Roder" loading="lazy" />
+          <span class="media-zoom-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z"/></svg></span>
+        </button>
+        <div class="testimonial-body">
+          <svg class="icon quote-icon"><use href="#i-quotes"/></svg>
+          <p>Nur die Hälfte hören? Für mich keine Alternative!</p>
+          <div class="testimonial-author">
+            <div>
+              <strong>Elke Roder</strong>
+              <small>Botschafterin des guten Hörens</small>
+            </div>
+            <svg class="icon" style="color:var(--magenta); font-size:20px;"><use href="#i-arrow-up-right"/></svg>
+          </div>
+          <button type="button" class="testimonial-link" data-portrait="images/testimonial-roder.jpg">Porträt ansehen <svg class="icon"><use href="#i-arrow-up-right"/></svg></button>
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <button type="button" class="testimonial-img media-trigger" data-lightbox-src="images/testimonial-klein.jpg" data-lightbox-alt="Lana Emilia Klein">
+          <img src="images/testimonial-klein.jpg" alt="Lana Emilia Klein" loading="lazy" />
+          <span class="media-zoom-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14Z"/></svg></span>
+        </button>
+        <div class="testimonial-body">
+          <svg class="icon quote-icon"><use href="#i-quotes"/></svg>
+          <p>Lana liebt ihre beiden roten Hörsysteme genauso doll wie ihr Stofftier!</p>
+          <div class="testimonial-author">
+            <div>
+              <strong>Lana Emilia Klein</strong>
+              <small>Botschafterin des guten Hörens</small>
+            </div>
+            <svg class="icon" style="color:var(--magenta); font-size:20px;"><use href="#i-arrow-up-right"/></svg>
+          </div>
+          <button type="button" class="testimonial-link" data-portrait="images/testimonial-klein.jpg">Porträt ansehen <svg class="icon"><use href="#i-arrow-up-right"/></svg></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ APP SECTION ============ -->
+<section class="app-section">
+  <div class="container">
+    <div class="app-grid">
+      <div class="app-mockup reveal">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-statusbar">
+              <span>09:41</span>
+              <span>5G · 87%</span>
+            </div>
+            <div class="phone-header-card">
+              <div class="phone-greeting">
+                Guten Morgen, Frau Mueller
+                <h3>Ihre BECKER App</h3>
+              </div>
+              <div class="phone-highlight">
+                <div>
+                  <strong>Naechster Termin</strong>
+                  <small>Do., 9:30 Uhr in Koblenz</small>
+                </div>
+                <span class="phone-pill">Check-in</span>
+              </div>
+            </div>
+            <div class="phone-card">
+              <div class="phone-card-row">
+                <div class="pcr-icon"><svg class="icon"><use href="#i-calendar-check"/></svg></div>
+                <div class="pcr-text">
+                  <strong>Termin am Do., 9:30</strong>
+                  <small>Hoertest im Haupthaus Koblenz</small>
+                </div>
+                <svg class="icon pcr-arrow"><use href="#i-caret-right"/></svg>
+              </div>
+              <div class="phone-card-row">
+                <div class="pcr-icon"><svg class="icon"><use href="#i-ear"/></svg></div>
+                <div class="pcr-text">
+                  <strong>Mein Hörprofil</strong>
+                  <small>Letzte Anpassung: 12.04.</small>
+                </div>
+                <svg class="icon pcr-arrow"><use href="#i-caret-right"/></svg>
+              </div>
+              <div class="phone-card-row">
+                <div class="pcr-icon"><svg class="icon"><use href="#i-chat"/></svg></div>
+                <div class="pcr-text">
+                  <strong>Frage stellen</strong>
+                  <small>Antwort in &lt; 24 Std.</small>
+                </div>
+                <svg class="icon pcr-arrow"><use href="#i-caret-right"/></svg>
+              </div>
+              <div class="phone-card-row">
+                <div class="pcr-icon"><svg class="icon"><use href="#i-file"/></svg></div>
+                <div class="pcr-text">
+                  <strong>Dokumente</strong>
+                  <small>3 neue Dokumente</small>
+                </div>
+                <svg class="icon pcr-arrow"><use href="#i-caret-right"/></svg>
+              </div>
+            </div>
+            <div class="phone-nav" aria-hidden="true">
+              <div class="phone-nav-item"><svg class="icon"><use href="#i-calendar-check"/></svg>Termine</div>
+              <div class="phone-nav-item"><svg class="icon"><use href="#i-ear"/></svg>Hoeren</div>
+              <div class="phone-nav-item"><svg class="icon"><use href="#i-chat"/></svg>Chat</div>
+              <div class="phone-nav-item"><svg class="icon"><use href="#i-file"/></svg>Docs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <span class="section-eyebrow">Unsere BECKER App</span>
+        <h2 class="section-title">Ihr Hörakustiker – immer in der <span class="brand-em">Hosentasche</span>.</h2>
+        <p class="section-lead">
+          Mit der BECKER App haben Sie alles im Blick: Termine, Hörprofile, Dokumente
+          und direkten Draht zu Ihrem persönlichen Hörakustiker.
+        </p>
+        <ul class="app-features">
+          <li><span class="li-icon"><svg class="icon"><use href="#i-calendar-check"/></svg></span> Termine jederzeit buchen &amp; verwalten</li>
+          <li><span class="li-icon"><svg class="icon"><use href="#i-ear"/></svg></span> Hörprofil &amp; Hörsysteme einsehen</li>
+          <li><span class="li-icon"><svg class="icon"><use href="#i-file"/></svg></span> Dokumente immer griffbereit</li>
+          <li><span class="li-icon"><svg class="icon"><use href="#i-chat"/></svg></span> Schnell &amp; bequem Fragen stellen</li>
+          <li><span class="li-icon"><svg class="icon"><use href="#i-bell"/></svg></span> Neuigkeiten &amp; Angebote erhalten</li>
+        </ul>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <svg class="icon"><use href="#i-apple"/></svg> App Store
+          </a>
+          <a href="https://play.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <svg class="icon"><use href="#i-play-store"/></svg> Google Play
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EVENTS ============ -->
+<section id="events" class="events">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Veranstaltungen</span>
+      <h2 class="section-title">Wir freuen uns, Sie persönlich <span class="brand-em">kennenzulernen</span>.</h2>
+      <p class="section-lead">
+        Auf zahlreichen Veranstaltungen können Sie modernste Hörsysteme testen,
+        unsere Experten treffen und Fragen stellen.
+      </p>
+    </div>
+    <div class="events-grid">
+      <a href="veranstaltungen.html" class="event-card reveal">
+        <div class="event-img">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&q=75&auto=format&fit=crop" alt="Tag des Hoerens - Open House" loading="lazy" />
+          <div class="event-date">
+            <span class="day">15</span>
+            <span class="month">Mai</span>
+          </div>
+        </div>
+        <div class="event-body">
+          <span class="event-tag">Hörtag</span>
+          <h3>Tag des Hörens – Open House</h3>
+          <p>Erleben Sie die neuesten Hörsystem-Innovationen, kostenlose Hörtests und Expertenberatung.</p>
+          <div class="event-meta">
+            <span><svg class="icon"><use href="#i-map"/></svg> Mainz</span>
+            <span><svg class="icon"><use href="#i-clock"/></svg> 10:00 – 18:00</span>
+          </div>
+        </div>
+      </a>
+      <a href="veranstaltungen.html" class="event-card reveal">
+        <div class="event-img">
+          <img src="https://images.unsplash.com/photo-1576765608866-5b51046452be?w=1200&q=75&auto=format&fit=crop" alt="Tinnitus-Workshop" loading="lazy" />
+          <div class="event-date">
+            <span class="day">22</span>
+            <span class="month">Mai</span>
+          </div>
+        </div>
+        <div class="event-body">
+          <span class="event-tag">Workshop</span>
+          <h3>Tinnitus-Workshop</h3>
+          <p>Verstehen, was Tinnitus wirklich bedeutet und welche modernen Therapien wirklich helfen.</p>
+          <div class="event-meta">
+            <span><svg class="icon"><use href="#i-map"/></svg> Wiesbaden</span>
+            <span><svg class="icon"><use href="#i-clock"/></svg> 14:00 – 17:00</span>
+          </div>
+        </div>
+      </a>
+      <a href="veranstaltungen.html" class="event-card reveal">
+        <div class="event-img">
+          <img src="https://images.unsplash.com/photo-1531983412531-1f49a365ffed?w=1200&q=75&auto=format&fit=crop" alt="Kinderhoer-Familientag" loading="lazy" />
+          <div class="event-date">
+            <span class="day">05</span>
+            <span class="month">Jun</span>
+          </div>
+        </div>
+        <div class="event-body">
+          <span class="event-tag">Familientag</span>
+          <h3>Kinderhör-Familientag</h3>
+          <p>Ein bunter Nachmittag für Familien mit hörbeeinträchtigten Kindern – Spaß garantiert!</p>
+          <div class="event-meta">
+            <span><svg class="icon"><use href="#i-map"/></svg> Frankfurt</span>
+            <span><svg class="icon"><use href="#i-clock"/></svg> 13:00 – 17:00</span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div style="text-align:center; margin-top:50px;">
+      <a href="veranstaltungen.html" class="btn btn-secondary">
+        Alle Veranstaltungen ansehen
+        <svg class="icon"><use href="#i-arrow-right"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARTNER ============ -->
+<section class="partner">
+  <div class="container">
+    <div class="partner-head reveal">
+      <h3>Unsere Partner – führende Hörsystem-Hersteller</h3>
+    </div>
+  </div>
+  <div class="partner-marquee">
+    <div class="partner-track">
+      <img src="images/partner-sennheiser.png" alt="Sennheiser" />
+      <img src="images/partner-signia.png" alt="Signia" />
+      <img src="images/partner-widex.png" alt="Widex" />
+      <img src="images/partner-resound.png" alt="ReSound" />
+      <img src="images/partner-bernafon.png" alt="Bernafon" />
+      <img src="images/partner-cochlear.png" alt="Cochlear" />
+      <img src="images/partner-hoerluchs.png" alt="Hörluchs" />
+      <img src="images/partner-humantechnik.png" alt="Humantechnik" />
+      <img src="images/partner-informa.png" alt="Informa" />
+      <img src="images/partner-medel.png" alt="MED-EL" />
+      <img src="images/partner-oticon.png" alt="Oticon" />
+      <img src="images/partner-phonak.png" alt="Phonak" />
+      <img src="images/partner-advanced-bionics.png" alt="Advanced Bionics" />
+      <img src="images/partner-sennheiser.png" alt="Sennheiser" />
+      <img src="images/partner-signia.png" alt="Signia" />
+      <img src="images/partner-widex.png" alt="Widex" />
+      <img src="images/partner-resound.png" alt="ReSound" />
+      <img src="images/partner-bernafon.png" alt="Bernafon" />
+      <img src="images/partner-cochlear.png" alt="Cochlear" />
+      <img src="images/partner-hoerluchs.png" alt="Hörluchs" />
+      <img src="images/partner-humantechnik.png" alt="Humantechnik" />
+      <img src="images/partner-informa.png" alt="Informa" />
+      <img src="images/partner-medel.png" alt="MED-EL" />
+      <img src="images/partner-oticon.png" alt="Oticon" />
+      <img src="images/partner-phonak.png" alt="Phonak" />
+      <img src="images/partner-advanced-bionics.png" alt="Advanced Bionics" />
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer id="kontakt">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo">
+          <img src="images/logo.png" alt="Becker Hörakustik" />
+        </a>
+        <p>Verstehen. Unterhalten. Dabeisein.<br>Ich ge<span class="brand-em">Höre</span> dazu!</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><svg class="icon"><use href="#i-facebook"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg class="icon"><use href="#i-instagram"/></svg></a>
+          <a href="#" aria-label="YouTube"><svg class="icon"><use href="#i-youtube"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Unternehmen</h4>
+        <ul>
+          <li><a href="unternehmen/firmengeschichte.html">Über uns</a></li>
+          <li><a href="unternehmen/karriere.html">Karriere</a></li>
+          <li><a href="fachgeschaefte.html">Fachgeschäfte</a></li>
+          <li><a href="veranstaltungen.html">Veranstaltungen</a></li>
+          <li><a href="#botschafter">Botschafter:innen</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Leistungen</h4>
+        <ul>
+          <li><a href="leistungen/hoertest.html">Kostenfreier Hörtest</a></li>
+          <li><a href="leistungen/audio-therapie.html">Audiotherapie</a></li>
+          <li><a href="leistungen/paedakustik.html">CI-Kompetenz</a></li>
+          <li><a href="leistungen/tinnitusberatung.html">Tinnitus-Beratung</a></li>
+          <li><a href="leistungen/remote-fitting.html">Remote-Fitting</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <p><svg class="icon"><use href="#i-phone"/></svg> 0800 / 123 456 78</p>
+        <p><svg class="icon"><use href="#i-mail"/></svg> info@becker-hoerakustik.de</p>
+        <p><svg class="icon"><use href="#i-clock"/></svg> Mo–Fr 9:00–18:00 Uhr</p>
+        <p><svg class="icon"><use href="#i-map"/></svg> Über 40 Fachgeschäfte</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 BECKER Hörakustik. Alle Rechte vorbehalten.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="#">AGB</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="nav.js"></script>
+<script>
+  /* Index-page only: calendar day slot interaction */
+  document.querySelectorAll('.day-slot').forEach(function (slot) {
+    slot.addEventListener('click', function () {
+      document.querySelectorAll('.day-slot').forEach(function (s) { s.classList.remove('active'); });
+      slot.classList.add('active');
+    });
+  });
+
+  /* Move App section before Experten section (user request: highlight as USP) */
+  (function () {
+    var appSection = document.querySelector('.app-section');
+    var expertenSection = document.getElementById('experten');
+    if (appSection && expertenSection) {
+      expertenSection.parentNode.insertBefore(appSection, expertenSection);
+    }
+  })();
+
+  /* "Porträt ansehen" buttons open the same lightbox as the image button */
+  document.querySelectorAll('.testimonial-link[data-portrait]').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      var src = btn.getAttribute('data-portrait');
+      var lb = document.getElementById('bkLightbox');
+      if (lb && lb._open) lb._open(src, btn.closest('.testimonial').querySelector('.testimonial-img img').alt);
+    });
+  });
+</script>
+
 </body>
 </html>
