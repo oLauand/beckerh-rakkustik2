@@ -331,6 +331,7 @@
     mobileToggle.setAttribute('aria-expanded', 'false');
     navLinks.classList.remove('mobile-open');
     document.body.classList.remove('nav-open');
+    closeAllMenus();
   }
   if (mobileToggle && navLinks) {
     mobileToggle.setAttribute('aria-expanded', 'false');
@@ -343,7 +344,10 @@
 
     queryAll('.nav-links a').forEach(function (link) {
       link.addEventListener('click', function () {
+        var parentItem = link.parentNode;
+        var isMobileDropdownTrigger = parentItem && parentItem.classList.contains('nav-item') && parentItem.querySelector(':scope > .dropdown-menu');
         if (window.matchMedia('(max-width: 1024px)').matches) {
+          if (isMobileDropdownTrigger) return;
           closeMobileMenu();
         }
       });
