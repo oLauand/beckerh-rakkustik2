@@ -239,8 +239,16 @@
 
   function closeAllMenus(exceptItem) {
     queryAll('.nav-item.is-open').forEach(function (item) {
-      if (item !== exceptItem) item.classList.remove('is-open');
+      if (item !== exceptItem) {
+        item.classList.remove('is-open');
+        var trigger = item.querySelector(':scope > a');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      }
     });
+  }
+
+  function isMobileNavViewport() {
+    return window.matchMedia('(max-width: 1024px)').matches;
   }
 
   /* Nav scroll shadow */
@@ -275,6 +283,7 @@
     }
 
     function delayedClose(nextTarget) {
+      if (isMobileNavViewport()) return;
       if (nextTarget && item.contains(nextTarget)) return;
       window.clearTimeout(closeTimer);
       closeTimer = window.setTimeout(closeMenu, 220);
@@ -283,15 +292,22 @@
     trigger.setAttribute('aria-haspopup', 'true');
     trigger.setAttribute('aria-expanded', 'false');
 
-    item.addEventListener('pointerenter', openMenu);
+    item.addEventListener('pointerenter', function () {
+      if (isMobileNavViewport()) return;
+      openMenu();
+    });
     item.addEventListener('pointerleave', function (event) {
       delayedClose(event.relatedTarget);
     });
-    item.addEventListener('focusin', openMenu);
+    item.addEventListener('focusin', function () {
+      if (isMobileNavViewport()) return;
+      openMenu();
+    });
     item.addEventListener('focusout', function (event) {
       delayedClose(event.relatedTarget);
     });
     menu.addEventListener('pointerenter', function () {
+      if (isMobileNavViewport()) return;
       window.clearTimeout(closeTimer);
     });
     menu.addEventListener('pointerleave', function (event) {
@@ -299,7 +315,7 @@
     });
 
     trigger.addEventListener('click', function (event) {
-      var isDesktopNav = window.matchMedia('(min-width: 1025px)').matches;
+      var isDesktopNav = !isMobileNavViewport();
       if (!isDesktopNav) {
         event.preventDefault();
         item.classList.contains('is-open') ? closeMenu() : openMenu();
@@ -320,6 +336,12 @@
   });
 
   document.addEventListener('pointerdown', function (event) {
+    if (isMobileNavViewport()) {
+      if (navLinks && navLinks.classList.contains('mobile-open') && !event.target.closest('.nav-inner')) {
+        closeMobileMenu();
+      }
+      return;
+    }
     if (!event.target.closest('.nav-item')) closeAllMenus();
   });
 
@@ -346,7 +368,7 @@
       link.addEventListener('click', function () {
         var parentItem = link.parentNode;
         var isMobileDropdownTrigger = parentItem && parentItem.classList.contains('nav-item') && parentItem.querySelector(':scope > .dropdown-menu');
-        if (window.matchMedia('(max-width: 1024px)').matches) {
+        if (isMobileNavViewport()) {
           if (isMobileDropdownTrigger) return;
           closeMobileMenu();
         }

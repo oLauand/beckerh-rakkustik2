@@ -262,7 +262,7 @@
     align-items: center;
     gap: 10px;
     padding: 8px 18px;
-    background: white;
+    background: rgba(255,255,255,0.94);
     color: var(--magenta);
     border-radius: 100px;
     font-size: 12px;
@@ -295,7 +295,7 @@
     letter-spacing: -0.025em;
   }
   .hero h1 .accent {
-    color: var(--magenta);
+    color: var(--magenta-light);
     font-family: 'Fraunces', Georgia, serif;
     font-style: italic;
     font-weight: 500;
@@ -305,7 +305,9 @@
   .hero h1 .accent::after {
     content: '';
     position: absolute;
-    left: -4px; right: -4px; bottom: 6px;
+    left: -4px;
+    right: -4px;
+    bottom: 6px;
     height: 14px;
     background: linear-gradient(90deg, rgba(201,75,155,0.35), rgba(166,28,115,0.18));
     border-radius: 6px;
@@ -318,10 +320,20 @@
     margin-top: 18px;
     font-size: clamp(24px, 2.8vw, 38px);
     line-height: 1.15;
+    width: fit-content;
   }
   .hero h1 .accent-line::after {
-    left: -2px; right: -2px; bottom: 2px;
+    content: '';
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    bottom: 2px;
     height: 10px;
+    background: linear-gradient(90deg, rgba(201,75,155,0.35), rgba(166,28,115,0.18));
+    border-radius: 6px;
+    z-index: -1;
+    animation: scaleX 1s 0.6s cubic-bezier(.2,.7,.3,1) both;
+    transform-origin: left;
   }
   @keyframes scaleX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
   .hero p.lead {
@@ -458,12 +470,15 @@
   }
   .reveal {
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transform: translateY(44px) scale(0.985);
+    filter: blur(4px);
+    transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
+    will-change: opacity, transform, filter;
   }
   .reveal.in {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 
   /* ============ SECTION DEFAULTS ============ */
@@ -909,28 +924,41 @@
   .reputation-section {
     position: relative;
     background:
-      radial-gradient(circle at 10% 16%, rgba(166,28,115,0.08), transparent 28%),
-      linear-gradient(180deg, #fff 0%, #fff8fc 100%);
+      radial-gradient(circle at 12% 18%, rgba(166,28,115,0.09), transparent 28%),
+      radial-gradient(circle at 92% 18%, rgba(201,75,155,0.10), transparent 24%),
+      linear-gradient(180deg, #fff 0%, #fff8fc 58%, #fff 100%);
   }
   .reputation-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+    grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
     gap: 28px;
-    align-items: start;
+    align-items: stretch;
   }
   .reputation-video-card,
-  .review-panel {
+  .review-summary {
     background: white;
     border: 1px solid rgba(166,28,115,0.10);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
+    height: 100%;
   }
   .reputation-video-card {
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
   .video-frame {
     aspect-ratio: 16 / 10;
+    position: relative;
     background: linear-gradient(135deg, #170f16 0%, #2a1122 100%);
+  }
+  .video-frame::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 30%;
+    background: linear-gradient(180deg, rgba(18,13,18,0), rgba(18,13,18,0.34));
+    pointer-events: none;
   }
   .video-frame video {
     width: 100%;
@@ -940,6 +968,9 @@
     background: #120d12;
   }
   .video-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
     padding: 28px 30px 30px;
   }
   .review-badge {
@@ -965,19 +996,65 @@
     color: var(--text-soft);
     line-height: 1.65;
     max-width: 58ch;
+    margin: 0;
   }
-  .review-stack {
+  .video-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .video-actions .btn {
+    padding: 12px 20px;
+  }
+  .video-actions .btn i {
+    font-size: 16px;
+    line-height: 1;
+  }
+  .video-status {
+    font-size: 13px;
+    color: var(--text-mute);
+    font-weight: 700;
+  }
+  .review-summary {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    background: linear-gradient(180deg, rgba(253,241,248,0.88) 0%, rgba(255,255,255,0.98) 100%);
+  }
+  .review-summary h3 {
+    font-size: 30px;
+    margin-bottom: 12px;
+  }
+  .review-summary-copy {
+    color: var(--text-soft);
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0;
+  }
+  .review-score-grid {
     display: grid;
-    gap: 18px;
+    gap: 16px;
   }
-  .review-panel {
-    padding: 24px;
+  .review-scorecard {
+    display: block;
+    padding: 20px;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.86);
+    border: 1px solid rgba(166,28,115,0.10);
+    box-shadow: 0 14px 28px rgba(166,28,115,0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .review-scorecard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px rgba(166,28,115,0.11);
+    border-color: rgba(166,28,115,0.18);
   }
   .review-source {
     display: flex;
     align-items: center;
     gap: 14px;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
   }
   .review-icon {
     width: 48px;
@@ -1003,16 +1080,18 @@
     font-weight: 700;
     line-height: 1.45;
   }
-  .review-score {
+  .review-score-line {
     display: flex;
     align-items: flex-end;
     gap: 10px;
-    font-size: 48px;
+  }
+  .review-score-line .num {
+    font-size: 46px;
     font-weight: 800;
     line-height: 1;
     letter-spacing: -0.04em;
   }
-  .review-score span {
+  .review-score-line .denom {
     font-size: 18px;
     color: var(--text-mute);
     font-weight: 700;
@@ -1022,21 +1101,15 @@
   .review-stars {
     display: flex;
     gap: 8px;
-    margin: 16px 0 12px;
+    margin: 12px 0 0;
     color: #f4b400;
     font-size: 16px;
-  }
-  .review-copy {
-    color: var(--text-soft);
-    font-size: 15px;
-    line-height: 1.6;
-    margin-bottom: 16px;
   }
   .review-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 18px;
+    margin-top: 16px;
   }
   .review-chip {
     display: inline-flex;
@@ -1053,37 +1126,25 @@
   .review-chip i {
     color: var(--magenta);
   }
-  .review-panel.review-network {
-    background: linear-gradient(135deg, rgba(166,28,115,0.06), rgba(255,255,255,0.98));
-  }
-  .social-proof-links {
+  .review-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+    margin-top: auto;
   }
-  .social-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 16px;
-    border-radius: 999px;
-    background: white;
-    color: var(--text);
-    border: 1px solid rgba(166,28,115,0.12);
-    box-shadow: 0 10px 28px rgba(166,28,115,0.08);
-    font-size: 14px;
+  .review-actions .btn {
+    padding: 13px 22px;
+  }
+  .review-footnote {
+    font-size: 13px;
+    color: var(--text-mute);
     font-weight: 700;
-    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+    line-height: 1.7;
+    margin: 0;
   }
-  .social-pill:hover {
-    transform: translateY(-2px);
-    border-color: rgba(166,28,115,0.24);
-    box-shadow: 0 14px 30px rgba(166,28,115,0.12);
+  .review-footnote a {
     color: var(--magenta);
-  }
-  .social-pill i {
-    font-size: 16px;
-    line-height: 1;
+    font-weight: 800;
   }
 
   /* ============ APP SECTION ============ */
@@ -1802,10 +1863,16 @@
     .hero-cta .btn { justify-content: center; }
     .hero-trust { gap: 16px; }
     .trust-item { width: 100%; }
-    .review-panel, .reputation-video-card { border-radius: 24px; }
-    .review-score { font-size: 40px; }
+    .hero p.lead {
+      font-size: 16px;
+      margin-bottom: 28px;
+      max-width: none;
+    }
+    .reputation-video-card, .review-summary { border-radius: 24px; }
+    .review-score-line .num { font-size: 40px; }
     .video-caption { padding: 24px; }
-    .social-proof-links { flex-direction: column; }
+    .video-actions, .review-actions { flex-direction: column; }
+    .video-actions .btn, .review-actions .btn { width: 100%; justify-content: center; }
     .nav {
       padding: calc(12px + env(safe-area-inset-top, 0px)) 0 12px;
     }
@@ -2188,7 +2255,7 @@
     <div class="reputation-grid">
       <article class="reputation-video-card reveal">
         <div class="video-frame">
-          <video controls playsinline preload="metadata">
+          <video id="hwkVideo" controls playsinline webkit-playsinline preload="auto" crossorigin="anonymous">
             <source src="https://www.beckerhoerakustik.de/wp-content/uploads/2025/08/hwk2_1280_opt.mp4" type="video/mp4">
           </video>
         </div>
@@ -2200,80 +2267,72 @@
             Beratung, präzises Handwerk und ein spürbares Verständnis dafür, wie wichtig
             gutes Hören für Teilhabe im Alltag ist.
           </p>
+          <div class="video-actions">
+            <button type="button" class="btn btn-primary" data-video-unmute="hwkVideo">
+              <i class="bi bi-volume-up-fill"></i>
+              Ton aktivieren
+            </button>
+            <button type="button" class="btn btn-secondary" data-video-play="hwkVideo">
+              <i class="bi bi-play-fill"></i>
+              Video starten
+            </button>
+          </div>
+          <p class="video-status" data-video-status>Falls Ihr Browser den Ton sperrt, tippen Sie kurz auf „Ton aktivieren“.</p>
         </div>
       </article>
-      <div class="review-stack">
-        <article class="review-panel reveal">
-          <div class="review-source">
-            <span class="review-icon"><i class="bi bi-google"></i></span>
-            <div>
-              <strong>Google Rezensionen</strong>
-              <small>BECKER Hörakustik oHG in Koblenz</small>
-            </div>
-          </div>
-          <div class="review-score">4,9 <span>/ 5</span></div>
-          <div class="review-stars" aria-hidden="true">
-            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-          </div>
-          <p class="review-copy">
-            346 Rezensionen und ein durchgehend starkes Bild in den lokalen Ergebnissen. Das ist
-            ein klares Signal für hohe Zufriedenheit und echte Weiterempfehlung.
+      <article class="review-summary reveal">
+        <div>
+          <span class="review-badge"><i class="bi bi-stars"></i> Öffentliche Stimmen zu BECKER</span>
+          <h3>Empfohlen von Kundschaft und Team</h3>
+          <p class="review-summary-copy">
+            Google zeigt starke öffentliche Kundenzufriedenheit, Kununu ein überzeugendes Bild als Arbeitgeber.
+            Zusammen wirkt das deutlich runder als eine lose Kartenwand und bringt die wichtigsten Signale sofort auf den Punkt.
           </p>
-          <div class="review-meta">
-            <span class="review-chip"><i class="bi bi-geo-alt-fill"></i> Koblenz</span>
-            <span class="review-chip"><i class="bi bi-chat-square-quote-fill"></i> 346 Rezensionen</span>
-            <span class="review-chip"><i class="bi bi-star-fill"></i> 4,9 Sterne</span>
-          </div>
-          <a href="https://www.google.com/search?q=BECKER+H%C3%B6rakustik+oHG+Koblenz" target="_blank" rel="noopener noreferrer" class="social-pill">
-            <i class="bi bi-arrow-up-right"></i> Google-Bewertungen ansehen
+        </div>
+        <div class="review-score-grid">
+          <a href="https://www.google.com/search?q=BECKER+H%C3%B6rakustik+oHG+Koblenz" target="_blank" rel="noopener noreferrer" class="review-scorecard">
+            <div class="review-source">
+              <span class="review-icon"><i class="bi bi-google"></i></span>
+              <div>
+                <strong>Google Rezensionen</strong>
+                <small>BECKER Hörakustik oHG in Koblenz</small>
+              </div>
+            </div>
+            <div class="review-score-line"><span class="num">4,9</span><span class="denom">/ 5</span></div>
+            <div class="review-stars" aria-hidden="true">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+            </div>
+            <div class="review-meta">
+              <span class="review-chip"><i class="bi bi-chat-square-quote-fill"></i> 346 Rezensionen</span>
+              <span class="review-chip"><i class="bi bi-geo-alt-fill"></i> Koblenz</span>
+            </div>
           </a>
-        </article>
-        <article class="review-panel reveal">
-          <div class="review-source">
-            <span class="review-icon"><i class="bi bi-award-fill"></i></span>
-            <div>
-              <strong>Kununu als Arbeitgeber</strong>
-              <small>Arbeitgeberbewertungen von Mitarbeitenden</small>
+          <a href="https://www.kununu.com/de/becker-hoerakustik7" target="_blank" rel="noopener noreferrer" class="review-scorecard">
+            <div class="review-source">
+              <span class="review-icon"><i class="bi bi-award-fill"></i></span>
+              <div>
+                <strong>Kununu als Arbeitgeber</strong>
+                <small>Arbeitgeberbewertungen von Mitarbeitenden</small>
+              </div>
             </div>
-          </div>
-          <div class="review-score">4,2 <span>/ 5</span></div>
-          <div class="review-stars" aria-hidden="true">
-            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
-          </div>
-          <p class="review-copy">
-            48 Bewertungen und 95 % Weiterempfehlung zeigen, dass die Qualität von BECKER nicht
-            nur Kundinnen und Kunden, sondern auch das eigene Team überzeugt.
-          </p>
-          <div class="review-meta">
-            <span class="review-chip"><i class="bi bi-people-fill"></i> 48 Bewertungen</span>
-            <span class="review-chip"><i class="bi bi-heart-fill"></i> 95 % Empfehlung</span>
-            <span class="review-chip"><i class="bi bi-briefcase-fill"></i> Arbeitgeberprofil</span>
-          </div>
-          <a href="https://www.kununu.com/de/becker-hoerakustik7" target="_blank" rel="noopener noreferrer" class="social-pill">
-            <i class="bi bi-arrow-up-right"></i> Kununu-Profil ansehen
+            <div class="review-score-line"><span class="num">4,2</span><span class="denom">/ 5</span></div>
+            <div class="review-stars" aria-hidden="true">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
+            </div>
+            <div class="review-meta">
+              <span class="review-chip"><i class="bi bi-people-fill"></i> 48 Bewertungen</span>
+              <span class="review-chip"><i class="bi bi-heart-fill"></i> 95 % Empfehlung</span>
+            </div>
           </a>
-        </article>
-        <article class="review-panel review-network reveal">
-          <div class="review-source">
-            <span class="review-icon"><i class="bi bi-share-fill"></i></span>
-            <div>
-              <strong>Social Media &amp; direkte Einblicke</strong>
-              <small>Aktuell, verbunden und sauber verlinkt</small>
-            </div>
-          </div>
-          <p class="review-copy">
-            Hier sehen Sie Neuigkeiten, Einblicke ins Team, Aktionen und das, was BECKER im Alltag
-            ausmacht. Alle Links führen direkt zu den offiziellen Profilen.
-          </p>
-          <div class="social-proof-links">
-            <a href="https://www.instagram.com/beckerhoerakustik/" target="_blank" rel="noopener noreferrer" class="social-pill"><i class="bi bi-instagram"></i> Instagram</a>
-            <a href="https://www.facebook.com/beckerhoerakustik" target="_blank" rel="noopener noreferrer" class="social-pill"><i class="bi bi-facebook"></i> Facebook</a>
-            <a href="https://www.youtube.com/@beckerhorakustik7681" target="_blank" rel="noopener noreferrer" class="social-pill"><i class="bi bi-youtube"></i> YouTube</a>
-            <a href="https://www.linkedin.com/company/becker-hoerakustik/" target="_blank" rel="noopener noreferrer" class="social-pill"><i class="bi bi-linkedin"></i> LinkedIn</a>
-            <a href="https://www.google.com/search?q=BECKER+H%C3%B6rakustik+oHG+Koblenz" target="_blank" rel="noopener noreferrer" class="social-pill"><i class="bi bi-google"></i> Google</a>
-          </div>
-        </article>
-      </div>
+        </div>
+        <div class="review-actions">
+          <a href="https://www.google.com/search?q=BECKER+H%C3%B6rakustik+oHG+Koblenz" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Bewertung hinterlassen</a>
+          <a href="https://www.kununu.com/de/becker-hoerakustik7" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Zum Kununu-Profil</a>
+        </div>
+        <p class="review-footnote">
+          Sie möchten direkt Feedback geben? Mit „Bewertung hinterlassen“ springen Sie direkt zum öffentlichen Google-Profil.
+        </p>
+      </article>
     </div>
   </div>
 </section>
@@ -2753,6 +2812,48 @@
       if (lb && lb._open) lb._open(src, btn.closest('.testimonial').querySelector('.testimonial-img img').alt);
     });
   });
+
+  /* Explicit playback helpers for browsers that keep inline video muted until interaction */
+  (function () {
+    var video = document.getElementById('hwkVideo');
+    var status = document.querySelector('[data-video-status]');
+    if (!video) return;
+
+    function setStatus(message) {
+      if (status) status.textContent = message;
+    }
+
+    document.querySelectorAll('[data-video-unmute="hwkVideo"]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        video.muted = false;
+        video.volume = 1;
+        var playPromise = video.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+          playPromise.catch(function () {
+            setStatus('Bitte noch einmal direkt im Video auf Play tippen, falls Ihr Browser den Ton blockiert.');
+          });
+        }
+        setStatus('Ton aktiviert. Falls Sie noch nichts hören, bitte direkt im Videoplayer auf Play tippen.');
+      });
+    });
+
+    document.querySelectorAll('[data-video-play="hwkVideo"]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var playPromise = video.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+          playPromise.catch(function () {
+            setStatus('Bitte direkt im Video auf Play tippen, falls Ihr Browser den Start blockiert.');
+          });
+        }
+      });
+    });
+
+    video.addEventListener('volumechange', function () {
+      if (!video.muted && video.volume > 0) {
+        setStatus('Ton ist aktiv.');
+      }
+    });
+  })();
 </script>
 
 </body>
