@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
@@ -182,9 +182,19 @@
 
   .mobile-toggle {
     display: none;
+    align-items: center;
+    justify-content: center;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--pink-soft);
+    border: 1px solid var(--pink-mist);
     color: var(--magenta);
-    font-size: 28px;
+    font-size: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s;
   }
+  .mobile-toggle:hover { background: var(--pink-mist); }
 
   /* ============ HERO – editorial split layout ============ */
   .hero {
@@ -1910,40 +1920,46 @@
     .nav-links.mobile-open { padding: 14px; border-radius: 20px; }
     .logo img { height: 36px; }
 
-    /* Hero */
-    .hero { padding: 106px 0 56px; min-height: auto; }
-    .hero h1 { font-size: clamp(36px, 9vw, 52px); margin-bottom: 20px; }
-    .hero h1 .accent-line { font-size: clamp(20px, 5.6vw, 30px); margin-top: 14px; }
-    .hero p.lead {
-      font-size: 15px;
-      margin-bottom: 24px;
-      max-width: none;
-      line-height: 1.6;
-    }
-    .hero-cta { flex-direction: column; align-items: stretch; gap: 10px; margin-bottom: 32px; }
+    /* Hero – clean mobile layout */
+    .hero { padding: 88px 0 48px; min-height: auto; }
+    .hero-eyebrow { display: none; }
+    .hero h1 { font-size: clamp(36px, 9vw, 52px); margin-bottom: 24px; }
+    .hero h1 .accent-line { font-size: clamp(22px, 5.8vw, 32px); margin-top: 16px; }
+    .hero p.lead { display: none; }
+    .hero-cta { flex-direction: column; align-items: stretch; gap: 10px; margin-bottom: 24px; }
     .hero-cta .btn { width: 100%; justify-content: center; font-size: 15px; padding: 15px 20px; }
+    .hero-cta .btn-secondary { display: none; }
+    /* Trust items: compact 3-column pill row */
     .hero-trust {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .hero-trust .trust-item:first-child {
-      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: row;
+      gap: 0;
+      flex-wrap: nowrap;
+      background: rgba(255,255,255,0.80);
+      border: 1px solid rgba(166,28,115,0.12);
+      border-radius: 18px;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
     .trust-item {
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       min-width: 0;
-      width: 100%;
-      background: rgba(255,255,255,0.72);
-      border: 1px solid rgba(166,28,115,0.10);
-      border-radius: 16px;
-      padding: 12px 14px;
-      gap: 10px;
-      backdrop-filter: blur(6px);
+      padding: 14px 6px;
+      gap: 2px;
+      background: transparent;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
     }
-    .trust-item .trust-icon { width: 38px; height: 38px; font-size: 18px; border-radius: 10px; }
-    .trust-item .num { font-size: 18px; }
-    .trust-item .label { font-size: 12px; }
-    .hero-eyebrow { font-size: 11px; padding: 7px 14px; margin-bottom: 22px; }
+    .trust-item + .trust-item { border-left: 1px solid rgba(166,28,115,0.10); }
+    .trust-item .trust-icon { display: none; }
+    .trust-item .num { font-size: 16px; font-weight: 800; }
+    .trust-item .label { font-size: 10px; }
 
     /* Leistungen / Testimonials / Events */
     .leistungen-grid, .testimonials, .events-grid { grid-template-columns: 1fr; gap: 16px; }
@@ -2050,12 +2066,12 @@
       padding-right: max(16px, env(safe-area-inset-right, 0px));
     }
     section { padding: 54px 0; }
-    .hero { padding: 96px 0 48px; }
+    .hero { padding: 84px 0 44px; }
     .hero h1 { font-size: clamp(32px, 9.5vw, 46px); }
     .hero-cta .btn { padding: 15px 16px; font-size: 14px; }
-    .hero-trust { grid-template-columns: 1fr; gap: 8px; }
-    .hero-trust .trust-item:first-child { grid-column: auto; }
-    .trust-item { padding: 10px 12px; }
+    .trust-item { padding: 12px 4px; }
+    .trust-item .num { font-size: 15px; }
+    .trust-item .label { font-size: 10px; }
 
     .experten-stats { grid-template-columns: 1fr; gap: 10px; }
     .stat .num { font-size: 30px; }
@@ -2449,17 +2465,6 @@
             Beratung, präzises Handwerk und ein spürbares Verständnis dafür, wie wichtig
             gutes Hören für Teilhabe im Alltag ist.
           </p>
-          <div class="video-actions">
-            <button type="button" class="btn btn-primary" data-video-unmute="hwkVideo">
-              <i class="bi bi-volume-up-fill"></i>
-              Ton aktivieren
-            </button>
-            <button type="button" class="btn btn-secondary" data-video-play="hwkVideo">
-              <i class="bi bi-play-fill"></i>
-              Video starten
-            </button>
-          </div>
-          <p class="video-status" data-video-status>Falls Ihr Browser den Ton sperrt, tippen Sie kurz auf „Ton aktivieren“.</p>
         </div>
       </article>
       <article class="review-summary reveal">
@@ -2994,48 +2999,6 @@
       if (lb && lb._open) lb._open(src, btn.closest('.testimonial').querySelector('.testimonial-img img').alt);
     });
   });
-
-  /* Explicit playback helpers for browsers that keep inline video muted until interaction */
-  (function () {
-    var video = document.getElementById('hwkVideo');
-    var status = document.querySelector('[data-video-status]');
-    if (!video) return;
-
-    function setStatus(message) {
-      if (status) status.textContent = message;
-    }
-
-    document.querySelectorAll('[data-video-unmute="hwkVideo"]').forEach(function (button) {
-      button.addEventListener('click', function () {
-        video.muted = false;
-        video.volume = 1;
-        var playPromise = video.play();
-        if (playPromise && typeof playPromise.catch === 'function') {
-          playPromise.catch(function () {
-            setStatus('Bitte noch einmal direkt im Video auf Play tippen, falls Ihr Browser den Ton blockiert.');
-          });
-        }
-        setStatus('Ton aktiviert. Falls Sie noch nichts hören, bitte direkt im Videoplayer auf Play tippen.');
-      });
-    });
-
-    document.querySelectorAll('[data-video-play="hwkVideo"]').forEach(function (button) {
-      button.addEventListener('click', function () {
-        var playPromise = video.play();
-        if (playPromise && typeof playPromise.catch === 'function') {
-          playPromise.catch(function () {
-            setStatus('Bitte direkt im Video auf Play tippen, falls Ihr Browser den Start blockiert.');
-          });
-        }
-      });
-    });
-
-    video.addEventListener('volumechange', function () {
-      if (!video.muted && video.volume > 0) {
-        setStatus('Ton ist aktiv.');
-      }
-    });
-  })();
 </script>
 
 </body>
