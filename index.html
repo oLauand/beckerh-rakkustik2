@@ -540,14 +540,14 @@
     margin-right: auto;
   }
   .section-head.section-head-compact {
-    max-width: 680px;
+      max-width: 860px;
     margin-bottom: 38px;
   }
   .section-head.section-head-compact .section-title {
-    max-width: 520px;
+      max-width: 760px;
   }
   .section-head.section-head-compact .section-lead {
-    max-width: 580px;
+      max-width: 820px;
     margin-bottom: 0;
   }
 
@@ -963,8 +963,8 @@
   }
   .reputation-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
-    gap: 28px;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
+    gap: 32px;
     align-items: stretch;
   }
   .reputation-video-card,
@@ -1028,25 +1028,8 @@
     font-size: 16px;
     color: var(--text-soft);
     line-height: 1.65;
-    max-width: 58ch;
+    max-width: 64ch;
     margin: 0;
-  }
-  .video-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .video-actions .btn {
-    padding: 12px 20px;
-  }
-  .video-actions .btn i {
-    font-size: 16px;
-    line-height: 1;
-  }
-  .video-status {
-    font-size: 13px;
-    color: var(--text-mute);
-    font-weight: 700;
   }
   .review-summary {
     padding: 28px;
@@ -1920,46 +1903,40 @@
     .nav-links.mobile-open { padding: 14px; border-radius: 20px; }
     .logo img { height: 36px; }
 
-    /* Hero – clean mobile layout */
-    .hero { padding: 88px 0 48px; min-height: auto; }
-    .hero-eyebrow { display: none; }
-    .hero h1 { font-size: clamp(36px, 9vw, 52px); margin-bottom: 24px; }
-    .hero h1 .accent-line { font-size: clamp(22px, 5.8vw, 32px); margin-top: 16px; }
-    .hero p.lead { display: none; }
-    .hero-cta { flex-direction: column; align-items: stretch; gap: 10px; margin-bottom: 24px; }
+    /* Hero */
+    .hero { padding: 106px 0 56px; min-height: auto; }
+    .hero h1 { font-size: clamp(36px, 9vw, 52px); margin-bottom: 20px; }
+    .hero h1 .accent-line { font-size: clamp(20px, 5.6vw, 30px); margin-top: 14px; }
+    .hero p.lead {
+      font-size: 15px;
+      margin-bottom: 24px;
+      max-width: none;
+      line-height: 1.6;
+    }
+    .hero-cta { flex-direction: column; align-items: stretch; gap: 10px; margin-bottom: 32px; }
     .hero-cta .btn { width: 100%; justify-content: center; font-size: 15px; padding: 15px 20px; }
-    .hero-cta .btn-secondary { display: none; }
-    /* Trust items: compact 3-column pill row */
     .hero-trust {
-      display: flex;
-      flex-direction: row;
-      gap: 0;
-      flex-wrap: nowrap;
-      background: rgba(255,255,255,0.80);
-      border: 1px solid rgba(166,28,115,0.12);
-      border-radius: 18px;
-      overflow: hidden;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .hero-trust .trust-item:first-child {
+      grid-column: 1 / -1;
     }
     .trust-item {
-      flex: 1;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
       min-width: 0;
-      padding: 14px 6px;
-      gap: 2px;
-      background: transparent;
-      border-radius: 0;
-      border: none;
-      box-shadow: none;
+      width: 100%;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(166,28,115,0.10);
+      border-radius: 16px;
+      padding: 12px 14px;
+      gap: 10px;
+      backdrop-filter: blur(6px);
     }
-    .trust-item + .trust-item { border-left: 1px solid rgba(166,28,115,0.10); }
-    .trust-item .trust-icon { display: none; }
-    .trust-item .num { font-size: 16px; font-weight: 800; }
-    .trust-item .label { font-size: 10px; }
+    .trust-item .trust-icon { width: 38px; height: 38px; font-size: 18px; border-radius: 10px; }
+    .trust-item .num { font-size: 18px; }
+    .trust-item .label { font-size: 12px; }
+    .hero-eyebrow { font-size: 11px; padding: 7px 14px; margin-bottom: 22px; }
 
     /* Leistungen / Testimonials / Events */
     .leistungen-grid, .testimonials, .events-grid { grid-template-columns: 1fr; gap: 16px; }
@@ -1982,9 +1959,6 @@
     .video-caption { padding: 20px; gap: 14px; }
     .video-caption h3 { font-size: 22px; margin-bottom: 6px; }
     .video-caption p { font-size: 14px; }
-    .video-actions { flex-direction: column; gap: 10px; }
-    .video-actions .btn { width: 100%; justify-content: center; font-size: 15px; padding: 14px 18px; }
-    .video-status { font-size: 12px; }
     .review-summary { padding: 20px; gap: 16px; }
     .review-summary h3 { font-size: 22px; margin-bottom: 6px; }
     .review-score-line .num { font-size: 38px; }
@@ -2055,6 +2029,9 @@
     /* Section headers */
     .section-head { margin-bottom: 36px; }
     .section-head.section-head-compact { margin-bottom: 28px; }
+    .section-head.section-head-compact,
+    .section-head.section-head-compact .section-title,
+    .section-head.section-head-compact .section-lead { max-width: none; }
     .section-title { font-size: clamp(26px, 6.5vw, 36px); }
     .section-lead { font-size: 15px; margin-bottom: 36px; }
   }
@@ -2066,12 +2043,12 @@
       padding-right: max(16px, env(safe-area-inset-right, 0px));
     }
     section { padding: 54px 0; }
-    .hero { padding: 84px 0 44px; }
+    .hero { padding: 96px 0 48px; }
     .hero h1 { font-size: clamp(32px, 9.5vw, 46px); }
     .hero-cta .btn { padding: 15px 16px; font-size: 14px; }
-    .trust-item { padding: 12px 4px; }
-    .trust-item .num { font-size: 15px; }
-    .trust-item .label { font-size: 10px; }
+    .hero-trust { grid-template-columns: 1fr; gap: 8px; }
+    .hero-trust .trust-item:first-child { grid-column: auto; }
+    .trust-item { padding: 10px 12px; }
 
     .experten-stats { grid-template-columns: 1fr; gap: 10px; }
     .stat .num { font-size: 30px; }
@@ -2445,9 +2422,8 @@
       <span class="section-eyebrow">Empfehlungen &amp; Bewertungen</span>
       <h2 class="section-title">Stark empfohlen. <span class="brand-em">Sichtbar bewertet.</span></h2>
       <p class="section-lead">
-        Die Empfehlung der Handwerkskammer Koblenz, starke Google-Rezensionen und sehr gute
-        Kununu-Werte zeigen auf einen Blick, wofür BECKER steht: fachliche Qualität,
-        menschliche Beratung und ein Team, das gerne bleibt.
+        Hier finden Sie das Video der Handwerkskammer Koblenz sowie aktuelle Google-
+        und Kununu-Bewertungen auf einen Blick.
       </p>
     </div>
     <div class="reputation-grid">
@@ -2470,10 +2446,10 @@
       <article class="review-summary reveal">
         <div>
           <span class="review-badge"><i class="bi bi-stars"></i> Öffentliche Stimmen zu BECKER</span>
-          <h3>Empfohlen von Kundschaft und Team</h3>
+          <h3>Google und Kununu direkt ansehen</h3>
           <p class="review-summary-copy">
-            Google zeigt starke öffentliche Kundenzufriedenheit, Kununu ein überzeugendes Bild als Arbeitgeber.
-            Zusammen wirkt das deutlich runder als eine lose Kartenwand und bringt die wichtigsten Signale sofort auf den Punkt.
+            Hier gelangen Sie direkt zu den aktuellen Bewertungen und können sich selbst
+            ein Bild machen.
           </p>
         </div>
         <div class="review-score-grid">

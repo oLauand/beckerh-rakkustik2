@@ -54,6 +54,13 @@
 .inline-btn.primary { background:var(--magenta); color:#fff; }
 .inline-btn.soft { background:var(--pink-soft); color:var(--magenta); border:1px solid var(--pink-mist); }
 @media (max-width: 1080px) { .location-shell,.info-grid,.detail-grid,.team-grid,.support-grid,.fact-grid { grid-template-columns:1fr; } }
+@media (max-width: 720px) {
+  .location-hero { min-height: auto; }
+  .panel { padding: 22px; border-radius: 22px; }
+  .branch-art { aspect-ratio: 16/9; }
+  .action-row { flex-direction: column; }
+  .inline-btn { width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -65,14 +72,14 @@
     <nav class="breadcrumb" aria-label="Breadcrumb"><a href="../index.html">Home</a><span class="sep">&rsaquo;</span><a href="../fachgeschaefte.html">Fachgeschaefte</a><span class="sep">&rsaquo;</span><span class="current">Mainz</span></nav>
     <div class="location-shell">
       <div>
-        <div class="page-eyebrow"><span class="dot"></span>BECKER Hoerakustik Mainz</div>
-        <h1>Beratung mit kurzen Wegen im <span style="color:var(--magenta);font-family:'Fraunces',serif;font-style:italic;font-weight:500;">Hauptgeschaeft Mainz</span></h1>
-        <p class="lead">Im Mainzer HOER-HAUS treffen zentrale Lage, verlaessliche Oeffnungszeiten und ein klarer Ablauf fuer Erstberatung, Nachsorge und Service zusammen.</p>
+        <div class="page-eyebrow"><span class="dot"></span>Standort Mainz</div>
+        <h1>Alle Infos zum Standort <span style="color:var(--magenta);font-family:'Fraunces',serif;font-style:italic;font-weight:500;">Mainz</span></h1>
+        <p class="lead">Hier finden Sie Adresse, Kontakt, Oeffnungszeiten und die wichtigsten Hinweise fuer Ihren Besuch in Mainz kompakt auf einen Blick.</p>
       </div>
       <aside class="panel reveal">
-        <div class="branch-art" role="img" aria-label="Illustrierte Vorschau fuer den Standort Mainz"><small>Hauptgeschaeft Mainz</small><strong>Innenstadt und direkter Kontakt</strong></div>
+        <div class="branch-art" role="img" aria-label="Illustrierte Vorschau fuer den Standort Mainz"><small>Standort Mainz</small><strong>Kontakt und Termin auf einen Blick</strong></div>
         <span class="badge">Schnell im Blick</span>
-        <div class="fact-grid"><div class="fact"><strong>Schillerstrasse 14</strong><span>Mainz Innenstadt</span></div><div class="fact"><strong>06131 / 123 45 00</strong><span>Telefon</span></div><div class="fact"><strong>Mo-Sa</strong><span>planbare Zeiten</span></div></div>
+        <div class="fact-grid"><div class="fact"><strong>Schillerstrasse 14</strong><span>Mainz</span></div><div class="fact"><strong>06131 / 123 45 00</strong><span>Telefon</span></div><div class="fact"><strong>Mo-Sa</strong><span>Oeffnungszeiten vorab pruefen</span></div></div>
         <div class="action-row"><a class="inline-btn primary" href="../kontakt.html">Termin anfragen</a><a class="inline-btn soft" href="https://www.google.com/maps/search/?api=1&query=Schillerstrasse%2014%2C%2055116%20Mainz" target="_blank" rel="noopener noreferrer">Route planen</a></div>
       </aside>
     </div>
@@ -81,35 +88,35 @@
 
 <section class="content-section">
   <div class="container info-grid">
-    <article class="panel reveal"><span class="badge">Adresse &amp; Kontakt</span><h3>Schillerstrasse 14, 55116 Mainz</h3><p>Telefon: 06131 / 123 45 00<br>E-Mail: info@becker-hoerakustik.de</p><p>Das Hauptgeschaeft ist ein guter Ausgangspunkt fuer Beratung, Rueckfragen und Terminabstimmung in Mainz.</p></article>
+    <article class="panel reveal"><span class="badge">Adresse &amp; Kontakt</span><h3>Schillerstrasse 14, 55116 Mainz</h3><p>Telefon: 06131 / 123 45 00<br>E-Mail: info@becker-hoerakustik.de</p><p>Fuer Terminabstimmung, Rueckfragen und Service finden Sie hier die wichtigsten Kontaktdaten direkt gebuendelt.</p></article>
     <article class="panel reveal"><span class="badge">Oeffnungszeiten</span><ul class="hours-list"><li><span>Montag bis Freitag</span><span>09:00 - 18:00 Uhr</span></li><li><span>Samstag</span><span>09:00 - 14:00 Uhr</span></li><li><span>Sonntag</span><span>Geschlossen</span></li></ul></article>
-    <article class="panel reveal"><span class="badge">Fuer wen der Standort passt</span><p>Die Innenstadtlage ist besonders hilfreich, wenn Sie einen gut erreichbaren Terminort mit anschliessender Nachbetreuung suchen. Auch fuer kuerzere Service-Besuche bleibt der Weg uebersichtlich.</p></article>
+    <article class="panel reveal"><span class="badge">Vor dem Besuch</span><p>Wenn Sie vorhandene Hoergeraete, HNO-Unterlagen oder konkrete Fragen mitbringen, laesst sich der Termin in Mainz direkt auf Ihre Situation zuschneiden.</p></article>
   </div>
 </section>
 
 <section class="content-section bg-light">
   <div class="container detail-grid">
-    <article class="panel reveal"><span class="badge">Leistungen vor Ort</span><ul class="service-list"><li>Erstberatung zu Hoersystemen und Versorgung</li><li>Feinanpassung und Nachsorge im Alltag</li><li>Gehoerschutz und individuelle Beratung</li><li>Tinnitus-Beratung und alltagsnahe Erklaerungen</li><li>Direkte Abstimmung ueber Termine und Folgebesuche</li></ul></article>
-    <article class="panel reveal"><span class="badge">Vor dem Besuch</span><ul class="hint-list"><li>Notieren Sie, in welchen Situationen das Verstehen besonders schwerfaellt.</li><li>Bringen Sie vorhandene Hoergeraete oder HNO-Unterlagen gern mit.</li><li>Durch die Innenstadtlage lohnt es sich, fuer Anfahrt und Ankommen etwas Puffer einzuplanen.</li></ul></article>
+    <article class="panel reveal"><span class="badge">Leistungen vor Ort</span><ul class="service-list"><li>Hoertest und persoenliche Beratung</li><li>Anpassung und Feineinstellung von Hoersystemen</li><li>Nachsorge und Service im Alltag</li><li>Gehoerschutz und individuelle Beratung</li><li>Tinnitus-Beratung</li></ul></article>
+    <article class="panel reveal"><span class="badge">Vor dem Termin</span><ul class="hint-list"><li>Notieren Sie, in welchen Situationen das Verstehen schwerfaellt.</li><li>Bringen Sie vorhandene Hoergeraete oder HNO-Unterlagen gern mit.</li><li>Planen Sie fuer Anfahrt und Ankommen in Mainz etwas Puffer ein.</li></ul></article>
   </div>
 </section>
 
 <section class="content-section">
   <div class="container">
-    <span class="section-eyebrow">Team vor Ort</span>
-    <h2 class="section-title">Ansprechpartner in <span style="color:var(--magenta);">Mainz</span></h2>
+    <span class="section-eyebrow">Mainz im Ueberblick</span>
+    <h2 class="section-title">Wichtige Infos fuer Ihren Besuch in <span style="color:var(--magenta);">Mainz</span></h2>
     <div class="team-grid">
-      <article class="panel team-card reveal"><div class="team-portrait"><span>BECKER Team</span></div><span class="team-role">Beratung</span><h3>Sophie Wagner</h3><p>Fuehrt Interessenten in die Versorgung ein und sorgt fuer einen ruhigen, strukturierten Start in den Termin.</p></article>
-      <article class="panel team-card reveal"><div class="team-portrait tone-soft"><span>BECKER Team</span></div><span class="team-role">Anpassung</span><h3>Daniel Hofmann</h3><p>Verbindet technische Praezision mit alltagsnaher Feineinstellung und erklaert komplexe Schritte verstaendlich.</p></article>
-      <article class="panel team-card reveal"><div class="team-portrait tone-light"><span>BECKER Team</span></div><span class="team-role">Service</span><h3>Elena Richter</h3><p>Haelt Rueckfragen, Nachbetreuung und Terminorganisation zusammen, damit der Standort auch nach dem ersten Besuch klar und verlaesslich bleibt.</p></article>
+      <article class="panel team-card reveal"><div class="team-portrait"><span>Standort Mainz</span></div><span class="team-role">Beratung</span><h3>Hoertest und erste Einordnung</h3><p>Im Termin werden Ihre Hoersituationen besprochen und die naechsten Schritte rund um Hoertest und Versorgung verstaendlich erklaert.</p></article>
+      <article class="panel team-card reveal"><div class="team-portrait tone-soft"><span>Standort Mainz</span></div><span class="team-role">Anpassung</span><h3>Feineinstellung und Nachsorge</h3><p>Nach der Auswahl der passenden Loesung geht es um alltagsnahe Feineinstellung, Nachkontrolle und Anpassung im weiteren Verlauf.</p></article>
+      <article class="panel team-card reveal"><div class="team-portrait tone-light"><span>Standort Mainz</span></div><span class="team-role">Service</span><h3>Kurze Wege fuer Rueckfragen</h3><p>Fuer Reinigung, kleine Nachjustierungen und organisatorische Rueckfragen sind die wichtigsten Kontaktwege auf dieser Seite direkt gebuendelt.</p></article>
     </div>
   </div>
 </section>
 
 <section class="content-section bg-light">
   <div class="container support-grid">
-    <article class="panel reveal"><span class="badge">Mainz im Alltag</span><p>Wer einen zentralen Standort fuer wiederkehrende Termine sucht, ist hier gut aufgehoben. Das Hauptgeschaeft eignet sich fuer Erstgespraech, Folgeanpassung und alle Fragen, die nach der Versorgung auftreten.</p></article>
-    <article class="panel reveal"><span class="badge">Weitere Standorte</span><p>Wenn Sie eine ruhigere Lage bevorzugen oder naeher an Andernach oder Neuwied wohnen, finden Sie dort eigene Standortseiten mit denselben klaren Informationen.</p><div class="action-row"><a class="inline-btn soft" href="andernach.html">Andernach ansehen</a><a class="inline-btn soft" href="neuwied.html">Neuwied ansehen</a><a class="inline-btn soft" href="../fachgeschaefte.html">Alle Fachgeschaefte</a></div></article>
+    <article class="panel reveal"><span class="badge">Fuer den Termin</span><p>Wenn Sie Ihre bisherigen Hoersituationen, vorhandene Unterlagen oder konkrete Fragen notieren, laesst sich der Termin in Mainz gezielt vorbereiten.</p></article>
+    <article class="panel reveal"><span class="badge">Weitere Standorte</span><p>Weitere Standortseiten mit Adresse, Oeffnungszeiten und Kontakt finden Sie hier direkt verlinkt.</p><div class="action-row"><a class="inline-btn soft" href="andernach.html">Andernach ansehen</a><a class="inline-btn soft" href="neuwied.html">Neuwied ansehen</a><a class="inline-btn soft" href="../fachgeschaefte.html">Alle Fachgeschaefte</a></div></article>
   </div>
 </section>
 

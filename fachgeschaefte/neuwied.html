@@ -45,11 +45,21 @@
 .service-list,.hint-list { list-style:none; display:grid; gap:10px; }
 .service-list li,.hint-list li { display:flex; gap:10px; color:var(--text-soft); }
 .service-list li::before,.hint-list li::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--magenta); margin-top:9px; flex-shrink:0; }
+.hours-list { list-style:none; display:grid; gap:10px; }
+.hours-list li { display:flex; justify-content:space-between; gap:12px; padding-bottom:10px; border-bottom:1px solid var(--border); color:var(--text-soft); font-weight:600; }
+.hours-list li:last-child { border-bottom:none; padding-bottom:0; }
 .action-row { display:flex; gap:12px; flex-wrap:wrap; margin-top:20px; }
 .inline-btn { display:inline-flex; align-items:center; justify-content:center; padding:12px 18px; border-radius:999px; font-weight:800; font-size:.84rem; }
 .inline-btn.primary { background:var(--magenta); color:#fff; }
 .inline-btn.soft { background:var(--pink-soft); color:var(--magenta); border:1px solid var(--pink-mist); }
 @media (max-width: 1080px) { .location-shell,.info-grid,.detail-grid,.team-grid,.support-grid,.fact-grid { grid-template-columns:1fr; } }
+@media (max-width: 720px) {
+  .location-hero { min-height: auto; }
+  .panel { padding: 22px; border-radius: 22px; }
+  .branch-art { aspect-ratio: 16/9; }
+  .action-row { flex-direction: column; }
+  .inline-btn { width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -63,12 +73,12 @@
       <div>
         <div class="page-eyebrow"><span class="dot"></span>BECKER Hoerakustik Neuwied</div>
         <h1>Kinderhoerzentrum und Hoerakustik in <span style="color:var(--magenta);font-family:'Fraunces',serif;font-style:italic;font-weight:500;">Neuwied</span></h1>
-        <p class="lead">In Neuwied steht die langfristige Begleitung im Vordergrund: fuer Familien, Kinder und alle, die bei Versorgung und Nachsorge einen besonders klaren, ruhigen Ablauf suchen.</p>
+        <p class="lead">In der Langendorfer Strasse 105 finden Sie das BECKER Kinderhoerzentrum in Neuwied. Vor Ort begleitet das Team Kinder, Familien und Erwachsene bei Hoersystemen, Nachanpassung und Service.</p>
       </div>
       <aside class="panel reveal">
         <div class="branch-art" role="img" aria-label="Illustrierte Vorschau fuer den Standort Neuwied"><small>Kinderhoerzentrum Neuwied</small><strong>Familiennah und gut planbar</strong></div>
         <span class="badge">Schnell im Blick</span>
-        <div class="fact-grid"><div class="fact"><strong>Langendorfer Str. 105</strong><span>Neuwied</span></div><div class="fact"><strong>02631 31800</strong><span>Telefon</span></div><div class="fact"><strong>Kinderhoerzentrum</strong><span>Schwerpunkt</span></div></div>
+        <div class="fact-grid"><div class="fact"><strong>Langendorfer Str. 105</strong><span>Neuwied</span></div><div class="fact"><strong>02631 31800</strong><span>Telefon</span></div><div class="fact"><strong>Sa 09:00-13:00</strong><span>zusaetzlich geoeffnet</span></div></div>
         <div class="action-row"><a class="inline-btn primary" href="../kontakt.html">Termin anfragen</a><a class="inline-btn soft" href="https://www.google.com/maps/search/?api=1&query=Langendorfer%20Strasse%20105%2C%2056564%20Neuwied" target="_blank" rel="noopener noreferrer">Route planen</a></div>
       </aside>
     </div>
@@ -77,26 +87,26 @@
 
 <section class="content-section">
   <div class="container info-grid">
-    <article class="panel reveal"><span class="badge">Adresse &amp; Kontakt</span><h3>Langendorfer Strasse 105, 56564 Neuwied</h3><p>Telefon: 02631 31800<br>Fax: 02631 353528</p><p>Der Standort eignet sich fuer wiederkehrende Termine, Nachsorge und alle Fragen, die waehrend einer laengerfristigen Betreuung auftauchen.</p></article>
-    <article class="panel reveal"><span class="badge">Kinderhoerzentrum</span><p>Neuwied begleitet Familien strukturiert durch Beratung, Anpassung und Nachkontrollen. Das macht den Standort besonders hilfreich, wenn mehrere Termine ueber einen laengeren Zeitraum geplant werden muessen.</p></article>
-    <article class="panel reveal"><span class="badge">Besuch ohne Umwege</span><p>Die Seite konzentriert sich auf das Wesentliche: Kontakt, Route, Ansprechpartner und eine verstaendliche Einordnung, wofuer der Standort gut passt.</p></article>
+    <article class="panel reveal"><span class="badge">Adresse &amp; Kontakt</span><h3>Langendorfer Strasse 105, 56564 Neuwied</h3><p>Telefon: 02631 31800<br>Fax: 02631 353528<br>E-Mail: neuwied@beckerhoerakustik.de</p><p>Fuer Terminabstimmung, Rueckfragen und Service erreichen Sie das Fachgeschaeft direkt.</p></article>
+    <article class="panel reveal"><span class="badge">Oeffnungszeiten</span><ul class="hours-list"><li><span>Montag bis Freitag</span><span>08:00 - 17:00 Uhr</span></li><li><span>Samstag</span><span>09:00 - 13:00 Uhr</span></li></ul></article>
+    <article class="panel reveal"><span class="badge">Parken &amp; Eingang</span><p>Parkplaetze finden Sie in der Luisenstrasse sowie gegenueber des Haupteingangs im oeffentlichen Parkhaus. Vom Parkplatz Luisenstrasse gelangen Sie barrierefrei ueber den ZUSATZEINGANG zur Filiale.</p></article>
   </div>
 </section>
 
 <section class="content-section bg-light">
   <div class="container detail-grid">
-    <article class="panel reveal"><span class="badge">Leistungen vor Ort</span><ul class="service-list"><li>Begleitung von Familien und Kindern mit Hoerverlust</li><li>Beratung fuer Erwachsene und langfristige Nachsorge</li><li>Anpassung und Feineinstellung von Hoersystemen</li><li>Alltagsnahe Erklaerungen fuer Eltern und Bezugspersonen</li><li>Ruhige Begleitung bei regelmaessigen Kontrollterminen</li></ul></article>
-    <article class="panel reveal"><span class="badge">Hilfreich fuer Familien</span><ul class="hint-list"><li>Bringen Sie vorhandene Unterlagen, Hoergeraete oder Fragen gesammelt mit.</li><li>Planen Sie bei Kindern lieber etwas mehr Zeit fuer Ankommen und Eingewoehnung ein.</li><li>Notieren Sie Beobachtungen aus Kita, Schule oder Alltag, damit das Team konkrete Situationen einordnen kann.</li></ul></article>
+    <article class="panel reveal"><span class="badge">Leistungen vor Ort</span><ul class="service-list"><li>Programmierung und Anpassung von Hoersystemen</li><li>Hoersysteme fuehrender Hersteller</li><li>Hoerimplantat-Spezialisten</li><li>Tinnitus-Beratung</li><li>Kinderhoerzentrum und Paedakustik</li><li>Nachanpassung in den Hoerstudios</li><li>Hoertraining und Audiotherapie</li><li>Umfassender Service</li></ul></article>
+    <article class="panel reveal"><span class="badge">Kinderhoerzentrum</span><p>Das Fachgeschaeft in Neuwied ist ein Kinderhoerzentrum. Hier begleitet Hoerakustikmeister, CI-Akustiker und Paedakustiker Stefan Saul Kinder und Familien bei dieser verantwortungsvollen Aufgabe.</p></article>
   </div>
 </section>
 
 <section class="content-section">
   <div class="container">
-    <span class="section-eyebrow">Team vor Ort</span>
-    <h2 class="section-title">Begleitung mit Ruhe und Struktur in <span style="color:var(--magenta);">Neuwied</span></h2>
+    <span class="section-eyebrow">BECKER-Team Neuwied</span>
+    <h2 class="section-title">Fachlich stark und familiennah in <span style="color:var(--magenta);">Neuwied</span></h2>
     <div class="team-grid">
-      <article class="panel team-card reveal"><div class="team-portrait"><span>BECKER Team</span></div><span class="team-role">Kinderhoerzentrum</span><h3>Laura Weiss</h3><p>Begleitet Familien strukturiert durch Anpassung, Eingewoehnung und Nachkontrollen und erklaert auch laengere Schritte verstaendlich.</p></article>
-      <article class="panel team-card reveal"><div class="team-portrait tone-soft"><span>BECKER Team</span></div><span class="team-role">Akustik &amp; Service</span><h3>Marcel Jung</h3><p>Verbindet technische Anpassung mit klaren Erklaerungen und sorgt dafuer, dass auch spaetere Service-Termine nachvollziehbar bleiben.</p></article>
+      <article class="panel team-card reveal"><div class="team-portrait"><span>BECKER Team</span></div><span class="team-role">Vor Ort</span><h3>Stefan Saul und Team</h3><p>Seit ueber 35 Jahren begleitet Hoerakustikmeister, Paedakustiker und CI-Akustiker Stefan Saul gemeinsam mit zwei weiteren Hoerakustikmeisterinnen Kundinnen und Kunden in Neuwied.</p></article>
+      <article class="panel team-card reveal"><div class="team-portrait tone-soft"><span>BECKER Team</span></div><span class="team-role">Kinderhoerzentrum</span><h3>Begleitung fuer Familien und Kinder</h3><p>Das Kinderhoerzentrum in Neuwied verbindet Beratung, Anpassung und regelmaessige Nachkontrollen in einem strukturierten Ablauf fuer Familien.</p></article>
     </div>
   </div>
 </section>
@@ -104,7 +114,7 @@
 <section class="content-section bg-light">
   <div class="container support-grid">
     <article class="panel reveal"><span class="badge">Fuer den ersten Besuch</span><p>Wenn Sie mit Kind oder als Familie kommen, hilft eine kurze Vorbereitung enorm: bisherige Unterlagen, Fragen aus Alltag oder Schule und eventuelle Beobachtungen zum Hoeren bringen schnell Struktur ins Gespraech.</p></article>
-    <article class="panel reveal"><span class="badge">Weitere Standorte</span><p>Andernach und Mainz zeigen denselben klaren Aufbau mit anderen Schwerpunkten. So koennen Sie je nach Weg, Stadt oder Betreuungssituation leichter entscheiden.</p><div class="action-row"><a class="inline-btn soft" href="andernach.html">Andernach ansehen</a><a class="inline-btn soft" href="mainz.html">Mainz ansehen</a><a class="inline-btn soft" href="../fachgeschaefte.html">Alle Fachgeschaefte</a></div></article>
+    <article class="panel reveal"><span class="badge">Weitere Standorte</span><p>Weitere Standortseiten mit Adresse, Oeffnungszeiten und Kontakt finden Sie hier direkt verlinkt.</p><div class="action-row"><a class="inline-btn soft" href="andernach.html">Andernach ansehen</a><a class="inline-btn soft" href="mainz.html">Mainz ansehen</a><a class="inline-btn soft" href="../fachgeschaefte.html">Alle Fachgeschaefte</a></div></article>
   </div>
 </section>
 
