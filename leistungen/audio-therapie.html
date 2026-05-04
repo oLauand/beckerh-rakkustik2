@@ -113,6 +113,67 @@
   color:var(--magenta);
   font-weight:700;
 }
+.network-figure {
+  margin:0;
+  padding:18px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(252,243,248,0.98));
+  border:1px solid var(--pink-mist);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-lg);
+}
+.network-figure img {
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit:contain;
+  background:#fff;
+  border-radius:calc(var(--radius-lg) - 8px);
+}
+.network-figure figcaption {
+  display:grid;
+  gap:10px;
+  margin-top:14px;
+}
+.network-caption-title {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  color:var(--magenta);
+}
+.network-caption-title::before {
+  content:'';
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:linear-gradient(135deg, var(--magenta), var(--magenta-light));
+  flex-shrink:0;
+}
+.network-caption-copy {
+  margin:0;
+  color:var(--text-soft);
+  font-size:15px;
+  line-height:1.7;
+}
+.network-meta {
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.network-meta span {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 12px;
+  border-radius:999px;
+  background:rgba(166,28,115,0.08);
+  color:var(--magenta);
+  font-size:13px;
+  font-weight:700;
+}
 @media (max-width: 900px) {
   .expert-grid, .topic-grid { grid-template-columns:1fr; }
   .two-column-copy { columns:1; }
@@ -203,9 +264,17 @@
           <p>Durch Informationsvermittlung über sozialrechtliche Bestimmungen unterstützt die Audiotherapie hörgeschädigte Menschen dabei, ihre Rechte kennenzulernen und in Anspruch zu nehmen. Ein aktiver Umgang mit der Hörstörung kann zu mehr Lebensqualität führen, Folgekosten minimieren und beim Erwerb aktiver Bewältigungsstrategien helfen.</p>
         </div>
       </div>
-      <div class="info-img" style="aspect-ratio:4/3;">
+      <figure class="network-figure">
         <img src="../images/leistungen/audiotherapie/netzwerkaudiotherapie.jpg" alt="Netzwerk Audiotherapie BECKER Hörakustik" loading="lazy">
-      </div>
+        <figcaption>
+          <div class="network-caption-title">Audiotherapie im Zusammenspiel</div>
+          <p class="network-caption-copy">Das Netzwerkbild zeigt die Bereiche, die in der Audiotherapie zusammenwirken: Hörakustik, Medizin, Audiologie, Psychologie, Soziologie, Pädagogik und Selbsthilfe.</p>
+          <div class="network-meta">
+            <span>Ganzes Diagramm sichtbar</span>
+            <span>Mehr Orientierung auf einen Blick</span>
+          </div>
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
