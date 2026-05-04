@@ -478,62 +478,75 @@
   }
   @media (max-width: 600px) {
     .hero {
-      min-height: 100vh;
-      min-height: 100dvh;
-      padding: 72px 0 16px;
-      align-items: center;
+      min-height: 100svh;
+      padding: 68px 0 12px;
+      align-items: flex-start;
+    }
+    .hero-grid {
+      padding-top: 16px;
+      padding-bottom: 12px;
     }
     .hero-media {
-      opacity: 0.42;
-      background-position: center 22%;
+      opacity: 0.38;
+      background-position: center 20%;
       background-size: cover;
     }
     .hero-eyebrow {
-      font-size: 11px;
-      padding: 6px 13px;
-      margin-bottom: 16px;
+      font-size: 10px;
+      padding: 5px 12px;
+      margin-bottom: 12px;
     }
     .hero h1 {
-      font-size: clamp(28px, 8vw, 42px);
-      margin-bottom: 12px;
+      font-size: clamp(26px, 7.5vw, 38px);
+      margin-bottom: 8px;
       line-height: 1.05;
     }
     .hero h1 .accent-line {
-      font-size: clamp(16px, 4.6vw, 24px);
-      margin-top: 8px;
+      font-size: clamp(15px, 4.2vw, 22px);
+      margin-top: 6px;
     }
     .hero p.lead {
-      font-size: 13.5px;
-      line-height: 1.5;
-      margin-bottom: 16px;
+      font-size: 13px;
+      line-height: 1.45;
+      margin-bottom: 14px;
     }
     .hero-cta {
-      flex-direction: column;
+      flex-direction: row;
+      flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
     .hero-cta .btn {
-      font-size: 13px;
-      padding: 10px 16px;
+      font-size: 12.5px;
+      padding: 9px 14px;
+      flex: 1 1 auto;
       text-align: center;
       justify-content: center;
+      min-width: 0;
     }
     .hero-trust {
-      gap: 10px 18px;
-      flex-wrap: wrap;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: 6px;
+      justify-content: space-between;
     }
     .trust-item {
-      min-width: unset;
-      gap: 8px;
+      flex: 1 1 0;
+      min-width: 0;
+      gap: 6px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
     .trust-item .trust-icon {
-      width: 36px;
-      height: 36px;
-      font-size: 16px;
-      border-radius: 10px;
+      width: 34px;
+      height: 34px;
+      font-size: 15px;
+      border-radius: 9px;
     }
-    .trust-item .num { font-size: 16px; }
-    .trust-item .label { font-size: 11px; }
+    .trust-item .num { font-size: 14px; }
+    .trust-item .label { font-size: 10px; }
   }
 
   /* ============ ANIMATIONS ============ */
