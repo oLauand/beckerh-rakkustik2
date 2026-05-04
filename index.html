@@ -295,12 +295,15 @@
     letter-spacing: -0.025em;
   }
   .hero h1 .accent {
-    color: var(--magenta-light);
+    color: var(--text);
     font-family: 'Fraunces', Georgia, serif;
     font-style: italic;
     font-weight: 500;
     position: relative;
     display: inline-block;
+  }
+  .hero h1 .accent-focus {
+    color: var(--magenta-light);
   }
   .hero h1 .accent::after {
     content: '';
@@ -343,6 +346,15 @@
     max-width: 540px;
     animation: fadeUp 0.9s 0.18s cubic-bezier(.2,.7,.3,1) both;
     line-height: 1.65;
+  }
+  .hero p.lead .lead-highlight {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: var(--text);
+    font-weight: 800;
+  }
+  .hero p.lead .lead-count {
+    color: var(--magenta);
   }
   .hero-cta {
     display: flex;
@@ -516,6 +528,17 @@
   .section-head.center .section-lead {
     margin-left: auto;
     margin-right: auto;
+  }
+  .section-head.section-head-compact {
+    max-width: 680px;
+    margin-bottom: 38px;
+  }
+  .section-head.section-head-compact .section-title {
+    max-width: 520px;
+  }
+  .section-head.section-head-compact .section-lead {
+    max-width: 580px;
+    margin-bottom: 0;
   }
 
   /* ============ LEISTUNGEN ============ */
@@ -1764,15 +1787,19 @@
   .nav-search-btn:hover { background: var(--pink-mist); }
 
   /* ============ RESPONSIVE ============ */
+
+  /* --- Tablet: ≤ 1024px --- */
   @media (max-width: 1024px) {
     .hero-grid, .experten-grid, .app-grid, .cta-grid, .reputation-grid {
       grid-template-columns: 1fr;
-      gap: 50px;
+      gap: 44px;
     }
     .leistungen-grid, .testimonials, .events-grid {
       grid-template-columns: repeat(2, 1fr);
     }
     .footer-top { grid-template-columns: 1fr 1fr; }
+
+    /* Nav */
     .nav {
       padding: calc(14px + env(safe-area-inset-top, 0px)) 0 14px;
     }
@@ -1797,25 +1824,30 @@
     .nav-links.mobile-open {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 4px;
       padding: 18px;
-      max-height: calc(100vh - 110px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+      max-height: calc(100dvh - 110px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
       overflow: auto;
       overscroll-behavior: contain;
       -webkit-overflow-scrolling: touch;
       border-radius: 24px;
       background: rgba(255,255,255,0.98);
       border: 1px solid rgba(166,28,115,0.08);
-      box-shadow: 0 24px 44px rgba(16, 12, 15, 0.12);
+      box-shadow: 0 24px 44px rgba(16,12,15,0.12);
     }
-    .nav-links.mobile-open .nav-item {
-      width: 100%;
-    }
+    .nav-links.mobile-open .nav-item { width: 100%; }
     .nav-links.mobile-open .nav-item > a {
       display: flex;
       justify-content: space-between;
       width: 100%;
-      padding: 12px 4px;
+      padding: 13px 6px;
+      font-size: 16px;
+      border-radius: 10px;
+    }
+    .nav-links.mobile-open .nav-item > a:hover,
+    .nav-links.mobile-open .nav-item.is-open > a {
+      background: var(--pink-soft);
+      color: var(--magenta);
     }
     .nav-links.mobile-open .nav-item > .dropdown-menu {
       position: static;
@@ -1824,15 +1856,13 @@
       pointer-events: auto;
       transform: none;
       min-width: 0;
-      margin-top: 6px;
+      margin-top: 4px;
       padding: 8px;
       box-shadow: none;
       border-radius: 16px;
       border-color: rgba(166,28,115,0.12);
     }
-    .nav-links.mobile-open .nav-item > .dropdown-menu::before {
-      display: none;
-    }
+    .nav-links.mobile-open .nav-item > .dropdown-menu::before { display: none; }
     .nav-links.mobile-open .nav-item.is-open > .dropdown-menu {
       display: block;
       transform: none;
@@ -1840,72 +1870,224 @@
     .nav-links.mobile-open .dropdown-menu li a {
       white-space: normal;
       line-height: 1.4;
+      padding: 10px 14px;
     }
-    .nav-actions {
-      margin-left: auto;
-      gap: 10px;
-    }
+    .nav-actions { margin-left: auto; gap: 10px; }
     .mobile-toggle { display: inline-flex; }
     .feature-card.fc-1, .feature-card.fc-2, .feature-card.fc-3 {
       margin-left: 0; margin-right: 0;
     }
+
+    /* CTA card on tablet */
+    .cta-card { padding: 60px 48px; }
+    .cta-grid { gap: 36px; }
+
+    /* App section */
+    .app-grid { gap: 48px; }
+    .phone-frame { width: 280px; height: 560px; transform: rotate(0) translateX(50%); }
+    .app-mockup { justify-content: flex-start; padding-left: 5%; }
   }
+
+  /* --- Phone: ≤ 720px --- */
   @media (max-width: 720px) {
-    .container { padding: 0 max(20px, env(safe-area-inset-left, 0px)) 0 max(20px, env(safe-area-inset-right, 0px)); }
-    section { padding: 70px 0; }
-    .leistungen-grid, .testimonials, .events-grid { grid-template-columns: 1fr; }
-    .experten-stats { grid-template-columns: 1fr; gap: 16px; }
-    .cta-card { padding: 50px 30px; }
-    .footer-top { grid-template-columns: 1fr; gap: 36px; }
-    .hero { padding: 110px 0 60px; min-height: auto; }
-    .phone-frame { width: 260px; height: 520px; transform: rotate(0); }
-    .hero-cta { flex-direction: column; align-items: stretch; }
-    .hero-cta .btn { justify-content: center; }
-    .hero-trust { gap: 16px; }
-    .trust-item { width: 100%; }
-    .hero p.lead {
-      font-size: 16px;
-      margin-bottom: 28px;
-      max-width: none;
+    /* Base */
+    .container {
+      padding-left:  max(18px, env(safe-area-inset-left,  0px));
+      padding-right: max(18px, env(safe-area-inset-right, 0px));
     }
-    .reputation-video-card, .review-summary { border-radius: 24px; }
-    .review-score-line .num { font-size: 40px; }
-    .video-caption { padding: 24px; }
-    .video-actions, .review-actions { flex-direction: column; }
-    .video-actions .btn, .review-actions .btn { width: 100%; justify-content: center; }
+    section { padding: 64px 0; }
+
+    /* Nav */
     .nav {
       padding: calc(12px + env(safe-area-inset-top, 0px)) 0 12px;
     }
-    .nav-actions {
-      gap: 8px;
+    .nav.scrolled {
+      padding: calc(9px + env(safe-area-inset-top, 0px)) 0 9px;
     }
-    .nav-actions .btn-primary {
-      display: none;
+    .nav-actions { gap: 6px; }
+    .nav-actions .btn-primary { display: none; }
+    .nav-search-btn, .mobile-toggle { width: 44px; height: 44px; }
+    .nav-links.mobile-open { padding: 14px; border-radius: 20px; }
+    .logo img { height: 36px; }
+
+    /* Hero */
+    .hero { padding: 106px 0 56px; min-height: auto; }
+    .hero h1 { font-size: clamp(36px, 9vw, 52px); margin-bottom: 20px; }
+    .hero h1 .accent-line { font-size: clamp(20px, 5.6vw, 30px); margin-top: 14px; }
+    .hero p.lead {
+      font-size: 15px;
+      margin-bottom: 24px;
+      max-width: none;
+      line-height: 1.6;
     }
-    .nav-search-btn, .mobile-toggle {
-      width: 44px;
-      height: 44px;
+    .hero-cta { flex-direction: column; align-items: stretch; gap: 10px; margin-bottom: 32px; }
+    .hero-cta .btn { width: 100%; justify-content: center; font-size: 15px; padding: 15px 20px; }
+    .hero-trust {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
-    .nav-links.mobile-open {
-      padding: 16px;
-      border-radius: 20px;
+    .hero-trust .trust-item:first-child {
+      grid-column: 1 / -1;
     }
-    .footer-bottom, .footer-bottom-links {
+    .trust-item {
+      min-width: 0;
       width: 100%;
-      justify-content: center;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(166,28,115,0.10);
+      border-radius: 16px;
+      padding: 12px 14px;
+      gap: 10px;
+      backdrop-filter: blur(6px);
     }
-  }
-  @media (max-width: 420px) {
-    .btn {
-      width: 100%;
-      justify-content: center;
-      white-space: normal;
-      padding: 13px 18px;
+    .trust-item .trust-icon { width: 38px; height: 38px; font-size: 18px; border-radius: 10px; }
+    .trust-item .num { font-size: 18px; }
+    .trust-item .label { font-size: 12px; }
+    .hero-eyebrow { font-size: 11px; padding: 7px 14px; margin-bottom: 22px; }
+
+    /* Leistungen / Testimonials / Events */
+    .leistungen-grid, .testimonials, .events-grid { grid-template-columns: 1fr; gap: 16px; }
+    .service-card { padding: 28px 22px; }
+    .testimonial-body { padding: 22px; }
+    .testimonial-body p { font-size: 17px; }
+    .event-img { height: 180px; }
+    .event-body { padding: 20px; }
+
+    /* Experten */
+    .experten { padding: 72px 0; }
+    .experten-img { aspect-ratio: 3/2; border-radius: var(--radius-md); }
+    .experten-stats { grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; padding-top: 24px; }
+    .stat .num { font-size: 32px; }
+    .stat .label { font-size: 12px; }
+
+    /* Reputation / Video */
+    .reputation-video-card, .review-summary { border-radius: 20px; }
+    .video-frame { aspect-ratio: 16/9; }
+    .video-caption { padding: 20px; gap: 14px; }
+    .video-caption h3 { font-size: 22px; margin-bottom: 6px; }
+    .video-caption p { font-size: 14px; }
+    .video-actions { flex-direction: column; gap: 10px; }
+    .video-actions .btn { width: 100%; justify-content: center; font-size: 15px; padding: 14px 18px; }
+    .video-status { font-size: 12px; }
+    .review-summary { padding: 20px; gap: 16px; }
+    .review-summary h3 { font-size: 22px; margin-bottom: 6px; }
+    .review-score-line .num { font-size: 38px; }
+    .review-scorecard { padding: 16px; border-radius: 18px; }
+    .review-source { gap: 10px; margin-bottom: 10px; }
+    .review-icon { width: 40px; height: 40px; font-size: 18px; border-radius: 10px; }
+    .review-source strong { font-size: 15px; }
+    .review-actions { flex-direction: column; gap: 10px; }
+    .review-actions .btn { width: 100%; justify-content: center; font-size: 15px; padding: 14px 18px; }
+    .review-chip { font-size: 12px; padding: 6px 10px; }
+    .review-badge { font-size: 11px; padding: 7px 12px; margin-bottom: 12px; }
+
+    /* App section */
+    .app-section { margin-top: 0; }
+    .app-grid { gap: 32px; }
+    .app-mockup { display: none; }
+    .app-features li { font-size: 15px; padding: 12px 0; }
+
+    /* Partner */
+    .partner { padding: 60px 0; }
+    .partner-track { gap: 44px; }
+    .partner-track img { height: 38px; }
+
+    /* CTA */
+    .cta-section { padding: 64px 0; }
+    .cta-card { padding: 40px 24px 36px; border-radius: var(--radius-lg); }
+    .cta-grid { gap: 28px; }
+    .cta-grid h2 { font-size: clamp(26px, 6.5vw, 36px); margin-bottom: 14px; }
+    .cta-grid p { font-size: 15px; margin-bottom: 24px; }
+    .cta-buttons { flex-direction: column; gap: 10px; }
+    .cta-buttons .btn { width: 100%; justify-content: center; }
+    .cta-calendar { display: none; }
+
+    /* Footer */
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    footer { padding: 60px 0 max(24px, env(safe-area-inset-bottom, 24px)); }
+    .footer-brand p { font-size: 18px; margin: 18px 0; }
+    .footer-col h4 { margin-bottom: 14px; }
+    .footer-bottom {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 14px;
+      padding-top: 22px;
     }
     .footer-bottom-links {
-      gap: 12px;
+      width: 100%;
+      justify-content: center;
       flex-wrap: wrap;
+      gap: 14px;
     }
+    .footer-social { justify-content: center; }
+
+    /* Cookie banner */
+    .cookie-banner {
+      flex-direction: column;
+      padding: 18px max(18px, env(safe-area-inset-right, 18px)) max(18px, env(safe-area-inset-bottom, 18px)) max(18px, env(safe-area-inset-left, 18px));
+      gap: 14px;
+    }
+    .cookie-actions { width: 100%; }
+    .cookie-actions .btn { flex: 1; justify-content: center; }
+
+    /* Search overlay */
+    .search-overlay { padding-top: 80px; }
+    .search-overlay-inner { padding: 0 max(18px, env(safe-area-inset-right, 18px)) 0 max(18px, env(safe-area-inset-left, 18px)); }
+    .search-input-wrap input { font-size: 17px; }
+
+    /* Section headers */
+    .section-head { margin-bottom: 36px; }
+    .section-head.section-head-compact { margin-bottom: 28px; }
+    .section-title { font-size: clamp(26px, 6.5vw, 36px); }
+    .section-lead { font-size: 15px; margin-bottom: 36px; }
+  }
+
+  /* --- Small phone: ≤ 480px --- */
+  @media (max-width: 480px) {
+    .container {
+      padding-left:  max(16px, env(safe-area-inset-left,  0px));
+      padding-right: max(16px, env(safe-area-inset-right, 0px));
+    }
+    section { padding: 54px 0; }
+    .hero { padding: 96px 0 48px; }
+    .hero h1 { font-size: clamp(32px, 9.5vw, 46px); }
+    .hero-cta .btn { padding: 15px 16px; font-size: 14px; }
+    .hero-trust { grid-template-columns: 1fr; gap: 8px; }
+    .hero-trust .trust-item:first-child { grid-column: auto; }
+    .trust-item { padding: 10px 12px; }
+
+    .experten-stats { grid-template-columns: 1fr; gap: 10px; }
+    .stat .num { font-size: 30px; }
+
+    .cta-card { padding: 32px 18px 30px; }
+    .cta-grid h2 { font-size: clamp(24px, 7vw, 32px); }
+
+    .review-score-grid { gap: 12px; }
+    .review-scorecard { padding: 14px; }
+
+    footer { padding: 50px 0 max(20px, env(safe-area-inset-bottom, 20px)); }
+
+    .testimonial-body p { font-size: 16px; }
+    .event-img { height: 160px; }
+
+    .search-bar-row { flex-direction: column; gap: 10px; }
+    .search-close-btn { align-self: flex-end; }
+  }
+
+  /* --- Very small: ≤ 380px --- */
+  @media (max-width: 380px) {
+    .btn {
+      white-space: normal;
+      padding: 13px 16px;
+      font-size: 14px;
+    }
+    .hero h1 { font-size: clamp(28px, 9vw, 40px); }
+    .hero h1 .accent-line { font-size: clamp(18px, 6vw, 26px); }
+    .cta-card { padding: 28px 16px; }
+    .footer-bottom-links { gap: 10px; }
+    .video-caption h3 { font-size: 19px; }
+    .review-summary h3 { font-size: 19px; }
   }
 </style>
 </head>
@@ -2140,12 +2322,12 @@
         Verstehen.<br>
         Unterhalten.<br>
         Dabeisein.
-        <span class="accent accent-line">Ich geHöre dazu.</span>
+        <span class="accent accent-line">Ich ge<span class="accent-focus">Höre</span> dazu.</span>
       </h1>
       <p class="lead">
-        22x in Ihrer Nähe: 21 Mal im nördlichen Rheinland-Pfalz und einmal in
-        Bonn-Bad Godesberg. Persönliche Beratung, moderne Hörsysteme und ein
-        Familienunternehmen, das seit 1925 für Teilhabe steht.
+        <span class="lead-highlight"><span class="lead-count">22x in Ihrer Nähe</span>, davon 21 Mal im nördlichen Rheinland-Pfalz und einmal in Bonn-Bad Godesberg.</span>
+        Persönliche Beratung, moderne Hörsysteme und ein Familienunternehmen,
+        das seit 1925 für Teilhabe steht.
       </p>
       <div class="hero-cta">
         <a href="kontakt.html" class="btn btn-primary">
@@ -2243,13 +2425,13 @@
 <!-- ============ REPUTATION ============ -->
 <section id="reputation" class="reputation-section">
   <div class="container">
-    <div class="section-head reveal">
+    <div class="section-head section-head-compact reveal">
       <span class="section-eyebrow">Empfehlungen &amp; Bewertungen</span>
       <h2 class="section-title">Stark empfohlen. <span class="brand-em">Sichtbar bewertet.</span></h2>
       <p class="section-lead">
         Die Empfehlung der Handwerkskammer Koblenz, starke Google-Rezensionen und sehr gute
-        Kununu-Werte zeigen, wofür BECKER steht: fachliche Qualität, menschliche Beratung und
-        ein Team, das gerne bleibt.
+        Kununu-Werte zeigen auf einen Blick, wofür BECKER steht: fachliche Qualität,
+        menschliche Beratung und ein Team, das gerne bleibt.
       </p>
     </div>
     <div class="reputation-grid">
